@@ -16,7 +16,6 @@ var MovieTileComponent = (function () {
         };
     }
     MovieTileComponent.prototype.ngOnInit = function () {
-        this.view.movie = this.movie;
     };
     return MovieTileComponent;
 }());

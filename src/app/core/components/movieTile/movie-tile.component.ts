@@ -20,7 +20,7 @@ export class  MovieTileComponent implements OnInit{
 	){}
 
 	ngOnInit():void{
-		this.view.movie = this.movie;
+		
 	}
 
 }

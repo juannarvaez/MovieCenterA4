@@ -13,6 +13,9 @@
 	<!-- {{movie.original_title}} -->
 	<!-- {{movie.poster_path}} -->
 	<!-- <movie-tile></movie-tile> -->
+	<a href="#/movie/{{ movie.id }}"
+			title="{{ movie.title }}"
+			ng-if="movie.poster_path">
 	<div *ngIf="view.images"
 		[ngStyle]="{'background-image': 'url(' + view.images + movie.poster_path + ')'}"  
 		style="
@@ -22,16 +25,15 @@
 			height: 225px;
 			background-size: 150px;
 		" >
-		<a href="#/movie/{{ movie.id }}"
-			title="{{ movie.title }}"
-			ng-if="movie.poster_path">
+		
 			<!-- <div>
 		    	<img src="{{view.images}}{{ movie.poster_path }}"
 		        style="width: 150px" />
 		    </div> -->
 		    <!-- <div>{{ movie.vote_average }}</div> -->
-		</a>
+		
 	</div>
+	</a>
 </div>
 
 <div *ngIf="view.movies.results">
