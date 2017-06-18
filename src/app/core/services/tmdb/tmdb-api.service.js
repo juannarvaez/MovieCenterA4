@@ -18,6 +18,7 @@ var TMDBAPIService = (function () {
         this.apiKey = "518d83af872f927b98cfe36a90cd05b0";
         this.language = "en-US";
         this.adult = "false";
+        this.apiImg = "//image.tmdb.org/t/p/w500";
     }
     //Abstract funtion to get info in json format from the tmdb api 
     TMDBAPIService.prototype.getFromTMDB = function (search, extra_params) {
@@ -33,7 +34,8 @@ var TMDBAPIService = (function () {
         return this.getFromTMDB('movie/popular');
     };
     TMDBAPIService.prototype.getMovieDetail = function (id) {
-        return this.getFromTMDB('movie/' + id);
+        var extra_params = '&append_to_response=alternative_titles,credits,releases,videos,similar,reviews,images';
+        return this.getFromTMDB('movie/' + id, extra_params);
     };
     TMDBAPIService.prototype.getTopMovies = function () {
         return this.getFromTMDB('movie/top_rated');

@@ -19,8 +19,17 @@ var tmdb_api_service_1 = require("../../services/tmdb/tmdb-api.service");
 var HomeComponent = (function () {
     function HomeComponent(tmdbapiservice) {
         this.tmdbapiservice = tmdbapiservice;
+        this.view = {
+            movies: '',
+            images: 'https://image.tmdb.org/t/p/w500',
+        };
     }
     HomeComponent.prototype.ngOnInit = function () {
+        this.getMovies();
+    };
+    HomeComponent.prototype.getMovies = function () {
+        var _this = this;
+        this.tmdbapiservice.getPopularMovies().subscribe(function (data) { return _this.view.movies = data; });
     };
     HomeComponent.prototype.searchMovie = function () {
         console.log("Popular movies: ");

@@ -1,1 +1,42 @@
+
+<!-- <iframe width="560" height="315" 
+	    			[src]="video|safe-video" frameborder="0" style="
+	    				position: absolute;
+	    				top: 0;
+	    				left: 0;
+	    				width: 100%;
+	    				height: 100%;
+	    			">
+</iframe> -->
+<p>Hola {{video}}</p>
+<div *ngFor="let movie of view.movies.results">
+	<!-- {{movie.original_title}} -->
+	<!-- {{movie.poster_path}} -->
+	<!-- <movie-tile></movie-tile> -->
+	<div *ngIf="view.images"
+		[ngStyle]="{'background-image': 'url(' + view.images + movie.poster_path + ')'}"  
+		style="
+			float: left; 
+			margin: 10px; 
+			width: 150px; 
+			height: 225px;
+			background-size: 150px;
+		" >
+		<a href="#/movie/{{ movie.id }}"
+			title="{{ movie.title }}"
+			ng-if="movie.poster_path">
+			<!-- <div>
+		    	<img src="{{view.images}}{{ movie.poster_path }}"
+		        style="width: 150px" />
+		    </div> -->
+		    <!-- <div>{{ movie.vote_average }}</div> -->
+		</a>
+	</div>
+</div>
+
+<div *ngIf="view.movies.results">
+	
+	<!-- {{view.movies.results[0].original_title}} -->
+</div>
+
 <button (click)="searchMovie()">Peticion movies tmdb</button>

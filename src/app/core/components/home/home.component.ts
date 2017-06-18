@@ -23,13 +23,22 @@ import {TMDBAPIService} from '../../services/tmdb/tmdb-api.service'
 
 export class  HomeComponent implements OnInit{
 
+	view = {
+		movies: '',
+		images: 'https://image.tmdb.org/t/p/w500',
+	};
+
 	constructor(
 		private tmdbapiservice : TMDBAPIService,
 		// private router: Router
 	){}
 
 	ngOnInit():void{
+		this.getMovies();
+	}
 
+	getMovies(): void{
+		this.tmdbapiservice.getPopularMovies().subscribe(data => this.view.movies = data);
 	}
 
 	searchMovie(): void{

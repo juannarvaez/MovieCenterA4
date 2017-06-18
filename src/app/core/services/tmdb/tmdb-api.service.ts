@@ -11,6 +11,7 @@ export class TMDBAPIService {
 	private apiKey = "518d83af872f927b98cfe36a90cd05b0";
 	private language = "en-US";
 	private adult = "false";
+	private apiImg = "//image.tmdb.org/t/p/w500";
 
 	constructor(private http: Http){}
 
@@ -30,7 +31,8 @@ export class TMDBAPIService {
 	}
 
 	getMovieDetail(id: string):Observable<any>{
-		return this.getFromTMDB('movie/'+id);
+		var extra_params = '&append_to_response=alternative_titles,credits,releases,videos,similar,reviews,images';
+		return this.getFromTMDB('movie/'+id, extra_params );
 	}
 
 	getTopMovies(): Observable<any>{
