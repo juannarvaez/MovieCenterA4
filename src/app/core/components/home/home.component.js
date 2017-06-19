@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
 // Observable class extensions
 require("rxjs/add/observable/of");
 // Observable operators
@@ -17,8 +18,9 @@ require("rxjs/add/operator/debounceTime");
 require("rxjs/add/operator/distinctUntilChanged");
 var tmdb_api_service_1 = require("../../services/tmdb/tmdb-api.service");
 var HomeComponent = (function () {
-    function HomeComponent(tmdbapiservice) {
+    function HomeComponent(tmdbapiservice, router) {
         this.tmdbapiservice = tmdbapiservice;
+        this.router = router;
         this.view = {
             movies: '',
             images: 'https://image.tmdb.org/t/p/w500',
@@ -30,6 +32,9 @@ var HomeComponent = (function () {
     HomeComponent.prototype.getMovies = function () {
         var _this = this;
         this.tmdbapiservice.getPopularMovies().subscribe(function (data) { return _this.view.movies = data; });
+    };
+    HomeComponent.prototype.goMovieDetile = function (id_movie) {
+        this.router.navigate(['home/detailMovie', String(id_movie)]);
     };
     HomeComponent.prototype.searchMovie = function () {
         console.log("Popular movies: ");
@@ -50,7 +55,8 @@ HomeComponent = __decorate([
         styleUrls: [],
         providers: [tmdb_api_service_1.TMDBAPIService]
     }),
-    __metadata("design:paramtypes", [tmdb_api_service_1.TMDBAPIService])
+    __metadata("design:paramtypes", [tmdb_api_service_1.TMDBAPIService,
+        router_1.Router])
 ], HomeComponent);
 exports.HomeComponent = HomeComponent;
 //# sourceMappingURL=home.component.js.map

@@ -9,11 +9,13 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
+var app_routing_module_1 = require("./app-routing.module");
 var filter_safe_video_1 = require("./core/filters/safeVideo/filter.safe-video");
 var app_component_1 = require("./app.component");
 var tmdb_api_service_1 = require("./core/services/tmdb/tmdb-api.service");
 var home_component_1 = require("./core/components/home/home.component");
 var movie_tile_component_1 = require("./core/components/movieTile/movie-tile.component");
+var movie_component_1 = require("./core/components/movie/movie.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -26,11 +28,13 @@ AppModule = __decorate([
             forms_1.FormsModule,
             http_1.HttpModule,
             http_1.JsonpModule,
+            app_routing_module_1.AppRoutingModule
         ],
         declarations: [
             app_component_1.AppComponent,
             home_component_1.HomeComponent,
             movie_tile_component_1.MovieTileComponent,
+            movie_component_1.MovieComponent,
             filter_safe_video_1.SafeVideo
         ],
         providers: [

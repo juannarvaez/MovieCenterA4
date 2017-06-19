@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router }            from '@angular/router';
+import { RouterModule, Router }            from '@angular/router';
 
 import { Observable }        from 'rxjs/Observable';
 import { Subject }           from 'rxjs/Subject';
@@ -30,7 +30,7 @@ export class  HomeComponent implements OnInit{
 
 	constructor(
 		private tmdbapiservice : TMDBAPIService,
-		// private router: Router
+		private router: Router
 	){}
 
 	ngOnInit():void{
@@ -40,6 +40,10 @@ export class  HomeComponent implements OnInit{
 	getMovies(): void{
 		this.tmdbapiservice.getPopularMovies().subscribe(data => this.view.movies = data);
 	}
+
+	goMovieDetile(id_movie: number ):void {
+		this.router.navigate(['home/detailMovie', String(id_movie)]);
+	}	
 
 	searchMovie(): void{
 		console.log("Popular movies: ");

@@ -8,16 +8,21 @@
 	    				height: 100%;
 	    			">
 </iframe> -->
+<!-- <router-outlet></router-outlet> -->
 <p>Hola {{video}}</p>
 <div *ngFor="let movie of view.movies.results">
 	<!-- {{movie.original_title}} -->
 	<!-- {{movie.poster_path}} -->
 	<!-- <movie-tile></movie-tile> -->
-	<a href="#/movie/{{ movie.id }}"
+	
+	<!-- <a href="/home/detailMovie"
 			title="{{ movie.title }}"
-			ng-if="movie.poster_path">
+			ng-if="movie.poster_path"
+			> -->
+
 	<div *ngIf="view.images"
-		[ngStyle]="{'background-image': 'url(' + view.images + movie.poster_path + ')'}"  
+		[ngStyle]="{'background-image': 'url(' + view.images + movie.poster_path + ')'}" 
+		(click)="goMovieDetile(movie.id)" 
 		style="
 			float: left; 
 			margin: 10px; 
@@ -33,7 +38,9 @@
 		    <!-- <div>{{ movie.vote_average }}</div> -->
 		
 	</div>
-	</a>
+
+	<!-- </a> -->
+
 </div>
 
 <div *ngIf="view.movies.results">
