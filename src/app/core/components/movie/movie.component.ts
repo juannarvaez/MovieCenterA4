@@ -53,25 +53,26 @@ export class MovieComponent implements OnInit{
 
 	movieSlider(direction: string): void{
 
-        // var slide: NodeListOf<Element> = document.getElementsByClassName('slide');
-        // var limit = slide.length;
-        // var div_width = slide[0].style.width;
-        // console.log("limit: " + limit);
+        var slide: NodeListOf<Element> = document.getElementsByClassName('slide');
+        var limit = slide.length;
+        var div_width = parseInt(slide[0].style.width.substring(0,3))+8;
+        console.log("limit: " + limit);
 
-        // this.pointer = (direction == 'right') ? this.pointer + 1 : this.pointer-1;
-        // this.pointer = (direction >= limit) ? 0 : this.pointer ;
-        // this.pointer = (direction < 0 ) ? limit - 1 : this.pointer ;
-        // console.log("pointer: "+ this.pointer);
+        this.pointer = (direction == 'right') ? this.pointer + 1 : this.pointer-1;
+        this.pointer = (direction >= limit) ? 0 : this.pointer ;
+        this.pointer = (direction < 0 ) ? limit - 1 : this.pointer ;
+        console.log("pointer: "+ this.pointer);
 
-        // var slide_container = document.getElementById('slide_container');
-        // // var mensaje = -(this.pointer * ('.form_container .slide').width())+"px";
-        // console.log(slide[0].style.width);
-        // console.log(slide_container);
+        var slide_container = document.getElementById('slide_container');
+        // var mensaje = -(this.pointer * ('.form_container .slide').width())+"px";
+        console.log("widht: "div_width);
 
-        // // slide_container.animate({
-        //     'margin-left': -(this.pointer * div_width)+"px"
+        var move_left = -1*this.pointer*div_width;
+        console.log("move: " + move_left);
 
-        // });
+        slide_container.style.margin = '0px 0px 0px '+move_left+'px';
+        slide_container.style.color = 'red';
+		console.log(slide_container);
 
     }
 
