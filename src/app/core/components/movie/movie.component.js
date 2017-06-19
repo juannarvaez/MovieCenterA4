@@ -44,22 +44,21 @@ var MovieComponent = (function () {
         return trailer;
     };
     MovieComponent.prototype.movieSlider = function (direction) {
+        //Slide has to be a NodeListOf<any> instead NodeListOf<Element> to avoid div_width compilation error
         var slide = document.getElementsByClassName('slide');
         var limit = slide.length;
         var div_width = parseInt(slide[0].style.width.substring(0, 3)) + 8;
         console.log("limit: " + limit);
         this.pointer = (direction == 'right') ? this.pointer + 1 : this.pointer - 1;
-        this.pointer = (direction >= limit) ? 0 : this.pointer;
-        this.pointer = (direction < 0) ? limit - 1 : this.pointer;
-        console.log("pointer: " + this.pointer);
+        // this.pointer = (this.pointer >= limit) ? 0 : this.pointer ;
+        // this.pointer = (this.pointer < 0 ) ? limit - 1 : this.pointer ;
         var slide_container = document.getElementById('slide_container');
-        // var mensaje = -(this.pointer * ('.form_container .slide').width())+"px";
-        console.log("widht: ", div_width);
+        console.log("widht: " + div_width);
         var move_left = -1 * this.pointer * div_width;
         console.log("move: " + move_left);
         slide_container.style.margin = '0px 0px 0px ' + move_left + 'px';
         slide_container.style.color = 'red';
-        console.log(slide_container);
+        console.log(typeof slide_container);
     };
     return MovieComponent;
 }());
