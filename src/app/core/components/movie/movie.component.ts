@@ -15,9 +15,10 @@ import {TMDBAPIService} from '../../services/tmdb/tmdb-api.service'
 export class MovieComponent implements OnInit{
 
 	private apiYoutube = 'https://www.youtube.com/embed/';
+	private pointer = 0;
 
 	@Input() view = {
-			movie: {},
+			movie: {videos: {results: [ {type:'', key:''}] } },
 			images: 'https://image.tmdb.org/t/p/w500'
 		}
 
@@ -33,7 +34,7 @@ export class MovieComponent implements OnInit{
 		.subscribe(response => this.view.movie = response);
 	}
 
-	getTrailer():void{
+	getTrailer():string{
 		var trailer = '';
 
 		var index =  this.view.movie.videos.results.length;
@@ -52,21 +53,18 @@ export class MovieComponent implements OnInit{
 
 	movieSlider(direction: string): void{
 
-        var limit = $('.form_container .slide').length;
+        // var limit = $('.form_container .slide').length;
 
-        pointer = (direction == 'right') ? pointer + 1 : pointer-1;
-        pointer = (direction >= limit) ? 0 : pointer ;
-        pointer = (direction < 0 ) ? limit - 1 : pointer ;
+        // this.pointer = (direction == 'right') ? this.pointer + 1 : this.pointer-1;
+        // this.pointer = (direction >= limit) ? 0 : this.pointer ;
+        // this.pointer = (direction < 0 ) ? limit - 1 : this.pointer ;
 
-        var mensaje = -(pointer * $('.form_container .slide').width())+"px";
-        console.log(mensaje);
+        // var mensaje = -(this.pointer * $('.form_container .slide').width())+"px";
+        // console.log(mensaje);
 
-        $('.form_container .slide_container').animate({
-            'margin-left': -(pointer * $('.form_container .slide').width())+"px"
-
-        });
-
-        
+        // $('.form_container .slide_container').animate({
+        //     'margin-left': -(this.pointer * $('.form_container .slide').width())+"px"
+        // });  
 
     }
 

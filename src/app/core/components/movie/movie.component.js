@@ -19,8 +19,9 @@ var MovieComponent = (function () {
         this.route = route;
         this.location = location;
         this.apiYoutube = 'https://www.youtube.com/embed/';
+        this.pointer = 0;
         this.view = {
-            movie: {},
+            movie: { videos: { results: [{ type: '', key: '' }] } },
             images: 'https://image.tmdb.org/t/p/w500'
         };
     }
@@ -43,15 +44,15 @@ var MovieComponent = (function () {
         return trailer;
     };
     MovieComponent.prototype.movieSlider = function (direction) {
-        var limit = $('.form_container .slide').length;
-        pointer = (direction == 'right') ? pointer + 1 : pointer - 1;
-        pointer = (direction >= limit) ? 0 : pointer;
-        pointer = (direction < 0) ? limit - 1 : pointer;
-        var mensaje = -(pointer * $('.form_container .slide').width()) + "px";
-        console.log(mensaje);
-        $('.form_container .slide_container').animate({
-            'margin-left': -(pointer * $('.form_container .slide').width()) + "px"
-        });
+        // var limit = $('.form_container .slide').length;
+        // this.pointer = (direction == 'right') ? this.pointer + 1 : this.pointer-1;
+        // this.pointer = (direction >= limit) ? 0 : this.pointer ;
+        // this.pointer = (direction < 0 ) ? limit - 1 : this.pointer ;
+        // var mensaje = -(this.pointer * $('.form_container .slide').width())+"px";
+        // console.log(mensaje);
+        // $('.form_container .slide_container').animate({
+        //     'margin-left': -(this.pointer * $('.form_container .slide').width())+"px"
+        // });  
     };
     return MovieComponent;
 }());
