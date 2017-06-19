@@ -53,18 +53,25 @@ export class MovieComponent implements OnInit{
 
 	movieSlider(direction: string): void{
 
-        // var limit = $('.form_container .slide').length;
+        // var slide: NodeListOf<Element> = document.getElementsByClassName('slide');
+        // var limit = slide.length;
+        // var div_width = slide[0].style.width;
+        // console.log("limit: " + limit);
 
         // this.pointer = (direction == 'right') ? this.pointer + 1 : this.pointer-1;
         // this.pointer = (direction >= limit) ? 0 : this.pointer ;
         // this.pointer = (direction < 0 ) ? limit - 1 : this.pointer ;
+        // console.log("pointer: "+ this.pointer);
 
-        // var mensaje = -(this.pointer * $('.form_container .slide').width())+"px";
-        // console.log(mensaje);
+        // var slide_container = document.getElementById('slide_container');
+        // // var mensaje = -(this.pointer * ('.form_container .slide').width())+"px";
+        // console.log(slide[0].style.width);
+        // console.log(slide_container);
 
-        // $('.form_container .slide_container').animate({
-        //     'margin-left': -(this.pointer * $('.form_container .slide').width())+"px"
-        // });  
+        // // slide_container.animate({
+        //     'margin-left': -(this.pointer * div_width)+"px"
+
+        // });
 
     }
 
