@@ -11,14 +11,7 @@
 <!-- <router-outlet></router-outlet> -->
 <p>Hola {{video}}</p>
 <div *ngFor="let movie of view.movies.results">
-	<!-- {{movie.original_title}} -->
-	<!-- {{movie.poster_path}} -->
-	<!-- <movie-tile></movie-tile> -->
-	
-	<!-- <a href="/home/detailMovie"
-			title="{{ movie.title }}"
-			ng-if="movie.poster_path"
-			> -->
+
 
 	<div *ngIf="view.images"
 		[ngStyle]="{'background-image': 'url(' + view.images + movie.poster_path + ')'}" 
@@ -31,15 +24,7 @@
 			background-size: 150px;
 		" >
 		
-			<!-- <div>
-		    	<img src="{{view.images}}{{ movie.poster_path }}"
-		        style="width: 150px" />
-		    </div> -->
-		    <!-- <div>{{ movie.vote_average }}</div> -->
-		
 	</div>
-
-	<!-- </a> -->
 
 </div>
 

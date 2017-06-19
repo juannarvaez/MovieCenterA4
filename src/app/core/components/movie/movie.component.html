@@ -1,2 +1,229 @@
-<div>EN EL DETAIL</div>
-<div>{{movie.original_title}}</div>
+<div class="col-md-12" 
+	style="
+		background: black;
+		padding: 0px;
+		margin: 0px;
+		">
+
+	<div *ngIf="view.movie.poster_path" class="col-md-12" 
+		[ngStyle]="{'background-image': 'url(' + view.images + view.movie.poster_path + ')'}"
+		style="
+			background-repeat:no-repeat;
+			background-attachment:fixed;
+			background-size: 500px 750px;
+			padding: 0px;
+			margin: 0px;
+		">
+		<div class="col-md-12"  style="
+			padding: 0px;
+			margin: 0px;
+			width: : 100%;
+			height: 680px;
+			background: rgba(0,0,0,0.4);
+			background: -moz-linear-gradient(left, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.64) 15%, rgba(0,0,0,1) 38%);
+			background: -webkit-gradient(left top, right top, color-stop(0%, rgba(0,0,0,0.4)), color-stop(15%, rgba(0,0,0,0.64)), color-stop(38%, rgba(0,0,0,1)));
+			background: -webkit-linear-gradient(left, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.64) 15%, rgba(0,0,0,1) 38%);
+			background: -o-linear-gradient(left, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.64) 15%, rgba(0,0,0,1) 38%);
+			background: -ms-linear-gradient(left, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.64) 15%, rgba(0,0,0,1) 38%);
+			background: linear-gradient(to right, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.64) 15%, rgba(0,0,0,1) 38%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000', GradientType=1 );
+		">
+
+			<div  class="Panel left"
+
+				style="
+				width: 42%;
+				height: 680px;
+				color: white;
+				padding: 0px;
+				margin: 0px;
+				float: left;
+				outline: 1px solid red;
+
+			">
+				<div style="
+					position: relative;
+					height: 660px;
+					vertical-align: bottom;
+					display: table-cell; 
+					padding: 10px;
+
+					">
+
+			        <h1 style="margin: 0px; padding: 0px; color:white;">{{ view.movie.original_title | uppercase }} </h1>
+			        <p style="color: rgba(255,255,255,0.7);"><i>{{view.movie.tagline}}</i></p>
+			        
+			        <br>
+			        
+			        <p>{{view.movie.overview}}</p>
+			        <span ng-if="view.movie.homepage"><a href="{{ view.movie.homepage }}" target=_new 
+			        style="color: #FFBF00">{{ view.movie.homepage }}</a></span>
+			        
+			        <br>
+			        <br>
+
+			        <div >
+				        <div class="col-md-6">
+				            <div class="detail">
+				                Release Date {{ view.movie.release_date | date }}
+				            </div>
+				            <div class="detail">
+				                Running Time {{ view.movie.runtime }} minutes
+				            </div>
+				        </div>
+				        <div class="col-md-6">
+				            <div class="detail">
+				                Budget ${{ view.movie.budget | number }} USD
+				            </div>
+				            <div class="detail">
+				                Revenue ${{ view.movie.revenue | number }} USD
+				            </div>
+				        </div>
+			        </div>
+
+			        <br>
+			        <br>
+			        <br>
+
+			        <p *ngFor="let gen of view.movie.genres" 
+			        	style="
+			        		float: left; 
+			        		margin-right: 10px;
+			        		margin-bottom: 0px;
+			        		padding-left: 5px;
+			        		padding-right: 5px; 
+			        		border-radius: 10%;
+			        		background-color: rgba(255,255,255, 0.1);
+			        	">
+			        	{{gen.name}} 
+			        </p>
+			        
+			        <br>
+
+			        <h2>{{ view.movie.original_language }}</h2>
+			    </div>
+		       
+
+		    </div>
+		    <!--  ====================DETAIL DERECHA =========================-->	
+
+			<div class="Panel right" style="
+		    	width: 58%; 
+		    	height: 690px; 
+		    	float: left; 
+		    	outline: 	1px solid blue;
+		    	" >
+
+		    	<br>
+		    	<br>
+		    	<div>{{getTrailer()}}</div>
+		    	<div  style="width: 70%; position: relative; left: 15%;">
+			    	<div style="
+			    			height: 0;
+			    			padding-bottom: 56.25%;
+			    			margin:1%;
+			    			position: relative;
+			    			outline: 1px solid blue;
+			    		">
+
+			    		<iframe width="560" height="315" 
+			    				[src]="getTrailer()|safe" frameborder="0" 
+			    				style="
+				    				position: absolute;
+				    				top: 0;
+				    				left: 0;
+				    				width: 100%;
+				    				height: 100%;
+			    				">
+			    		</iframe>
+			    	</div>	
+		    	</div>
+		    	
+		    	<br>
+		    	<br>
+		<!-- ========================= ACTORES DE PELICULA  ======================= -->
+				<div align="center">
+					<p style="color:white; ">
+						IMPORTANT CAST
+					</p>
+				</div>
+				<div style="
+						position: relative;
+						padding: 0px;
+						width: 73%;
+						left: 14.5%;
+						/*outline: 1px solid red;*/
+					">
+					<!-- ng-click="showActor(actor.id)"  -->
+		    		<div  
+		    			
+		    			*ngFor="let actor of view.movie.credits.cast | slice:0:10; let i=index " 
+		    			[ngStyle]="{'background-image': 'url(' + view.images + actor.profile_path + ')'}"
+		    			style="
+		    		 	width:  18.1%;
+		    		 	padding-top: 14.1%;
+		    		 	float: left;
+		    		 	margin-left: 5px;
+		    		 	margin-top: 5px;
+		    		 	background-size: 100px 150px;
+		    		 	background-position: 0px -10px;
+		    		 	background-repeat: no-repeat;
+		    		 	outline: 1px solid rgba(255, 255,255, 0.1);
+		    		 	color: white;
+		    		">
+		    			<div style="
+			    				background-color:rgba(0, 0, 0, 0.5); 
+			    				width: 100%; 
+			    				height: 20px;
+			    				position: relative;
+
+		    				">
+		    				<p  style="
+		    					
+		    					
+			    				position:absolute; 
+			    				bottom:1px;
+			    				padding: 0px; 
+			    				margin: 0px;
+			    				font-size: 100%; 
+			    				/*outline: 1px solid green;*/
+			    				
+
+			    			">
+		    					{{actor.name}}
+		    				</p>
+		    			</div>	
+		    			
+					</div>
+					
+				</div>
+			
+			</div>
+
+			<!-- ===============================ACTOR PANEL EMERGENTE =========================== -->
+			<div id="actorDetailPanel" 
+				style="
+					position: absolute;
+					width: 70%; 
+					background-color: white; 
+					height: 450px; 
+					display: none;
+					left: 15%;
+					top: 10%;
+
+				">
+				<div style="
+							width: 50%;
+							
+						 ">
+					
+				</div>
+				<button ng-click="closeActorDetail()">
+					X
+				</button>
+			</div>
+	
+		</div>
+	</div>
+</div>
+

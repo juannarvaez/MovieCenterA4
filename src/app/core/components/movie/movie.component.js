@@ -18,20 +18,47 @@ var MovieComponent = (function () {
         this.tmdbapiservice = tmdbapiservice;
         this.route = route;
         this.location = location;
-        this.movie = {};
+        this.apiYoutube = 'https://www.youtube.com/embed/';
+        this.view = {
+            movie: {},
+            images: 'https://image.tmdb.org/t/p/w500'
+        };
     }
     MovieComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params
             .switchMap(function (params) { return _this.tmdbapiservice.getMovieDetail(String(+params['id'])); })
-            .subscribe(function (response) { return _this.movie = response; });
+            .subscribe(function (response) { return _this.view.movie = response; });
+    };
+    MovieComponent.prototype.getTrailer = function () {
+        var trailer = '';
+        var index = this.view.movie.videos.results.length;
+        var results = this.view.movie.videos.results;
+        for (var i = 0; i < index; i++) {
+            if (results[i].type == "Trailer") {
+                trailer = this.apiYoutube + results[i].key;
+                break;
+            }
+        }
+        return trailer;
+    };
+    MovieComponent.prototype.movieSlider = function (direction) {
+        var limit = $('.form_container .slide').length;
+        pointer = (direction == 'right') ? pointer + 1 : pointer - 1;
+        pointer = (direction >= limit) ? 0 : pointer;
+        pointer = (direction < 0) ? limit - 1 : pointer;
+        var mensaje = -(pointer * $('.form_container .slide').width()) + "px";
+        console.log(mensaje);
+        $('.form_container .slide_container').animate({
+            'margin-left': -(pointer * $('.form_container .slide').width()) + "px"
+        });
     };
     return MovieComponent;
 }());
 __decorate([
     core_1.Input(),
     __metadata("design:type", Object)
-], MovieComponent.prototype, "movie", void 0);
+], MovieComponent.prototype, "view", void 0);
 MovieComponent = __decorate([
     core_1.Component({
         selector: 'movie',
