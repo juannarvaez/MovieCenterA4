@@ -16,9 +16,15 @@ var MovieTileComponent = (function () {
         };
     }
     MovieTileComponent.prototype.ngOnInit = function () {
+        console.log("movie-tile");
+        console.log(this.movie);
     };
     return MovieTileComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], MovieTileComponent.prototype, "movie", void 0);
 MovieTileComponent = __decorate([
     core_1.Component({
         selector: 'movie-tile',

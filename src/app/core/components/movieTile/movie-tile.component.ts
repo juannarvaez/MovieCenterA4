@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router }            from '@angular/router';
 
 
@@ -10,7 +10,8 @@ import { Router }            from '@angular/router';
 
 export class  MovieTileComponent implements OnInit{
 
-	
+	@Input() movie: any;
+
 	view = {
 		imagesUrl: 'url'
 	}
@@ -20,7 +21,8 @@ export class  MovieTileComponent implements OnInit{
 	){}
 
 	ngOnInit():void{
-		
+		console.log("movie-tile");
+		console.log(this.movie);
 	}
 
 }
