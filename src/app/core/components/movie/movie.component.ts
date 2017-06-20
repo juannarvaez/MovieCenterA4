@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { RouterModule, ActivatedRoute, Params } from '@angular/router';
+import { RouterModule, ActivatedRoute, Params, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 
@@ -18,14 +18,25 @@ export class MovieComponent implements OnInit{
 	private pointer = 0;
 
 	@Input() view = {
-			movie: {videos: {results: [ {type:'', key:''}] } },
+			movie: {
+				videos: { results: [ {type:'', key:''} ] },
+				credits: { cast: [ {id:'', profile_path: ''} ] },
+			},
+			actor: {id:'', profile_path: ''},
 			images: 'https://image.tmdb.org/t/p/w500'
 		}
+
+
+
+
+
+
 
 	constructor(
 		private tmdbapiservice : TMDBAPIService,
 		private route: ActivatedRoute,
-		private location: Location
+		private location: Location,
+		private router: Router
 	){}
 
 	ngOnInit(): void {
@@ -51,6 +62,40 @@ export class MovieComponent implements OnInit{
         return trailer;
 	}
 
+	goMovieDetile(id_movie: number ):void {
+		this.router.navigate(['home/detailMovie', String(id_movie)]);
+	}
+
+	showActor(id_actor: string):void{
+
+               
+        for (var i in this.view.movie.credits.cast){
+            if (this.view.movie.credits.cast[i].id == id_actor) {
+                this.view.actor = this.view.movie.credits.cast[i];
+                console.log(this.view.actor);
+                break;
+            }
+        }
+
+        console.log( this.view.actor);
+
+
+        var actorPanel = document.getElementById('actorDetailPanel');
+        actorPanel.style.display='block';
+        actorPanel.style.backgroundImage = "url("+ this.view.images + this.view.actor.profile_path +")";
+        actorPanel.style.backgroundRepeat = 'no-repeat';
+        // $("#actorDetailPanel").css({
+        //    'background-image': "url(https:"+ $scope.view.images + $scope.view.actor.profile_path +")",
+        //    'background-repeat': 'no-repeat',
+        //    'display':'block',
+        // });
+        
+    }
+
+    closeActorDetail():void{
+        document.getElementById("actorDetailPanel").style.display='none';
+    }
+
 	movieSlider(direction: string): void{
 		//Slide has to be a NodeListOf<any> instead NodeListOf<Element> to avoid div_width compilation error
         var slide: NodeListOf<any> = document.getElementsByClassName('slide');
@@ -69,7 +114,8 @@ export class MovieComponent implements OnInit{
         var move_left = -1*this.pointer*div_width;
         console.log("move: " + move_left);
 
-        slide_container.style.margin = '0px 0px 0px '+move_left+'px';
+        slide_container.style.marginLeft = move_left+'px';
+        // slide_container.style.margin = '0px 0px 0px '+move_left+'px';
         slide_container.style.color = 'red';
 		console.log(typeof slide_container);
 

@@ -14,14 +14,19 @@ var common_1 = require("@angular/common");
 require("rxjs/add/operator/switchMap");
 var tmdb_api_service_1 = require("../../services/tmdb/tmdb-api.service");
 var MovieComponent = (function () {
-    function MovieComponent(tmdbapiservice, route, location) {
+    function MovieComponent(tmdbapiservice, route, location, router) {
         this.tmdbapiservice = tmdbapiservice;
         this.route = route;
         this.location = location;
+        this.router = router;
         this.apiYoutube = 'https://www.youtube.com/embed/';
         this.pointer = 0;
         this.view = {
-            movie: { videos: { results: [{ type: '', key: '' }] } },
+            movie: {
+                videos: { results: [{ type: '', key: '' }] },
+                credits: { cast: [{ id: '', profile_path: '' }] },
+            },
+            actor: { id: '', profile_path: '' },
             images: 'https://image.tmdb.org/t/p/w500'
         };
     }
@@ -43,6 +48,31 @@ var MovieComponent = (function () {
         }
         return trailer;
     };
+    MovieComponent.prototype.goMovieDetile = function (id_movie) {
+        this.router.navigate(['home/detailMovie', String(id_movie)]);
+    };
+    MovieComponent.prototype.showActor = function (id_actor) {
+        for (var i in this.view.movie.credits.cast) {
+            if (this.view.movie.credits.cast[i].id == id_actor) {
+                this.view.actor = this.view.movie.credits.cast[i];
+                console.log(this.view.actor);
+                break;
+            }
+        }
+        console.log(this.view.actor);
+        var actorPanel = document.getElementById('actorDetailPanel');
+        actorPanel.style.display = 'block';
+        actorPanel.style.backgroundImage = "url(" + this.view.images + this.view.actor.profile_path + ")";
+        actorPanel.style.backgroundRepeat = 'no-repeat';
+        // $("#actorDetailPanel").css({
+        //    'background-image': "url(https:"+ $scope.view.images + $scope.view.actor.profile_path +")",
+        //    'background-repeat': 'no-repeat',
+        //    'display':'block',
+        // });
+    };
+    MovieComponent.prototype.closeActorDetail = function () {
+        document.getElementById("actorDetailPanel").style.display = 'none';
+    };
     MovieComponent.prototype.movieSlider = function (direction) {
         //Slide has to be a NodeListOf<any> instead NodeListOf<Element> to avoid div_width compilation error
         var slide = document.getElementsByClassName('slide');
@@ -56,7 +86,8 @@ var MovieComponent = (function () {
         console.log("widht: " + div_width);
         var move_left = -1 * this.pointer * div_width;
         console.log("move: " + move_left);
-        slide_container.style.margin = '0px 0px 0px ' + move_left + 'px';
+        slide_container.style.marginLeft = move_left + 'px';
+        // slide_container.style.margin = '0px 0px 0px '+move_left+'px';
         slide_container.style.color = 'red';
         console.log(typeof slide_container);
     };
@@ -74,7 +105,8 @@ MovieComponent = __decorate([
     }),
     __metadata("design:paramtypes", [tmdb_api_service_1.TMDBAPIService,
         router_1.ActivatedRoute,
-        common_1.Location])
+        common_1.Location,
+        router_1.Router])
 ], MovieComponent);
 exports.MovieComponent = MovieComponent;
 //# sourceMappingURL=movie.component.js.map
