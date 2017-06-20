@@ -9,28 +9,30 @@
 	    			">
 </iframe> -->
 <!-- <router-outlet></router-outlet> -->
-<p>Hola {{video}}</p>
-<div *ngFor="let movie of view.movies.results">
+<div style="background-image: url('../../../../assets/images/background_6.jpg'); height: 750px;">
+	<div *ngFor="let movie of view.movies.results">
 
 
-	<div *ngIf="view.images"
-		[ngStyle]="{'background-image': 'url(' + view.images + movie.poster_path + ')'}" 
-		(click)="goMovieDetile(movie.id)" 
-		style="
-			float: left; 
-			margin: 10px; 
-			width: 150px; 
-			height: 225px;
-			background-size: 150px;
-		" >
-		
+		<div *ngIf="view.images"
+			[ngStyle]="{'background-image': 'url(' + view.images + movie.poster_path + ')'}" 
+			(click)="goMovieDetile(movie.id)" 
+			style="
+				float: left; 
+				margin: 10px; 
+				width: 150px; 
+				height: 225px;
+				background-size: 150px;
+			" >
+			
+		</div>
+
 	</div>
 
-</div>
+	<div *ngIf="view.movies.results">
+		
+		<!-- {{view.movies.results[0].original_title}} -->
+	</div>
 
-<div *ngIf="view.movies.results">
-	
-	<!-- {{view.movies.results[0].original_title}} -->
-</div>
+	<button (click)="searchMovie()">Peticion movies tmdb</button>
 
-<button (click)="searchMovie()">Peticion movies tmdb</button>
+</div>

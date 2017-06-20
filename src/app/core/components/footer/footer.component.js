@@ -6,17 +6,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
-var AppComponent = (function () {
-    function AppComponent() {
-        this.name = 'Angular';
+var FooterComponent = (function () {
+    function FooterComponent() {
     }
-    return AppComponent;
+    FooterComponent.prototype.ngOnInit = function () {
+    };
+    return FooterComponent;
 }());
-AppComponent = __decorate([
+FooterComponent = __decorate([
     core_1.Component({
-        selector: 'my-app',
-        template: "\n  \t<router-outlet></router-outlet>\n  \t<footer></footer>\n  \t",
+        selector: 'footer',
+        templateUrl: './footer.component.html',
+        styleUrls: [],
     })
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+], FooterComponent);
+exports.FooterComponent = FooterComponent;
+//# sourceMappingURL=footer.component.js.map

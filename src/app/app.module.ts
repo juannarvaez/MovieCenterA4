@@ -14,6 +14,7 @@ import { HomeComponent } from './core/components/home/home.component'
 import { MovieTileComponent } from './core/components/movieTile/movie-tile.component'
 import { MovieComponent } from './core/components/movie/movie.component'
 import { PersonComponent } from './core/components/person/person.component'
+import { FooterComponent } from './core/components/footer/footer.component'
 
 
 
@@ -32,6 +33,7 @@ import { PersonComponent } from './core/components/person/person.component'
 		MovieTileComponent,
 		MovieComponent,
 		PersonComponent,
+		FooterComponent,
 		SafeVideo
 	],
 	providers: [

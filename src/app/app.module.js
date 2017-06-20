@@ -17,6 +17,7 @@ var home_component_1 = require("./core/components/home/home.component");
 var movie_tile_component_1 = require("./core/components/movieTile/movie-tile.component");
 var movie_component_1 = require("./core/components/movie/movie.component");
 var person_component_1 = require("./core/components/person/person.component");
+var footer_component_1 = require("./core/components/footer/footer.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -37,6 +38,7 @@ AppModule = __decorate([
             movie_tile_component_1.MovieTileComponent,
             movie_component_1.MovieComponent,
             person_component_1.PersonComponent,
+            footer_component_1.FooterComponent,
             filter_safe_video_1.SafeVideo
         ],
         providers: [
