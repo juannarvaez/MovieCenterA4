@@ -17,6 +17,8 @@ export class MovieComponent implements OnInit{
 	private apiYoutube = 'https://www.youtube.com/embed/';
 	private pointer = 0;
 
+    actorInfo: any;
+
 	@Input() view = {
 			movie: {
 				videos: { results: [ {type:'', key:''} ] },
@@ -25,11 +27,6 @@ export class MovieComponent implements OnInit{
 			actor: {id:'', profile_path: ''},
 			images: 'https://image.tmdb.org/t/p/w500'
 		}
-
-
-
-
-
 
 
 	constructor(
@@ -67,7 +64,7 @@ export class MovieComponent implements OnInit{
 	}
 
 	showActor(id_actor: string):void{
-
+        this.tmdbapiservice.getDetailPerson(id_actor).subscribe(response=> this.actor_info = response);
                
         for (var i in this.view.movie.credits.cast){
             if (this.view.movie.credits.cast[i].id == id_actor) {
@@ -77,13 +74,13 @@ export class MovieComponent implements OnInit{
             }
         }
 
-        console.log( this.view.actor);
-
 
         var actorPanel = document.getElementById('actorDetailPanel');
+        var actorPanelPicture = document.getElementById('actorDetailPanelPicture');
         actorPanel.style.display='block';
-        actorPanel.style.backgroundImage = "url("+ this.view.images + this.view.actor.profile_path +")";
-        actorPanel.style.backgroundRepeat = 'no-repeat';
+        actorPanelPicture.style.backgroundRepeat = 'no-repeat';
+        actorPanelPicture.style.backgroundImage = "url("+ this.view.images + this.view.actor.profile_path +")";
+
         // $("#actorDetailPanel").css({
         //    'background-image': "url(https:"+ $scope.view.images + $scope.view.actor.profile_path +")",
         //    'background-repeat': 'no-repeat',

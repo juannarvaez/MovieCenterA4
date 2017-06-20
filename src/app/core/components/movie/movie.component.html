@@ -202,7 +202,7 @@
 			<div id="actorDetailPanel" 
 				style="
 					position: absolute;
-					width: 70%; 
+					width: 50%; 
 					background-color: white; 
 					height: 450px; 
 					display: none;
@@ -210,15 +210,39 @@
 					top: 10%;
 
 				">
-				<div style="
+					<div id="actorDetailPanelPicture" style="
+								width: 50%;
+								height: 450px;
+								float: left;
+								/*outline: 1px solid pink;*/
+								background-size: 300px 450px;
+							 ">
+
+						
+					</div>
+					<div *ngIf="actor_info" 
+						style="
 							width: 50%;
-							
-						 ">
-					
-				</div>
-				<button (click)="closeActorDetail()">
-					X
-				</button>
+							float: left;
+							/*outline: 1px solid red;	*/
+						">
+
+						<div id="bodydesc" style="margin-left:auto; margin-right:auto; width:100%; height:200px; overflow-y:auto;">
+
+					        <p id="desc" style="float:left;color: #666666; width:100%;  font-size: 12px; line-height: 18px;">
+					        	{{actor_info.biography}}
+					        </p>
+
+						</div>
+						
+					</div>
+					<button (click)="closeActorDetail()"
+						style="
+							position: absolute;
+							left: 0px;
+						">
+						X
+					</button>
 			</div>
 		</div>
 			<!-- ========================== PELICULAS SIMILARES ======================-->

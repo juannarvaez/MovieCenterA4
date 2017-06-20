@@ -52,6 +52,8 @@ var MovieComponent = (function () {
         this.router.navigate(['home/detailMovie', String(id_movie)]);
     };
     MovieComponent.prototype.showActor = function (id_actor) {
+        var _this = this;
+        this.tmdbapiservice.getDetailPerson(id_actor).subscribe(function (response) { return _this.actor_info = response; });
         for (var i in this.view.movie.credits.cast) {
             if (this.view.movie.credits.cast[i].id == id_actor) {
                 this.view.actor = this.view.movie.credits.cast[i];
@@ -59,11 +61,11 @@ var MovieComponent = (function () {
                 break;
             }
         }
-        console.log(this.view.actor);
         var actorPanel = document.getElementById('actorDetailPanel');
+        var actorPanelPicture = document.getElementById('actorDetailPanelPicture');
         actorPanel.style.display = 'block';
-        actorPanel.style.backgroundImage = "url(" + this.view.images + this.view.actor.profile_path + ")";
-        actorPanel.style.backgroundRepeat = 'no-repeat';
+        actorPanelPicture.style.backgroundRepeat = 'no-repeat';
+        actorPanelPicture.style.backgroundImage = "url(" + this.view.images + this.view.actor.profile_path + ")";
         // $("#actorDetailPanel").css({
         //    'background-image': "url(https:"+ $scope.view.images + $scope.view.actor.profile_path +")",
         //    'background-repeat': 'no-repeat',
