@@ -13,6 +13,8 @@ import { TMDBAPIService } from './core/services/tmdb/tmdb-api.service'
 import { HomeComponent } from './core/components/home/home.component'
 import { MovieTileComponent } from './core/components/movieTile/movie-tile.component'
 import { MovieComponent } from './core/components/movie/movie.component'
+import { PersonComponent } from './core/components/person/person.component'
+
 
 
 
@@ -29,6 +31,7 @@ import { MovieComponent } from './core/components/movie/movie.component'
 		HomeComponent,
 		MovieTileComponent,
 		MovieComponent,
+		PersonComponent,
 		SafeVideo
 	],
 	providers: [

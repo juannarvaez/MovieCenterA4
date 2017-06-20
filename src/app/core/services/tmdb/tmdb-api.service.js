@@ -48,7 +48,8 @@ var TMDBAPIService = (function () {
         return this.getFromTMDB('person/popular');
     };
     TMDBAPIService.prototype.getDetailPerson = function (id) {
-        return this.getFromTMDB('person/' + id);
+        var extra_params = '&append_to_response=movie_credits,images';
+        return this.getFromTMDB('person/' + id, extra_params);
     };
     TMDBAPIService.prototype.getMovieCreditsPerson = function (id) {
         return this.getFromTMDB('person/' + id + '/movie_credits');

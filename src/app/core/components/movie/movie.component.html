@@ -51,7 +51,7 @@
 					">
 
 			        <h1 style="margin: 0px; padding: 0px; color:white;">{{ view.movie.original_title | uppercase }} </h1>
-			        <p style="color: rgba(255,255,255,0.7);"><i>{{view.movie.tagline}}</i></p>
+			        <p style="margin: 0px; padding: 0px; color: rgba(255,255,255,0.7);"><i>{{view.movie.tagline}}</i></p>
 			        
 			        <br>
 			        
@@ -60,9 +60,10 @@
 			        style="color: #FFBF00">{{ view.movie.homepage }}</a></span>
 			        
 			        <br>
+			        <br>
 
 			        <div >
-				        <div class="col-md-6">
+				        <div  style="float:left; width:44%; padding:  0% 3% 0% 3% ;">
 				            <div class="detail">
 				                Release Date {{ view.movie.release_date | date }}
 				            </div>
@@ -70,7 +71,7 @@
 				                Running Time {{ view.movie.runtime }} minutes
 				            </div>
 				        </div>
-				        <div class="col-md-6">
+				        <div  style="float:left; width:44%; padding: 0% 3% 0% 3%; ">
 				            <div class="detail">
 				                Budget ${{ view.movie.budget | number }} USD
 				            </div>
@@ -81,6 +82,9 @@
 			        </div>
 
 			        <br>
+			        <br>
+					<br>
+
 
 			        <p *ngFor="let gen of view.movie.genres" 
 			        	style="
@@ -211,7 +215,7 @@
 
 				">
 					<div id="actorDetailPanelPicture" style="
-								width: 50%;
+								width: 47%;
 								height: 450px;
 								float: left;
 								/*outline: 1px solid pink;*/
@@ -220,19 +224,58 @@
 
 						
 					</div>
-					<div *ngIf="actor_info" 
+					<div *ngIf="actorInfo" 
 						style="
-							width: 50%;
+							width: 49%;
 							float: left;
+							padding: 2%;
 							/*outline: 1px solid red;	*/
 						">
+						<div>
+							<h1 style="padding: 0px; margin: 0px; padding-top: 15px; font-size: 30px; color: rgba(220,7,0,1) ;">
+								{{actorInfo.name}}
+							</h1>
+							<p style="padding: 0px; margin: 0px">
+								Character: {{view.actor.character}}
+							</p>
+						</div>
+
+						<br>
 
 						<div id="bodydesc" style="margin-left:auto; margin-right:auto; width:100%; height:200px; overflow-y:auto;">
 
-					        <p id="desc" style="float:left;color: #666666; width:100%;  font-size: 12px; line-height: 18px;">
-					        	{{actor_info.biography}}
+					        <p id="desc" style="float:left;  width:100%;  font-size: 15px; line-height: 18px;">
+					        	{{actorInfo.biography}}
 					        </p>
 
+						</div>
+
+						<br>
+
+						<dir style="padding: 0px; margin: 0px;">
+							<p>Personal Information:</p>
+							<div style="float: left; padding: 0px; margin: 0px; width: 50%">
+								<p>Gender:</p>
+								<p *ngIf="actorInfo.gender==1">Female</p>
+								<p *ngIf="actorInfo.gender==2">Male</p>
+							</div>
+							<div style="float: left; padding: 0px; margin: 0px; width: 50%">
+								<p>Birthday:</p>
+								<p>{{actorInfo.birthday}}</p>	
+							</div>
+							
+						</dir>
+						<div style="float: left; padding: 0px; margin: 0px; ">
+							<p>Place of birth:</p>
+							<p>{{actorInfo.place_of_birth}}</p>
+								
+						</div>
+						<div style="
+								position: absolute;
+								bottom: 0px;
+								right: 0px;
+							">
+							 <p style="color: red" (click)="goPersonDetail(actorInfo.id)">go detail</p>
 						</div>
 						
 					</div>
@@ -293,7 +336,7 @@
 
 		             	<div class="slide"
 		             		*ngFor="let similar of view.movie.similar.results"
-		             		(click)="goMovieDetile(similar.id)" 
+		             		(click)="goMovieDetail(similar.id)" 
 		             		[ngStyle]="{'background-image': 'url(' + view.images + similar.poster_path  + ')'}" 
 		             		style="
 		             			

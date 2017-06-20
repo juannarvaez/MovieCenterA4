@@ -16,6 +16,7 @@ var tmdb_api_service_1 = require("./core/services/tmdb/tmdb-api.service");
 var home_component_1 = require("./core/components/home/home.component");
 var movie_tile_component_1 = require("./core/components/movieTile/movie-tile.component");
 var movie_component_1 = require("./core/components/movie/movie.component");
+var person_component_1 = require("./core/components/person/person.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -35,6 +36,7 @@ AppModule = __decorate([
             home_component_1.HomeComponent,
             movie_tile_component_1.MovieTileComponent,
             movie_component_1.MovieComponent,
+            person_component_1.PersonComponent,
             filter_safe_video_1.SafeVideo
         ],
         providers: [

@@ -59,12 +59,17 @@ export class MovieComponent implements OnInit{
         return trailer;
 	}
 
-	goMovieDetile(id_movie: number ):void {
+	goMovieDetail(id_movie: number ):void {
 		this.router.navigate(['home/detailMovie', String(id_movie)]);
 	}
 
+    goPersonDetail(id_person: number ):void {
+        this.router.navigate(['home/person', String(id_person)]);
+    }
+
+
 	showActor(id_actor: string):void{
-        this.tmdbapiservice.getDetailPerson(id_actor).subscribe(response=> this.actor_info = response);
+        this.tmdbapiservice.getDetailPerson(id_actor).subscribe(response=> this.actorInfo = response);
                
         for (var i in this.view.movie.credits.cast){
             if (this.view.movie.credits.cast[i].id == id_actor) {
@@ -115,6 +120,7 @@ export class MovieComponent implements OnInit{
         // slide_container.style.margin = '0px 0px 0px '+move_left+'px';
         slide_container.style.color = 'red';
 		console.log(typeof slide_container);
+        console.log(this.actorInfo);
 
     }
 

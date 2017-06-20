@@ -1,3 +1,14 @@
+html{
+	margin: 0px; 
+	padding: 0px;
+	font-family: "Helvetica",Arial,sans-serif;
+	font-size: 15px;
+}
+p{
+	margin: 0px; 
+	padding: 0px;
+	border: 0px;
+}
 h1 {
   color: #369;
   font-family: Arial, Helvetica, sans-serif;

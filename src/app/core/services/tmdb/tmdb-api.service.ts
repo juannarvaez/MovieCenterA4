@@ -49,7 +49,8 @@ export class TMDBAPIService {
 	}
 
 	getDetailPerson(id: string): Observable<any>{
-		return this.getFromTMDB('person/'+id);
+		var extra_params = '&append_to_response=movie_credits,images';
+		return this.getFromTMDB('person/'+id, extra_params);
 	}
 
 	getMovieCreditsPerson(id: string):Observable<any>{
