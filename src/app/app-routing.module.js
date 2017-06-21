@@ -10,9 +10,11 @@ var router_1 = require("@angular/router");
 var movie_component_1 = require("./core/components/movie/movie.component");
 var home_component_1 = require("./core/components/home/home.component");
 var person_component_1 = require("./core/components/person/person.component");
+var people_component_1 = require("./core/components/people/people.component");
 var routes = [
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'home', component: home_component_1.HomeComponent },
+    { path: '', redirectTo: '/home/movies', pathMatch: 'full' },
+    { path: 'home/movies', component: home_component_1.HomeComponent },
+    { path: 'home/people', component: people_component_1.PeopleComponent },
     { path: 'home/detailMovie/:id', component: movie_component_1.MovieComponent },
     { path: 'home/person/:id', component: person_component_1.PersonComponent }
 ];

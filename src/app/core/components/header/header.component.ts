@@ -23,8 +23,11 @@ import { SearchService } from '../../services/search/search.service';
 
 export class HeaderComponent implements OnInit{
 
-	results: Observable<any>;
-	private searchTerms = new Subject<string>(); //es un observable, ante cambios en su definicion hay repuesta
+	resultsMovies: Observable<any>;
+	resultsPersons: Observable<any>;
+	private searchMovieTerms = new Subject<string>(); //es un observable, ante cambios en su definicion hay repuesta
+	private searchPersonTerms = new Subject<string>();
+
 	private pointer = -1;
 
 	constructor(
@@ -33,10 +36,19 @@ export class HeaderComponent implements OnInit{
     ) {}
 
 	ngOnInit(): void{
-		this.results = this.searchTerms
+		this.resultsMovies = this.searchMovieTerms
 			.debounceTime(300)    //Espere 300 ms después de cada pulsación antes de considerar el término    
 			.distinctUntilChanged()  //No volver a consultar si no hay cambios en la consulta
-			.switchMap(term => this.test(term)) //term es la respuesta de lo archivado en serchTerms
+			.switchMap(term => this.test(term,'/movie')) //term es la respuesta de lo archivado en serchTerms
+			.catch(error => {
+				console.log(error);
+				return Observable.of<any>([]); //en caso de error para debugea
+			});
+
+		this.resultsPersons = this.searchPersonTerms
+			.debounceTime(300)    //Espere 300 ms después de cada pulsación antes de considerar el término    
+			.distinctUntilChanged()  //No volver a consultar si no hay cambios en la consulta
+			.switchMap(term => this.test(term,'/person')) //term es la respuesta de lo archivado en serchTerms
 			.catch(error => {
 				console.log(error);
 				return Observable.of<any>([]); //en caso de error para debugea
@@ -45,23 +57,34 @@ export class HeaderComponent implements OnInit{
 
 	searchTerm(term: string): void {
 		
-		this.searchTerms.next(term);
-
-		console.log(term);
-		console.log("Observable");
-		console.log(this.searchTerms);
+		this.searchMovieTerms.next(term);
+		this.searchPersonTerms.next(term);
+		// console.log("Observable");
+		// console.log(term);
+		
 	}
 
-	test(term: string){
+	test(term: string, specificSearch=""){
 
-		console.log("En el switchMap");
-		console.log(term);
+		console.log("En el switchMap service response");
+		//console.log(this.searchService.search(term));
+
 		return term  
 		//condicional devuelve la búsqueda HTTP observable 
-		? this.searchService.search(term)
+		? this.searchService.search(term, specificSearch)
 
 		//o el observable de los héroes vacíos si no había término de búsqueda
 		: Observable.of<any>([])
+	}
+
+	goMovies():void {
+		this.menuAnimation(-1);
+		this.router.navigate(['home/movies']);
+	}	
+	
+	goPeople():void {
+		this.menuAnimation(-1);
+		this.router.navigate(['home/people']);
 	}
 
 	menuAnimation(pointer: number):void{

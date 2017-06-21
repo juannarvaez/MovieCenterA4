@@ -23,32 +23,50 @@ var HeaderComponent = (function () {
     function HeaderComponent(searchService, router) {
         this.searchService = searchService;
         this.router = router;
-        this.searchTerms = new Subject_1.Subject(); //es un observable, ante cambios en su definicion hay repuesta
+        this.searchMovieTerms = new Subject_1.Subject(); //es un observable, ante cambios en su definicion hay repuesta
+        this.searchPersonTerms = new Subject_1.Subject();
         this.pointer = -1;
     }
     HeaderComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.results = this.searchTerms
+        this.resultsMovies = this.searchMovieTerms
             .debounceTime(300) //Espere 300 ms después de cada pulsación antes de considerar el término    
             .distinctUntilChanged() //No volver a consultar si no hay cambios en la consulta
-            .switchMap(function (term) { return _this.test(term); }) //term es la respuesta de lo archivado en serchTerms
+            .switchMap(function (term) { return _this.test(term, '/movie'); }) //term es la respuesta de lo archivado en serchTerms
+            .catch(function (error) {
+            console.log(error);
+            return Observable_1.Observable.of([]); //en caso de error para debugea
+        });
+        this.resultsPersons = this.searchPersonTerms
+            .debounceTime(300) //Espere 300 ms después de cada pulsación antes de considerar el término    
+            .distinctUntilChanged() //No volver a consultar si no hay cambios en la consulta
+            .switchMap(function (term) { return _this.test(term, '/person'); }) //term es la respuesta de lo archivado en serchTerms
             .catch(function (error) {
             console.log(error);
             return Observable_1.Observable.of([]); //en caso de error para debugea
         });
     };
     HeaderComponent.prototype.searchTerm = function (term) {
-        this.searchTerms.next(term);
-        console.log(term);
-        console.log("Observable");
-        console.log(this.searchTerms);
+        this.searchMovieTerms.next(term);
+        this.searchPersonTerms.next(term);
+        // console.log("Observable");
+        // console.log(term);
     };
-    HeaderComponent.prototype.test = function (term) {
-        console.log("En el switchMap");
-        console.log(term);
+    HeaderComponent.prototype.test = function (term, specificSearch) {
+        if (specificSearch === void 0) { specificSearch = ""; }
+        console.log("En el switchMap service response");
+        //console.log(this.searchService.search(term));
         return term
-            ? this.searchService.search(term)
+            ? this.searchService.search(term, specificSearch)
             : Observable_1.Observable.of([]);
+    };
+    HeaderComponent.prototype.goMovies = function () {
+        this.menuAnimation(-1);
+        this.router.navigate(['home/movies']);
+    };
+    HeaderComponent.prototype.goPeople = function () {
+        this.menuAnimation(-1);
+        this.router.navigate(['home/people']);
     };
     HeaderComponent.prototype.menuAnimation = function (pointer) {
         this.pointer = this.pointer * pointer;

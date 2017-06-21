@@ -18,6 +18,7 @@ import { MovieComponent } from './core/components/movie/movie.component'
 import { PersonComponent } from './core/components/person/person.component'
 import { FooterComponent } from './core/components/footer/footer.component'
 import { HeaderComponent } from './core/components/header/header.component'
+import { PeopleComponent } from './core/components/people/people.component';
 
 
 
@@ -36,6 +37,7 @@ import { HeaderComponent } from './core/components/header/header.component'
 		MovieTileComponent,
 		MovieComponent,
 		PersonComponent,
+		PeopleComponent,
 		HeaderComponent,
 		FooterComponent,
 		SafeVideo

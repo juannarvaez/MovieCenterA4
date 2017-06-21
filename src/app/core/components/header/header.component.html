@@ -15,12 +15,12 @@
   </div>
 
   <div class= "menu-button" style=" float:left; width: 48px; height: 24px; margin-left: 10px; margin-right: 15px; ">
-    <button (click)="menuAnimation(-1)" id="menu-button" style="position: relative; float:left; background: none; border: none; outline: none; height: 24px; width: 24px; margin-top: 32px; left: 12px; ">
+    <button (click)="menuAnimation(-1)" id="menu-button" style="cursor: pointer; position: relative; float:left; background: none; border: none; outline: none; height: 24px; width: 24px; margin-top: 32px; left: 12px; ">
       <img id="menu-img-button" src="../../../../assets/icons/menu-2-24.png" style="position: relative; height: 24px;  width: 24px; transition: all 300ms ease;"> 
     </button>
 
-    <button (click)="menuAnimation(-1)" id="menu-cancel-button" style="position: relative; float:left; background: none; border: none; outline: none; height: 24px; width: 24px; margin-top: 34px; right: 12px;">
-      <img id="cancel-img-button" src="../../../../assets/icons/cancel-x-white-16.png" style="position: relative;  height: 0px;  width: 16px; transition: all 300ms ease; margin-left: 2px; top: 0px; left:2px; line-height: 16px;"> 
+    <button (click)="menuAnimation(-1)" id="menu-cancel-button" style="cursor: pointer; position: relative; float:left; background: none; border: none; outline: none; height: 24px; width: 24px; margin-top: 34px; right: 12px;">
+      <img id="cancel-img-button" src="../../../../assets/icons/cancel-x-white-16.png" style="cursor: pointer; position: relative;  height: 0px;  width: 16px; transition: all 300ms ease; margin-left: 2px; top: 0px; left:2px; line-height: 16px;"> 
     </button>
   </div>
 
@@ -46,13 +46,13 @@
             ">    
 
         <div class="menu-bar" style="float: left; color: white; margin-top:35px; ">
-          <div style="float: left; ">
+          <div (click)="goMovies()" style="float: left; cursor: pointer; ">
             MOVIE
           </div >
-          <div style="float: left;margin-left:20px; ">
+          <div (click)="goPeople()" style="float: left;margin-left:20px; cursor: pointer;">
             PEOPLE
           </div >
-          <div style="float: left; margin-left:20px; ">
+          <div style="float: left; margin-left:20px; cursor: pointer;">
             RECOMMEND ME A MOVIE
           </div>    
         </div>
@@ -73,16 +73,23 @@
   </div>
 
   
- <!--  <div style="float:right; padding-top: 33px; padding-right: 20px; width: 45%;" id="search-component">
+  <div style="float:right; padding-top: 33px; padding-right: 20px; width: 45%;" id="search-component">
     <input #searchBox id="search-box" style="width: 100%; border: none; background-color: rgba(255,255,255, 0.2);" (keyup)="searchTerm(searchBox.value)" />
     <div>
-      <div *ngFor="let result of results | async"
+
+      <div style="color:white" *ngFor="let result of resultsMovies | async"
             class="search-result" >
-        {{result.name}}
+            {{result.original_title}} {{result.release_date}}
+        <!-- {{result.name}} -->
       </div>
+      <div style="color:white" *ngFor="let result of resultsPersons | async"
+            class="search-result" >
+            {{result.name}}
+      </div>
+      
     </div>
     <br>
-  </div> -->
+  </div>
 
 </div>
 
