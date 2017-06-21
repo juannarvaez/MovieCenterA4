@@ -1,0 +1,17 @@
+<!-- <div style="position: absolute; z-index: 100;"> -->
+<div style="background-color: white; height: 20px; z-index: 100;">
+	HOLAA
+	<button>x</button>
+</div>
+
+<div id="search-component">
+  <input #searchBox id="search-box" (keyup)="searchTerm(searchBox.value)" />
+  <div>
+    <div *ngFor="let result of results | async"
+          class="search-result" >
+      {{result.name}}
+    </div>
+  </div>
+  <br>
+
+</div>
