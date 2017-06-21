@@ -24,6 +24,7 @@ var HeaderComponent = (function () {
         this.searchService = searchService;
         this.router = router;
         this.searchTerms = new Subject_1.Subject(); //es un observable, ante cambios en su definicion hay repuesta
+        this.pointer = -1;
     }
     HeaderComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -48,6 +49,44 @@ var HeaderComponent = (function () {
         return term
             ? this.searchService.search(term)
             : Observable_1.Observable.of([]);
+    };
+    HeaderComponent.prototype.menuAnimation = function (pointer) {
+        this.pointer = this.pointer * pointer;
+        console.log(this.pointer);
+        var menuImgButton = document.getElementById('menu-img-button');
+        var cancelImgButton = document.getElementById('cancel-img-button');
+        var menuBarSlide = document.getElementById('slide_container');
+        var separator = document.getElementById('separator');
+        // menuImgButton.style.width = "24px";
+        // menuImgButton.style.height = "0px"; 
+        if (this.pointer == 1) {
+            menuImgButton.style.width = "24px";
+            menuImgButton.style.height = "0px";
+            menuImgButton.style.top = "-3px";
+            menuImgButton.style.opacity = "0";
+            menuBarSlide.style.marginLeft = "0%";
+            separator.style.opacity = "0";
+        }
+        else {
+            menuImgButton.style.width = "24px";
+            menuImgButton.style.height = "24px";
+            menuImgButton.style.top = "0px";
+            menuImgButton.style.opacity = "1";
+        }
+        if (this.pointer == -1) {
+            cancelImgButton.style.width = "16px";
+            cancelImgButton.style.height = "0px";
+            cancelImgButton.style.top = "-5px";
+            cancelImgButton.style.opacity = "0";
+            menuBarSlide.style.marginLeft = "-100%";
+            separator.style.opacity = "0.3";
+        }
+        else {
+            cancelImgButton.style.width = "16px";
+            cancelImgButton.style.height = "16px";
+            cancelImgButton.style.top = "0px";
+            cancelImgButton.style.opacity = "1";
+        }
     };
     return HeaderComponent;
 }());
