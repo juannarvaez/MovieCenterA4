@@ -69,7 +69,7 @@ export class HeaderComponent implements OnInit{
 		console.log(this.pointer);
 		var menuImgButton = document.getElementById('menu-img-button');
 		var cancelImgButton = document.getElementById('cancel-img-button');
-		var menuBarSlide = document.getElementById('slide_container');
+		var menuBarSlide = document.getElementById('slide_menu');
 		var separator = document.getElementById('separator');
 		// menuImgButton.style.width = "24px";
 		// menuImgButton.style.height = "0px"; 

@@ -79,7 +79,23 @@ var MovieComponent = (function () {
         document.getElementById("actorDetailPanel").style.display = 'none';
     };
     MovieComponent.prototype.movieSlider = function (direction) {
-        //Slide has to be a NodeListOf<any> instead NodeListOf<Element> to avoid div_width compilation error
+        // //Slide has to be a NodeListOf<any> instead NodeListOf<Element> to avoid div_width compilation error
+        //       var slide: NodeListOf<any> = document.getElementsByClassName('slide');
+        //       var limit = slide.length;
+        //       var div_width = parseInt(slide[0].style.width.substring(0,3))+8;
+        //       console.log("limit: " + limit);
+        //       this.pointer = (direction == 'right') ? this.pointer + 1 : this.pointer-1;
+        //       // this.pointer = (this.pointer >= limit) ? 0 : this.pointer ;
+        //       // this.pointer = (this.pointer < 0 ) ? limit - 1 : this.pointer ;
+        //       var slide_container = document.getElementById('slide_container');
+        //       console.log("widht: "+div_width);
+        //       var move_left = -1*this.pointer*div_width;
+        //       console.log("move: " + move_left);
+        //       slide_container.style.marginLeft = move_left+'px';
+        //       // slide_container.style.margin = '0px 0px 0px '+move_left+'px';
+        //       slide_container.style.color = 'red';
+        // console.log("info actor slider");
+        //       console.log(this.actorInfo);
         var slide = document.getElementsByClassName('slide');
         var limit = slide.length;
         var div_width = parseInt(slide[0].style.width.substring(0, 3)) + 8;
@@ -94,8 +110,7 @@ var MovieComponent = (function () {
         slide_container.style.marginLeft = move_left + 'px';
         // slide_container.style.margin = '0px 0px 0px '+move_left+'px';
         slide_container.style.color = 'red';
-        console.log(typeof slide_container);
-        console.log(this.actorInfo);
+        console.log(slide_container);
     };
     return MovieComponent;
 }());
