@@ -16,6 +16,10 @@ export class PersonComponent implements OnInit{
 
 	@Input() person: any;
 
+	view = {
+		images: 'https://image.tmdb.org/t/p/w500'
+	}
+
 	constructor(
 		private tmdbapiservice : TMDBAPIService,
 		private route: ActivatedRoute,
@@ -28,5 +32,20 @@ export class PersonComponent implements OnInit{
 		.switchMap((params: Params) => this.tmdbapiservice.getDetailPerson(String(+params['id'])))
 		.subscribe(response => this.person = response);
 	}
+
+	getProfileImage():void{
+		let limit = this.person.images.profiles.length;
+		return limit == 1 ? 
+			this.person.images.profiles[0].file_path :  
+			this.person.images.profiles[1].file_path;
+
+	}
+
+	detail():void{
+		console.log(this.person);
+	}
+
+
+	
 
 }

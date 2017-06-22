@@ -17,7 +17,7 @@ export class MovieComponent implements OnInit{
 	private apiYoutube = 'https://www.youtube.com/embed/';
 	private pointer = 0;
 
-  actorInfo: any;
+    actorInfo: any;
 
 	@Input() view = {
 			movie: {

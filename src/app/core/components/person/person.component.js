@@ -19,12 +19,24 @@ var PersonComponent = (function () {
         this.route = route;
         this.location = location;
         this.router = router;
+        this.view = {
+            images: 'https://image.tmdb.org/t/p/w500'
+        };
     }
     PersonComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params
             .switchMap(function (params) { return _this.tmdbapiservice.getDetailPerson(String(+params['id'])); })
             .subscribe(function (response) { return _this.person = response; });
+    };
+    PersonComponent.prototype.getProfileImage = function () {
+        var limit = this.person.images.profiles.length;
+        return limit == 1 ?
+            this.person.images.profiles[0].file_path :
+            this.person.images.profiles[1].file_path;
+    };
+    PersonComponent.prototype.detail = function () {
+        console.log(this.person);
     };
     return PersonComponent;
 }());

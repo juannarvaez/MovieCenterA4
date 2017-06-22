@@ -1,4 +1,101 @@
-<div>HOLA</div>
-<div *ngIf="person">
-	{{person.name}}
+
+<div *ngIf="person" class="col-md-12"  
+	
+	style="
+	/*background: black;*/
+	height: 680px;
+	width: 100%;
+	padding: 0px;
+	margin: 0px;
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-position: right;
+
+">	
+	<div [ngStyle]="{'background-image': 'url(' + view.images + person.profile_path + ')'}" style="
+		filter: grayscale(100%);
+		-webkit-filter: grayscale(100%); 
+		height: 680px;
+		width: 100%;
+		position: absolute;
+		z-index: -100;
+		background-repeat:no-repeat;
+		background-attachment:fixed;
+		background-position: right;
+		background-size: 600px 900px; 
+		background-color: black;              
+		">
+		
+	</div>
+	<div style="
+
+			padding: 0px;
+			margin: 0px;
+			width: : 100%;
+			height: 680px;
+			background: rgba(0,0,0,1);
+background: -moz-linear-gradient(left, rgba(0,0,0,1) 50%, rgba(0,0,0,0.87) 71%, rgba(0,0,0,0.69) 100%);
+background: -webkit-gradient(left top, right top, color-stop(50%, rgba(0,0,0,1)), color-stop(71%, rgba(0,0,0,0.87)), color-stop(100%, rgba(0,0,0,0.69)));
+background: -webkit-linear-gradient(left, rgba(0,0,0,1) 50%, rgba(0,0,0,0.87) 71%, rgba(0,0,0,0.69) 100%);
+background: -o-linear-gradient(left, rgba(0,0,0,1) 50%, rgba(0,0,0,0.87) 71%, rgba(0,0,0,0.69) 100%);
+background: -ms-linear-gradient(left, rgba(0,0,0,1) 50%, rgba(0,0,0,0.87) 71%, rgba(0,0,0,0.69) 100%);
+background: linear-gradient(to right, rgba(0,0,0,1) 50%, rgba(0,0,0,0.87) 71%, rgba(0,0,0,0.69) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000', GradientType=1 );
+">
+	
+	<div style="padding-top: 100px;">
+		<div style="width:80% ; margin: 0 auto;">
+			<div  style="float: left;  width: 34%;">
+				<!-- <div style="width: 350px; height: 30px; background-color: white;"></div> -->
+				<div 
+				[ngStyle]="{'background-image': 'url(' + view.images + getProfileImage() + ')'}"
+					style="
+						background-repeat: no-repeat;
+						height: 0px;
+						padding-bottom: 150%;
+						background-size: contain;
+						/*outline: 1px solid red;*/
+
+				">	
+								
+					
+				</div>
+			</div>
+			
+			<div *ngIf="person" style=" float: left;  padding-left:6%; width: 60%; color:white; ">
+				
+				<div style="color: white; padding: 0px, margin: 0px;">
+					<p style="font-size: 35px; font-weight: bold;">{{person.name | uppercase}}</p>
+				</div>
+				<div>
+					<p style="color: rgba(255,0,0,0.8); font-style: italic; padding: 0px, margin: 0px;">
+						{{person.also_known_as[0]}}
+					</p>
+				</div>
+				
+				<br>
+
+				<div  style="margin-left:auto; margin-right:auto; width:100%; height:200px; overflow-y:auto;">
+
+			        <p id="desc" style="float:left;  width:100%;  font-size: 15px; line-height: 18px;">
+			        	{{person.biography}}
+			        </p>
+
+				</div>
+				
+			</div>
+
+			<div>
+				
+			</div>
+
+
+		</div>
+	</div>
+
+
+	</div>	
 </div>
+
+
+<!-- <button (click)="detail()">button</button> -->
