@@ -10,21 +10,9 @@
 </iframe> -->
 <!-- <router-outlet></router-outlet> -->
 <div style="background-image: url('../../../../assets/images/background_6.jpg'); padding-top: 100px; height: 750px;">
-	<div *ngFor="let movie of view.movies.results">
+	<div style="width: 80%; margin: 0 auto;"
+		*ngFor="let movie of view.movies.results| slice:0:18; let i=index" >
 
-
-		<!-- <div *ngIf="view.images"
-			[ngStyle]="{'background-image': 'url(' + view.images + movie.poster_path + ')'}" 
-			(click)="goMovieDetile(movie.id)" 
-			style="
-				float: left; 
-				margin: 10px; 
-				width: 150px; 
-				height: 225px;
-				background-size: 150px;
-			" >
-			
-		</div> -->
 		<movie-tile [movie]="movie"> </movie-tile>
 
 	</div>
@@ -34,6 +22,7 @@
 		<!-- {{view.movies.results[0].original_title}} -->
 	</div>
 
-	<button (click)="searchMovie()">Peticion movies tmdb</button>
+	
 
 </div>
+<button (click)="searchMovie()">Peticion movies tmdb</button>

@@ -26,6 +26,9 @@ var HeaderComponent = (function () {
         this.searchMovieTerms = new Subject_1.Subject(); //es un observable, ante cambios en su definicion hay repuesta
         this.searchPersonTerms = new Subject_1.Subject();
         this.pointer = -1;
+        this.view = {
+            images: 'https://image.tmdb.org/t/p/w500',
+        };
     }
     HeaderComponent.prototype.ngOnInit = function () {
         var _this = this;

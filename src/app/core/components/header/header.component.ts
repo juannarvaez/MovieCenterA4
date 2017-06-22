@@ -30,6 +30,10 @@ export class HeaderComponent implements OnInit{
 
 	private pointer = -1;
 
+	view = {
+		images: 'https://image.tmdb.org/t/p/w500',
+	}
+
 	constructor(
     	private searchService: SearchService,
     	private router: Router

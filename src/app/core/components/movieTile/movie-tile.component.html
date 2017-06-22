@@ -8,4 +8,44 @@
 		height: 225px;
 		background-size: 150px;
 	" >
+	<div style="
+			position: relative;
+			height: 225px;
+			width: 150px; 
+			vertical-align: bottom;
+			display: table-cell; 
+		">
+		
+		<div style="
+			background-color: rgba(0, 0, 0, 0.5);
+			width: 100%; 
+			height: 50px;
+			position: relative;
+			color: white;
+			overflow: hidden;
+			">
+			<div style="float:left; width: 25%;">
+				<div  *ngIf="movie.vote_average<=6" style="padding-left: 10px; float:left; opacity: 1; background-repeat: no-repeat; background-image:url('../../../../assets/icons/star-24.png'); height: 24px; width: 24px;">
+							
+				</div>
+				<div  *ngIf="movie.vote_average >6 && movie.vote_average<=7 " style="padding-left: 10px; float:left; opacity: 1; background-repeat: no-repeat; background-image:url('../../../../assets/icons/star-border-24.png'); height: 24px; width: 24px;">
+							
+				</div>
+
+				<div  *ngIf="movie.vote_average > 7" style="padding-left: 10px; float:left; opacity: 1; background-repeat: no-repeat; background-image:url('../../../../assets/icons/star-white-24.png'); height: 24px; width: 24px;">
+							
+				</div>
+
+				<div style="color: white">
+					{{movie.vote_average}}
+				</div>
+			</div>
+
+			<div style="float:left; width: 75%; ">
+				{{movie.original_title}}
+			</div>
+		</div>
+
+		
+	</div>
 </div>

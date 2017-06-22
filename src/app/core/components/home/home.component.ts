@@ -41,9 +41,9 @@ export class  HomeComponent implements OnInit{
 		this.tmdbapiservice.getPopularMovies().subscribe(data => this.view.movies = data);
 	}
 
-	goMovieDetile(id_movie: number ):void {
-		this.router.navigate(['home/detailMovie', String(id_movie)]);
-	}	
+	// goMovieDetile(id_movie: number ):void {
+	// 	this.router.navigate(['home/detailMovie', String(id_movie)]);
+	// }	
 
 	searchMovie(): void{
 		console.log("Popular movies: ");

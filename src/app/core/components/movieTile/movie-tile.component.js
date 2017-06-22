@@ -9,8 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
 var MovieTileComponent = (function () {
-    function MovieTileComponent() {
+    function MovieTileComponent(router) {
+        this.router = router;
         this.view = {
             images: 'https://image.tmdb.org/t/p/w500',
         };
@@ -18,6 +20,9 @@ var MovieTileComponent = (function () {
     MovieTileComponent.prototype.ngOnInit = function () {
         console.log("movie-tile");
         console.log(this.movie);
+    };
+    MovieTileComponent.prototype.goMovieDetile = function (id_movie) {
+        this.router.navigate(['home/detailMovie', String(id_movie)]);
     };
     return MovieTileComponent;
 }());
@@ -31,7 +36,7 @@ MovieTileComponent = __decorate([
         templateUrl: './movie-tile.component.html',
         styleUrls: []
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [router_1.Router])
 ], MovieTileComponent);
 exports.MovieTileComponent = MovieTileComponent;
 //# sourceMappingURL=movie-tile.component.js.map

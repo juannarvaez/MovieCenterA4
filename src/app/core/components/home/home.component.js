@@ -33,9 +33,9 @@ var HomeComponent = (function () {
         var _this = this;
         this.tmdbapiservice.getPopularMovies().subscribe(function (data) { return _this.view.movies = data; });
     };
-    HomeComponent.prototype.goMovieDetile = function (id_movie) {
-        this.router.navigate(['home/detailMovie', String(id_movie)]);
-    };
+    // goMovieDetile(id_movie: number ):void {
+    // 	this.router.navigate(['home/detailMovie', String(id_movie)]);
+    // }	
     HomeComponent.prototype.searchMovie = function () {
         console.log("Popular movies: ");
         this.tmdbapiservice.getPopularMovies().subscribe(function (data) { return console.log(data); });
