@@ -1,1 +1,52 @@
-<div>PEOPLE</div>
+<div style="background-image: url('../../../../assets/images/background_6.jpg'); padding-top: 100px; height: 750px;">
+	<div 
+		*ngFor="let person of view.people.results| slice:0:18; let i=index"
+			style="width: 80%; margin: 0 auto;"
+		 >
+
+		 <div *ngIf="person"
+			[ngStyle]="{'background-image': 'url(' + view.images + person.profile_path + ')'}" 
+			style="
+				float: left; 
+				margin: 10px; 
+				width: 150px; 
+				height: 225px;
+				background-size: 150px;
+			" >
+			<div style="
+					position: relative;
+					height: 225px;
+					width: 150px; 
+					vertical-align: bottom;
+					display: table-cell; 
+				">
+				
+				<div style="
+					background-color: rgba(0, 0, 0, 0.5);
+					width: 100%; 
+					height: 50px;
+					position: relative;
+					color: white;
+					overflow: hidden;
+					">
+					<div style="float:left; width: 35%;">
+						{{person.popularity | percentage : 4 }}
+
+						<!-- {{substringPorcent(person.popularity) }} -->
+					</div>
+					<div style="float:left; width: 75%; ">
+						{{person.name }}
+					</div>
+				</div>
+
+				
+			</div>
+		</div>
+
+
+
+	</div>
+
+
+
+</div>

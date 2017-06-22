@@ -7,6 +7,7 @@ import { HttpModule,  JsonpModule }    from '@angular/http';
 import { AppRoutingModule }     from './app-routing.module';
 
 import { SafeVideo } from './core/filters/safeVideo/filter.safe-video';
+import { Percentage } from './core/filters/percentage/filter.percentage';
 
 import { TMDBAPIService } from './core/services/tmdb/tmdb-api.service';
 import { SearchService } from './core/services/search/search.service';
@@ -40,6 +41,7 @@ import { PeopleComponent } from './core/components/people/people.component';
 		PeopleComponent,
 		HeaderComponent,
 		FooterComponent,
+		Percentage,
 		SafeVideo
 	],
 	providers: [

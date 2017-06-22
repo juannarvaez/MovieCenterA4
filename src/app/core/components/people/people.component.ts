@@ -14,7 +14,26 @@ import {TMDBAPIService} from '../../services/tmdb/tmdb-api.service'
 
 export class PeopleComponent implements OnInit{
 	
-	ngOnInit():void{
+	view = {
+		people: '',
+		images: 'https://image.tmdb.org/t/p/w500',
+	}
+	
 
+	constructor(
+		private tmdbapiservice : TMDBAPIService,
+		private router: Router
+	){}
+
+	ngOnInit():void{
+		this.getPeople();
+	}
+
+	getPeople(): void{
+		this.tmdbapiservice.getPopularPersons().subscribe(data => this.view.people = data);
+	}
+
+	substringPorcent(porcent:string):string{
+		return porcent.toString().substring(0,4)+'%';
 	}
 }

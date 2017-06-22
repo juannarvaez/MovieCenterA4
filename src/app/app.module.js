@@ -11,6 +11,7 @@ var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var app_routing_module_1 = require("./app-routing.module");
 var filter_safe_video_1 = require("./core/filters/safeVideo/filter.safe-video");
+var filter_percentage_1 = require("./core/filters/percentage/filter.percentage");
 var tmdb_api_service_1 = require("./core/services/tmdb/tmdb-api.service");
 var search_service_1 = require("./core/services/search/search.service");
 var app_component_1 = require("./app.component");
@@ -44,6 +45,7 @@ AppModule = __decorate([
             people_component_1.PeopleComponent,
             header_component_1.HeaderComponent,
             footer_component_1.FooterComponent,
+            filter_percentage_1.Percentage,
             filter_safe_video_1.SafeVideo
         ],
         providers: [

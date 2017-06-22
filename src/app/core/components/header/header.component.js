@@ -67,9 +67,26 @@ var HeaderComponent = (function () {
         this.menuAnimation(-1);
         this.router.navigate(['home/movies']);
     };
+    HeaderComponent.prototype.goMovieDetail = function (id_movie) {
+        this.router.navigate(['home/detailMovie', String(id_movie)]);
+        this.ngOnInit();
+        var searchInput = document.getElementById('search-box');
+        searchInput.value = '';
+        // this.resultsMovies = Observable.of<any>([]);
+        // this.resultsPersons = Observable.of<any>([]);
+    };
     HeaderComponent.prototype.goPeople = function () {
         this.menuAnimation(-1);
         this.router.navigate(['home/people']);
+    };
+    HeaderComponent.prototype.goPersonDetail = function (id_person) {
+        this.router.navigate(['home/person', String(id_person)]);
+        this.ngOnInit();
+        var searchInput = document.getElementById('search-box');
+        searchInput.value = '';
+        //searchInput.setAttribute('value', '');
+        // this.resultsPersons = Observable.of<any>([]);
+        // this.resultsMovies = Observable.of<any>([]);
     };
     HeaderComponent.prototype.menuAnimation = function (pointer) {
         this.pointer = this.pointer * pointer;

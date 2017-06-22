@@ -84,12 +84,31 @@ export class HeaderComponent implements OnInit{
 	goMovies():void {
 		this.menuAnimation(-1);
 		this.router.navigate(['home/movies']);
-	}	
+	}
+
+	goMovieDetail(id_movie: number ):void {
+		this.router.navigate(['home/detailMovie', String(id_movie)]);
+		this.ngOnInit();
+		let searchInput = <HTMLInputElement> document.getElementById('search-box');
+		searchInput.value = '';
+		// this.resultsMovies = Observable.of<any>([]);
+		// this.resultsPersons = Observable.of<any>([]);
+	}		
 	
 	goPeople():void {
 		this.menuAnimation(-1);
 		this.router.navigate(['home/people']);
 	}
+
+	goPersonDetail(id_person: number ):void {
+      	this.router.navigate(['home/person', String(id_person)]);
+      	this.ngOnInit();
+      	let searchInput = <HTMLInputElement>document.getElementById('search-box');
+		searchInput.value = '';
+		//searchInput.setAttribute('value', '');
+    	// this.resultsPersons = Observable.of<any>([]);
+      	// this.resultsMovies = Observable.of<any>([]);
+  	}
 
 	menuAnimation(pointer: number):void{
 		this.pointer = this.pointer*pointer;

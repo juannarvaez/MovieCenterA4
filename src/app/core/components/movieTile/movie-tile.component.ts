@@ -22,11 +22,10 @@ export class  MovieTileComponent implements OnInit{
 	){}
 
 	ngOnInit():void{
-		console.log("movie-tile");
-		console.log(this.movie);
+		
 	}
 
-	goMovieDetile(id_movie: number ):void {
+	goMovieDetail(id_movie: number ):void {
 		this.router.navigate(['home/detailMovie', String(id_movie)]);
 	}	
 

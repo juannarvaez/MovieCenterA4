@@ -18,10 +18,8 @@ var MovieTileComponent = (function () {
         };
     }
     MovieTileComponent.prototype.ngOnInit = function () {
-        console.log("movie-tile");
-        console.log(this.movie);
     };
-    MovieTileComponent.prototype.goMovieDetile = function (id_movie) {
+    MovieTileComponent.prototype.goMovieDetail = function (id_movie) {
         this.router.navigate(['home/detailMovie', String(id_movie)]);
     };
     return MovieTileComponent;
