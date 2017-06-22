@@ -33,7 +33,10 @@ export class PeopleComponent implements OnInit{
 		this.tmdbapiservice.getPopularPersons().subscribe(data => this.view.people = data);
 	}
 
-	substringPorcent(porcent:string):string{
-		return porcent.toString().substring(0,4)+'%';
-	}
+	goPersonDetail(id_person: number ):void {
+		this.router.navigate(['home/person', String(id_person)]);
+	}	
+
+
+
 }

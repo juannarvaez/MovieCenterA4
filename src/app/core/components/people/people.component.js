@@ -28,8 +28,8 @@ var PeopleComponent = (function () {
         var _this = this;
         this.tmdbapiservice.getPopularPersons().subscribe(function (data) { return _this.view.people = data; });
     };
-    PeopleComponent.prototype.substringPorcent = function (porcent) {
-        return porcent.toString().substring(0, 4) + '%';
+    PeopleComponent.prototype.goPersonDetail = function (id_person) {
+        this.router.navigate(['home/person', String(id_person)]);
     };
     return PeopleComponent;
 }());
