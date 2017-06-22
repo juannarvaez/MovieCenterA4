@@ -73,7 +73,7 @@
   </div>
 
   
-  <div style="float:right; padding-top: 33px; padding-right: 20px; width: 45%;" id="search-component">
+  <div style="position: absolute; right: 10px; padding-top: 0px; padding-right: 20px; width: 45%;" id="search-component">
     <input #searchBox id="search-box" style="width: 100%; border: none; background-color: rgba(255,255,255, 0.2);" (keyup)="searchTerm(searchBox.value)" />
     <div>
 
@@ -86,7 +86,7 @@
             class="search-result" >
             {{result.name}}
       </div>
-      
+
     </div>
     <br>
   </div>

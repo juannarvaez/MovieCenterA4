@@ -1,1 +1,11 @@
-<div>MOVIE TILE: {{view.imagesUrl}} {{movie.original_title}}</div>
+<div *ngIf="movie"
+	[ngStyle]="{'background-image': 'url(' + view.images + movie.poster_path + ')'}" 
+	(click)="goMovieDetile(movie.id)" 
+	style="
+		float: left; 
+		margin: 10px; 
+		width: 150px; 
+		height: 225px;
+		background-size: 150px;
+	" >
+</div>

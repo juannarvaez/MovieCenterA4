@@ -92,6 +92,7 @@ export class HeaderComponent implements OnInit{
 		console.log(this.pointer);
 		var menuImgButton = document.getElementById('menu-img-button');
 		var cancelImgButton = document.getElementById('cancel-img-button');
+		var menuBarFormContainer = document.getElementById('form_container_menu');
 		var menuBarSlide = document.getElementById('slide_menu');
 		var separator = document.getElementById('separator');
 		// menuImgButton.style.width = "24px";
@@ -100,7 +101,8 @@ export class HeaderComponent implements OnInit{
 			menuImgButton.style.width = "24px";
 			menuImgButton.style.height = "0px"; 
 			menuImgButton.style.top= "-3px";
-			menuImgButton.style.opacity= "0";
+			menuImgButton.style.opacity= "0"
+			// menuBarFormContainer.style.width= "400px";
 			menuBarSlide.style.marginLeft = "0%";
 			separator.style.opacity = "0";
 

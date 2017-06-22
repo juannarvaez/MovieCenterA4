@@ -13,7 +13,7 @@
 	<div *ngFor="let movie of view.movies.results">
 
 
-		<div *ngIf="view.images"
+		<!-- <div *ngIf="view.images"
 			[ngStyle]="{'background-image': 'url(' + view.images + movie.poster_path + ')'}" 
 			(click)="goMovieDetile(movie.id)" 
 			style="
@@ -24,8 +24,8 @@
 				background-size: 150px;
 			" >
 			
-		</div>
-		<!-- <movie-tile [movie]="movie"> </movie-tile> -->
+		</div> -->
+		<movie-tile [movie]="movie"> </movie-tile>
 
 	</div>
 

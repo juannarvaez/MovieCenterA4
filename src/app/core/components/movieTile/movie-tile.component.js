@@ -12,7 +12,7 @@ var core_1 = require("@angular/core");
 var MovieTileComponent = (function () {
     function MovieTileComponent() {
         this.view = {
-            imagesUrl: 'url'
+            images: 'https://image.tmdb.org/t/p/w500',
         };
     }
     MovieTileComponent.prototype.ngOnInit = function () {

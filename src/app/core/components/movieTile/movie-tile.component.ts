@@ -12,8 +12,9 @@ export class  MovieTileComponent implements OnInit{
 
 	@Input() movie: any;
 
+
 	view = {
-		imagesUrl: 'url'
+		images: 'https://image.tmdb.org/t/p/w500',
 	}
 
 	constructor(
