@@ -63,9 +63,9 @@ export class MovieComponent implements OnInit{
 		this.router.navigate(['home/detailMovie', String(id_movie)]);
 	}
 
-  goPersonDetail(id_person: number ):void {
-      this.router.navigate(['home/person', String(id_person)]);
-  }
+    goPersonDetail(id_person: number ):void {
+        this.router.navigate(['home/person', String(id_person)]);
+    }
 
 
 	showActor(id_actor: string):void{

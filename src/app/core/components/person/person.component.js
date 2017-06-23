@@ -35,6 +35,9 @@ var PersonComponent = (function () {
             this.person.images.profiles[0].file_path :
             this.person.images.profiles[1].file_path;
     };
+    PersonComponent.prototype.goMovieDetail = function (id_movie) {
+        this.router.navigate(['home/detailMovie', String(id_movie)]);
+    };
     PersonComponent.prototype.detail = function () {
         console.log(this.person);
     };

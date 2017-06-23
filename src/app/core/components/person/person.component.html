@@ -42,7 +42,7 @@ background: -ms-linear-gradient(left, rgba(0,0,0,1) 50%, rgba(0,0,0,0.87) 71%, r
 background: linear-gradient(to right, rgba(0,0,0,1) 50%, rgba(0,0,0,0.87) 71%, rgba(0,0,0,0.69) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000', GradientType=1 );
 ">
-	
+	<!-- ================ INFO PANEL ================ -->
 	<div style="padding-top: 100px;">
 		<div style="width:80% ; margin: 0 auto;">
 			<div  style="float: left;  width: 34%;">
@@ -50,46 +50,132 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', end
 				<div 
 				[ngStyle]="{'background-image': 'url(' + view.images + getProfileImage() + ')'}"
 					style="
+						position: relative;
 						background-repeat: no-repeat;
 						height: 0px;
-						padding-bottom: 150%;
-						background-size: contain;
+						padding-bottom: 115%;
+						background-size: cover;
 						/*outline: 1px solid red;*/
 
-				">	
-								
+				">
+					<div style="
+						position: relative;
+
+						height: 30px;
+						background-color: rgba(0,0,0,0.5);
+						
+						">
+						<!-- <p>95</p>
+						<p>movies known for</p>
+						 -->
+					</div>	
+				</div>
+
+				<div style="
+					height: 100px;
+					background-color: white;
+					width: 100%;
+
+				">
+					<!-- <p>Popularity: {{person.popularity | percentage : 4}} </p> -->
+					<div style="float: left; width: 25% ; color: rgba(255,0,0,0.8)">
+						<p align="center" style="font-size: 40px; margin-top: 10%; font-weight: bold; ;">{{person.movie_credits.cast.length}}</p>
+						<p align="center" style="font-size: 12px; margin: 0% 10% 0% 10%; "  >Movies known for</p>
+					</div>
+
+					<div style="float: left; width: 75%; margin-top: 3%;">
+						<p *ngIf="person.gender == 1"><b>Gender:</b> Female</p>
+						<p *ngIf="person.gender == 2"><b>Gender:</b> Male</p>
+						<p><b>Birthday:</b> {{person.birthday | date : 'mediumDate'}}</p>
+						<p><b>Place of birth:</b> </p>
+						<p>{{person.place_of_birth}}</p>
+					</div>
+					
+					
 					
 				</div>
+
 			</div>
+
+			<!-- =========================PANEL RIGTH============== -->
 			
 			<div *ngIf="person" style=" float: left;  padding-left:6%; width: 60%; color:white; ">
 				
 				<div style="color: white; padding: 0px, margin: 0px;">
-					<p style="font-size: 35px; font-weight: bold;">{{person.name | uppercase}}</p>
+					<p style="float: left; font-size: 35px; font-weight: bold; margin-right: 30px;">{{person.name | uppercase}}</p>
+
+					<div style="float: left; height: 32px; width: 150px;">
+						<div style="float: left; margin: 0 auto;background-repeat: no-repeat; background-image:url('../../../../assets/icons/thumb-up-white-32.png'); background-position: 0px 2px; opacity:0.7; height:32px; width: 32px;">
+								
+						</div>
+						<p style="float: left; font-size: 35px; font-weight: bold; color: rgba(255,255,255,0.6);">  {{person.popularity | percentage : 4}} </p>
+					</div>
+
 				</div>
-				<div>
-					<p style="color: rgba(255,0,0,0.8); font-style: italic; padding: 0px, margin: 0px;">
-						{{person.also_known_as[0]}}
+
+
+				<div style="float: left; width: 100%">
+					<p style="color: rgba(255,0,0,0.7); font-style: italic; padding: 0px, margin: 0px;">
+						Also known as: {{person.also_known_as[0]}}
 					</p>
 				</div>
 				
 				<br>
 
-				<div  style="margin-left:auto; margin-right:auto; width:100%; height:200px; overflow-y:auto;">
+				<div  style="margin-left:auto; margin-right:auto; margin-top: 80px; width:100%; height:150px; overflow-y:auto;">
 
 			        <p id="desc" style="float:left;  width:100%;  font-size: 15px; line-height: 18px;">
 			        	{{person.biography}}
 			        </p>
 
 				</div>
+				<br>
+				<br>
+
+				<div class="col-md-12" style="
+					position: relative;
+					width: 35%;
+					/*bottom: 0px;*/
+					margin: 0 auto;
+					height: 0px;
+					border-top-right-radius: 50%;
+					border-top-left-radius: 50%;
+					border-bottom: 20px solid rgba(255,0,0,0.4);
+					border-left: 40px solid transparent;
+					border-right: 40px solid transparent;
+				">
+				<p align="center" style="color: white;margin: 0px; padding-top: 3px; font-size: 17px; opacity: 1;">
+					Cast
+				</p>	
+				</div>
+
+				<div style="position: relative;
+							width: 100%; 
+							background-color: red;">
+					<div 
+						style="
+							cursor: pointer;
+							width: 15.7%;
+							padding-top: 15.7%;
+							margin-left: 0.8%;
+		    		 		margin-top: 0.8%;
+							outline: 1px solid rgba(255, 255,255, 0.1);
+							background-repeat: no-repeat;
+							background-size: cover;
+							float: left;
+						"
+						(click) = "goMovieDetail(cast.id)"
+						[ngStyle]="{'background-image': 'url(' + view.images + cast.poster_path + ')'}"
+						*ngFor="let cast of person.movie_credits.cast| slice:0:12; let i=index" align=""
+						>
+						
+					</div>
+					
+				</div>
 				
 			</div>
 
-			<div>
-				
-			</div>
-
-
+			
 		</div>
 	</div>
 
