@@ -12,7 +12,12 @@
     <p style=" font-size: 45px; font-weight: bold; color: white; padding: 0px; margin: 0px;">M</p>
   </div>
   <div style=" float:left; padding-top: 37px;">
-    <p style=" font-size: 12px; font-weight: bold; color: white; padding: 0px; margin: 0px;">ovie Center</p>
+    <p style=" font-size: 12px; font-weight: bold; color: white; padding: 0px; margin: 0px;">
+      ovie 
+    </p>
+    <p  style=" position: relative; top:-4px; font-size: 12px; font-weight: bold; color: white; padding: 0px; margin: 0px;">
+      Center
+    </p>
   </div>
 
   <div class= "menu-button" style=" float:left; width: 48px; height: 24px; margin-left: 10px; margin-right: 15px; ">
@@ -36,11 +41,24 @@
       position: relative;
       width: 400px;
       overflow: hidden;
+      /*visibility: show;*/
+      
     ">
+      <div id="location-tag" style="
+            position:absolute;
+            margin-top:35px; 
+            margin-left: 10px; 
+            color:white;
+            z-index: -100;
+            transition: all 300ms ease-in-out ;
+            /*transition-delay: 900ms;*/
+          ">
+        {{location}}
+      </div>
 
       <div id="slide_menu" 
         style="
-
+          z-index: 100;
           white-space: nowrap;
           margin-left: -100%;
           transition: margin 300ms ease-in-out;
@@ -59,7 +77,10 @@
         </div>
 
       </div>
+      
    </div>
+
+   
   
  <!--  <div style="float:left; margin-left: 20px; margin-top: 35px; ">
     <p style="color: white;">{{"MOVIE"}}</p>
@@ -69,13 +90,46 @@
 <!-- ================================= BUSCADOR ========================================== -->
  
   
-  <div style="float: right; margin-right: 12%; margin-top: 31px;height: 24px;width: 24px;">
-    <img src="../../../../assets/icons/searcher.png">
+  <div style="position:absolute; 
+              height: 20px;
+              width: 20px; 
+              right: 11.5%; 
+              top:34%;
+              opacity: 1;
+              background-image:url('../../../../assets/icons/searcher.png');
+              background-repeat: no-repeat;
+              background-size: cover;
+        ">
+       <!-- <img src="../../../../assets/icons/searcher.png"> -->
   </div>
+  <!-- ==========================SEARCH BAR================= -->
+  <div style="position: absolute; 
+              right: 15%; 
+              top: 35%;
+              z-index: 0;
+              /*padding-top: 0px; */
+              /*padding-right: 20px; */
+              overflow: hidden;
+              width: 35%;" 
+    id="search-component">
 
-  
-  <div style="position: absolute; right: 10px; padding-top: 0px; padding-right: 20px; width: 45%;" id="search-component">
-    <input #searchBox id="search-box"  placeholder="search a movie, person..." style="width: 100%; outline:0px; border: none; background-color: rgba(255,255,255, 0.2); " (keyup)="searchTerm(searchBox.value)" />
+
+
+    <input #searchBox id="search-box"  placeholder="search a movie, person..." 
+            style="
+                  position: relative;
+                  width:  100%;
+                  outline:0px; 
+                  border: none;
+                  margin-left: 0%;
+                  transition: all 300ms ease;
+                  background-color: rgba(255,255,255, 0.2); " 
+    (keyup)="searchTerm(searchBox.value)" />
+
+
+
+
+
     <div>
 
       <div class="search-result" 
@@ -145,44 +199,45 @@
               " >
               
                 
-                <div (click)="goPersonDetail(result.id)" style="
-                      position: relative;
-                      height: 40px;
-                      width: 100%;
-                      cursor: pointer;
-                      
-                    ">
-                    
-                    <div style="color: black; float: left; position:relative; width: 100%; overflow: hidden;">
-                        <div style="white-space: nowrap;">
-               
-                            <div style="margin-left: 50px; width:100%; color: rgba(0,0,0,0.8); font-weight: bold; ">
-                              {{result.name}} 
-                            </div>
-                            <div style="margin-left: 50px; width:100%; color: rgba(0,0,0,0.5);font-style: italic; ">
-                              Known for: {{result.known_for[0].title}}
-                            </div>
-                        </div>
-                    </div>
+          <div (click)="goPersonDetail(result.id)" style="
+                position: relative;
+                height: 40px;
+                width: 100%;
+                cursor: pointer;
+                
+              ">
+              
+              <div style="color: black; float: left; position:relative; width: 100%; overflow: hidden;">
+                  <div style="white-space: nowrap;">
+         
+                      <div style="margin-left: 50px; width:100%; color: rgba(0,0,0,0.8); font-weight: bold; ">
+                        {{result.name}} 
+                      </div>
+                      <div style="margin-left: 50px; width:100%; color: rgba(0,0,0,0.5);font-style: italic; ">
+                        Known for: {{result.known_for[0].title}}
+                      </div>
+                  </div>
+              </div>
 
-                    <div *ngIf="result"
-                      [ngStyle]="{'background-image': 'url(' + view.images + result.profile_path + ')'}"  
-                      style="
-                        position: absolute;
-                        width: 40px;
-                        height: 40px;
-                        background-size:40px;
-                        background-color: white;
-                        /*background-color: blue;*/
-                        
-                      ">
-                     
-                    </div>
-                    
-                </div>
+              <div *ngIf="result"
+                [ngStyle]="{'background-image': 'url(' + view.images + result.profile_path + ')'}"  
+                style="
+                  position: absolute;
+                  width: 40px;
+                  height: 40px;
+                  background-size:40px;
+                  background-color: white;
+                  /*background-color: blue;*/
+                  
+                ">
+               
+              </div>
+              
+          </div>
 
     </div> <!-- search person end  -->
-    <br>
+    
+
   </div>
 
 </div>

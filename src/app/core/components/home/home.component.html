@@ -9,14 +9,29 @@
 	    			">
 </iframe> -->
 <!-- <router-outlet></router-outlet> -->
-<div style="background-image: url('../../../../assets/images/background_6.jpg'); padding-top: 100px; height: 750px;">
-	<div style="width: 80%; margin: 0 auto;"
+<div style="background-image: url('../../../../assets/images/background_6.jpg'); 
+			padding-top: 100px; 
+			/*display: table;*/
+			/*height: 750px;*/
+			/*clear: both;*/
+
+			">
+
+	<div style="
+		width: 80%; 
+		margin: 0 auto;
+
+
+		"
 		*ngFor="let movie of view.movies.results| slice:0:18; let i=index" >
 
 		<movie-tile [movie]="movie"> </movie-tile>
 
 	</div>
 
+	<!-- clear both agregado para que el float left para agregar el height al contenedor -->
+	<div style="clear: both;"></div>
+
 
 </div>
-<button (click)="searchMovie()">Peticion movies tmdb</button>
+<!-- <button (click)="searchMovie()">Peticion movies tmdb</button> -->

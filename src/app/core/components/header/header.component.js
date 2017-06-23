@@ -23,6 +23,7 @@ var HeaderComponent = (function () {
     function HeaderComponent(searchService, router) {
         this.searchService = searchService;
         this.router = router;
+        this.location = 'MOVIES';
         this.searchMovieTerms = new Subject_1.Subject(); //es un observable, ante cambios en su definicion hay repuesta
         this.searchPersonTerms = new Subject_1.Subject();
         this.pointer = -1;
@@ -64,10 +65,12 @@ var HeaderComponent = (function () {
             : Observable_1.Observable.of([]);
     };
     HeaderComponent.prototype.goMovies = function () {
+        this.location = 'MOVIES';
         this.menuAnimation(-1);
         this.router.navigate(['home/movies']);
     };
     HeaderComponent.prototype.goMovieDetail = function (id_movie) {
+        this.location = 'MOVIE DETAIL';
         this.router.navigate(['home/detailMovie', String(id_movie)]);
         this.ngOnInit();
         var searchInput = document.getElementById('search-box');
@@ -76,10 +79,12 @@ var HeaderComponent = (function () {
         // this.resultsPersons = Observable.of<any>([]);
     };
     HeaderComponent.prototype.goPeople = function () {
+        this.location = 'PEOPLE';
         this.menuAnimation(-1);
         this.router.navigate(['home/people']);
     };
     HeaderComponent.prototype.goPersonDetail = function (id_person) {
+        this.location = 'PERSON DETAIL';
         this.router.navigate(['home/person', String(id_person)]);
         this.ngOnInit();
         var searchInput = document.getElementById('search-box');
@@ -96,6 +101,9 @@ var HeaderComponent = (function () {
         var menuBarFormContainer = document.getElementById('form_container_menu');
         var menuBarSlide = document.getElementById('slide_menu');
         var separator = document.getElementById('separator');
+        var searchBoxInput = document.getElementById('search-box');
+        var locationTag = document.getElementById('location-tag');
+        var searchComponent = document.getElementById('search-component');
         // menuImgButton.style.width = "24px";
         // menuImgButton.style.height = "0px"; 
         if (this.pointer == 1) {
@@ -103,9 +111,12 @@ var HeaderComponent = (function () {
             menuImgButton.style.height = "0px";
             menuImgButton.style.top = "-3px";
             menuImgButton.style.opacity = "0";
-            // menuBarFormContainer.style.width= "400px";
             menuBarSlide.style.marginLeft = "0%";
             separator.style.opacity = "0";
+            searchBoxInput.style.width = "0%";
+            searchBoxInput.style.marginLeft = "100%";
+            locationTag.style.opacity = "0";
+            searchComponent.style.zIndex = "-100";
         }
         else {
             menuImgButton.style.width = "24px";
@@ -120,6 +131,10 @@ var HeaderComponent = (function () {
             cancelImgButton.style.opacity = "0";
             menuBarSlide.style.marginLeft = "-100%";
             separator.style.opacity = "0.3";
+            searchBoxInput.style.width = "100%";
+            searchBoxInput.style.marginLeft = "0%";
+            setTimeout(function () { locationTag.style.opacity = "1"; }, 1000);
+            searchComponent.style.zIndex = "0";
         }
         else {
             cancelImgButton.style.width = "16px";

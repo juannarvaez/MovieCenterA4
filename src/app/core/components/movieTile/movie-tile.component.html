@@ -2,12 +2,16 @@
 	[ngStyle]="{'background-image': 'url(' + view.images + movie.poster_path + ')'}" 
 	(click)="goMovieDetail(movie.id)" 
 	style="
+		/*position: relative;*/
+		/*display: table;*/
+
 		float: left; 
 		margin: 10px; 
 		width: 150px; 
 		height: 225px;
 		background-size: 150px;
 		cursor: pointer;
+		box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
 	" >
 	<div style="
 			position: relative;
@@ -49,4 +53,5 @@
 
 		
 	</div>
+	
 </div>

@@ -25,6 +25,8 @@ export class HeaderComponent implements OnInit{
 
 	resultsMovies: Observable<any>;
 	resultsPersons: Observable<any>;
+	location = 'MOVIES';
+
 	private searchMovieTerms = new Subject<string>(); //es un observable, ante cambios en su definicion hay repuesta
 	private searchPersonTerms = new Subject<string>();
 
@@ -82,11 +84,13 @@ export class HeaderComponent implements OnInit{
 	}
 
 	goMovies():void {
+		this.location='MOVIES';
 		this.menuAnimation(-1);
 		this.router.navigate(['home/movies']);
 	}
 
 	goMovieDetail(id_movie: number ):void {
+		this.location='MOVIE DETAIL';
 		this.router.navigate(['home/detailMovie', String(id_movie)]);
 		this.ngOnInit();
 		let searchInput = <HTMLInputElement> document.getElementById('search-box');
@@ -96,11 +100,13 @@ export class HeaderComponent implements OnInit{
 	}		
 	
 	goPeople():void {
+		this.location='PEOPLE';
 		this.menuAnimation(-1);
 		this.router.navigate(['home/people']);
 	}
 
 	goPersonDetail(id_person: number ):void {
+		this.location='PERSON DETAIL';
       	this.router.navigate(['home/person', String(id_person)]);
       	this.ngOnInit();
       	let searchInput = <HTMLInputElement>document.getElementById('search-box');
@@ -113,11 +119,15 @@ export class HeaderComponent implements OnInit{
 	menuAnimation(pointer: number):void{
 		this.pointer = this.pointer*pointer;
 		console.log(this.pointer);
+		
 		var menuImgButton = document.getElementById('menu-img-button');
 		var cancelImgButton = document.getElementById('cancel-img-button');
 		var menuBarFormContainer = document.getElementById('form_container_menu');
 		var menuBarSlide = document.getElementById('slide_menu');
 		var separator = document.getElementById('separator');
+		var searchBoxInput = document.getElementById('search-box');
+		var locationTag = document.getElementById('location-tag'); 
+		var searchComponent = document.getElementById('search-component'); 
 		// menuImgButton.style.width = "24px";
 		// menuImgButton.style.height = "0px"; 
 		if(this.pointer == 1){
@@ -125,9 +135,17 @@ export class HeaderComponent implements OnInit{
 			menuImgButton.style.height = "0px"; 
 			menuImgButton.style.top= "-3px";
 			menuImgButton.style.opacity= "0"
-			// menuBarFormContainer.style.width= "400px";
+			
 			menuBarSlide.style.marginLeft = "0%";
+			
 			separator.style.opacity = "0";
+			
+			searchBoxInput.style.width = "0%";
+			searchBoxInput.style.marginLeft = "100%";
+
+			locationTag.style.opacity = "0";
+
+			searchComponent.style.zIndex = "-100";
 
 		}else{
 			menuImgButton.style.width = "24px";
@@ -137,12 +155,23 @@ export class HeaderComponent implements OnInit{
 		}
 
 		if(this.pointer == -1){
+
 			cancelImgButton.style.width = "16px";
 			cancelImgButton.style.height = "0px"; 
 			cancelImgButton.style.top= "-5px";
 			cancelImgButton.style.opacity= "0";
+			
 			menuBarSlide.style.marginLeft = "-100%";
+			
 			separator.style.opacity = "0.3";
+
+			searchBoxInput.style.width = "100%";
+			searchBoxInput.style.marginLeft = "0%";
+			setTimeout(function(){ locationTag.style.opacity = "1"}, 1000);
+
+			searchComponent.style.zIndex = "0";
+			
+			
 		}else{
 			cancelImgButton.style.width = "16px";
 			cancelImgButton.style.height = "16px"; 
