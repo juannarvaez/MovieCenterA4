@@ -40,7 +40,8 @@ export class  RecommendComponent implements OnInit{
 	private searchPersonTerms = new Subject<string>();
 
 	resultsMovies: Observable<any>;
-	selectedMovies = new Array();	
+	selectedMovies = new Array();
+	idsSelectedMovies = new Array();	
 
 	view = {
 		images: 'https://image.tmdb.org/t/p/w500',
@@ -89,10 +90,16 @@ export class  RecommendComponent implements OnInit{
 	getMovieDetail(id_movie:string):void{
 
 		this.numberOfSelectedMovies +=1;
-		
-		//if(this.numberOfSelectedMovies<=5){
+		let auxIds = this.idsSelectedMovies.length;
+		this.idsSelectedMovies.push(id_movie);
+		this.idsSelectedMovies = this.idsSelectedMovies.filter(function(a,b,c){return c.indexOf(a,b+1)<0;});
+		let auxNewIds = this.idsSelectedMovies.length;
+
+		if(auxIds != auxNewIds){
+			
 			this.tmdbapiservice.getMovieDetailRecommend(id_movie).subscribe(data => this.selectedMovies.push(data));
-		//}
+
+		}
 		
 		let searchInput = <HTMLInputElement> document.getElementById('search-box-recommend');
 		searchInput.value = '';
@@ -100,6 +107,7 @@ export class  RecommendComponent implements OnInit{
 	}
 
 	setIdsSimilarMovies():void{
+
 		let length = this.selectedMovies.length;
 		this.minSupport = length%2 == 0 ? length/2 :Math.ceil(length/2);
 		if(this.minSupport == 1 && length==2){this.minSupport = 2;}

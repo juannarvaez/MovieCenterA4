@@ -39,6 +39,7 @@ var RecommendComponent = (function () {
         this.searchMovieTerms = new Subject_1.Subject(); //es un observable, ante cambios en su definicion hay repuesta
         this.searchPersonTerms = new Subject_1.Subject();
         this.selectedMovies = new Array();
+        this.idsSelectedMovies = new Array();
         this.view = {
             images: 'https://image.tmdb.org/t/p/w500',
         };
@@ -70,9 +71,13 @@ var RecommendComponent = (function () {
     RecommendComponent.prototype.getMovieDetail = function (id_movie) {
         var _this = this;
         this.numberOfSelectedMovies += 1;
-        //if(this.numberOfSelectedMovies<=5){
-        this.tmdbapiservice.getMovieDetailRecommend(id_movie).subscribe(function (data) { return _this.selectedMovies.push(data); });
-        //}
+        var auxIds = this.idsSelectedMovies.length;
+        this.idsSelectedMovies.push(id_movie);
+        this.idsSelectedMovies = this.idsSelectedMovies.filter(function (a, b, c) { return c.indexOf(a, b + 1) < 0; });
+        var auxNewIds = this.idsSelectedMovies.length;
+        if (auxIds != auxNewIds) {
+            this.tmdbapiservice.getMovieDetailRecommend(id_movie).subscribe(function (data) { return _this.selectedMovies.push(data); });
+        }
         var searchInput = document.getElementById('search-box-recommend');
         searchInput.value = '';
         this.ngOnInit();
