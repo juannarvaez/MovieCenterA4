@@ -35,6 +35,11 @@ export class TMDBAPIService {
 		return this.getFromTMDB('movie/'+id, extra_params );
 	}
 
+	getMovieDetailRecommend(id: string):Observable<any>{
+		var extra_params = '&append_to_response=similar,images';
+		return this.getFromTMDB('movie/'+id, extra_params );
+	}
+
 	getTopMovies(): Observable<any>{
 		return this.getFromTMDB('movie/top_rated');
 	}

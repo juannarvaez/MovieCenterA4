@@ -37,6 +37,10 @@ var TMDBAPIService = (function () {
         var extra_params = '&append_to_response=alternative_titles,credits,releases,videos,similar,reviews,images';
         return this.getFromTMDB('movie/' + id, extra_params);
     };
+    TMDBAPIService.prototype.getMovieDetailRecommend = function (id) {
+        var extra_params = '&append_to_response=similar,images';
+        return this.getFromTMDB('movie/' + id, extra_params);
+    };
     TMDBAPIService.prototype.getTopMovies = function () {
         return this.getFromTMDB('movie/top_rated');
     };
