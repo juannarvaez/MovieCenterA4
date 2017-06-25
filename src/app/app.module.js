@@ -22,6 +22,7 @@ var person_component_1 = require("./core/components/person/person.component");
 var footer_component_1 = require("./core/components/footer/footer.component");
 var header_component_1 = require("./core/components/header/header.component");
 var people_component_1 = require("./core/components/people/people.component");
+var recommend_component_1 = require("./core/components/recommend/recommend.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -45,6 +46,7 @@ AppModule = __decorate([
             people_component_1.PeopleComponent,
             header_component_1.HeaderComponent,
             footer_component_1.FooterComponent,
+            recommend_component_1.RecommendComponent,
             filter_percentage_1.Percentage,
             filter_safe_video_1.SafeVideo
         ],

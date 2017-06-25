@@ -43,17 +43,22 @@
       overflow: hidden;
       /*visibility: show;*/
       
-    ">
-      <div id="location-tag" style="
+    "><div  style="
             position:absolute;
             margin-top:35px; 
             margin-left: 10px; 
             color:white;
             z-index: -100;
-            transition: all 300ms ease-in-out ;
-            /*transition-delay: 900ms;*/
-          ">
-        {{location}}
+           
+            ">
+        <div  id="location-tag" style="float: left; transition: all 300ms ease-in-out ;
+             ">
+            {{location}}
+        
+        </div>
+        <div id="sub-location-tag" style="float: left; margin-left:20px; color: red;transition: all 300ms ease-in-out" >
+              {{subLocation}}
+        </div>
       </div>
 
       <div id="slide_menu" 
@@ -71,7 +76,7 @@
           <div (click)="goPeople()" style="float: left;margin-left:20px; cursor: pointer;">
             PEOPLE
           </div >
-          <div style="float: left; margin-left:20px; cursor: pointer;">
+          <div (click)="goRecommend()" style="float: left; margin-left:20px; cursor: pointer;">
             RECOMMEND ME A MOVIE
           </div>    
         </div>

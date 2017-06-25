@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit{
 	resultsMovies: Observable<any>;
 	resultsPersons: Observable<any>;
 	location = 'MOVIES';
+	subLocation = 'POPULAR';
 
 	private searchMovieTerms = new Subject<string>(); //es un observable, ante cambios en su definicion hay repuesta
 	private searchPersonTerms = new Subject<string>();
@@ -116,6 +117,13 @@ export class HeaderComponent implements OnInit{
       	// this.resultsMovies = Observable.of<any>([]);
   	}
 
+  	goRecommend():void {
+		this.location='RECOMMEND ME A MOVIE';
+		this.menuAnimation(-1);
+		this.router.navigate(['home/recommend']);
+	}
+
+
 	menuAnimation(pointer: number):void{
 		this.pointer = this.pointer*pointer;
 		console.log(this.pointer);
@@ -127,6 +135,7 @@ export class HeaderComponent implements OnInit{
 		var separator = document.getElementById('separator');
 		var searchBoxInput = document.getElementById('search-box');
 		var locationTag = document.getElementById('location-tag'); 
+		var subLocationTag = document.getElementById('sub-location-tag'); 
 		var searchComponent = document.getElementById('search-component'); 
 		// menuImgButton.style.width = "24px";
 		// menuImgButton.style.height = "0px"; 
@@ -144,17 +153,20 @@ export class HeaderComponent implements OnInit{
 			searchBoxInput.style.marginLeft = "100%";
 
 			locationTag.style.opacity = "0";
+			subLocationTag.style.opacity = "0";
 
 			searchComponent.style.zIndex = "-100";
+
+			cancelImgButton.style.width = "16px";
+			cancelImgButton.style.height = "16px"; 
+			cancelImgButton.style.top= "0px";
+			cancelImgButton.style.opacity= "1";
 
 		}else{
 			menuImgButton.style.width = "24px";
 			menuImgButton.style.height = "24px"; 
 			menuImgButton.style.top= "0px";
 			menuImgButton.style.opacity= "1";
-		}
-
-		if(this.pointer == -1){
 
 			cancelImgButton.style.width = "16px";
 			cancelImgButton.style.height = "0px"; 
@@ -167,16 +179,19 @@ export class HeaderComponent implements OnInit{
 
 			searchBoxInput.style.width = "100%";
 			searchBoxInput.style.marginLeft = "0%";
-			setTimeout(function(){ locationTag.style.opacity = "1"}, 1000);
+			setTimeout(function(){ locationTag.style.opacity = "1"}, 800);
+			setTimeout(function(){ subLocationTag.style.opacity = "1"}, 800);
 
 			searchComponent.style.zIndex = "0";
+		}
+
+		if(this.pointer == -1){
+
+
 			
 			
 		}else{
-			cancelImgButton.style.width = "16px";
-			cancelImgButton.style.height = "16px"; 
-			cancelImgButton.style.top= "0px";
-			cancelImgButton.style.opacity= "1";
+			
 		}
 		
 

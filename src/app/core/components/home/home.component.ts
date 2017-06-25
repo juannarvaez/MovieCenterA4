@@ -23,6 +23,7 @@ import {TMDBAPIService} from '../../services/tmdb/tmdb-api.service'
 
 export class  HomeComponent implements OnInit{
 
+	
 	view = {
 		movies: '',
 		images: 'https://image.tmdb.org/t/p/w500',
@@ -35,6 +36,7 @@ export class  HomeComponent implements OnInit{
 
 	ngOnInit():void{
 		this.getMovies();
+		
 	}
 
 	getMovies(): void{
