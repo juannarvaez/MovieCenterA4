@@ -5,7 +5,7 @@ import { Router }            from '@angular/router';
 @Component({
 	selector: 'movie-tile',
 	templateUrl: './movie-tile.component.html',
-	styleUrls: []
+	styleUrls: ['./movie-tile.component.css']
 })
 
 export class  MovieTileComponent implements OnInit{

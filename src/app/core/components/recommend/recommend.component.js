@@ -147,13 +147,16 @@ var RecommendComponent = (function () {
             console.log(itemSetSup);
             this.itemSetsCollectionTables.push(itemSetSup);
             var iterationNumber = 1;
+            itemSetkeys = Object.keys(itemSetSup);
+            itemSetLength = itemSetkeys.length;
             // ITERACIONES DEL ALGORITMO
-            while (iterationNumber < 4) {
+            console.log("keys iteracion 1:" + itemSetLength);
+            while (iterationNumber < 4 && itemSetLength > 1) {
                 // while(false ){
                 // while(itemSetkeys.length>2 ){
                 iterationNumber++;
                 console.log("================  ITERACION # " + iterationNumber + "  ================");
-                itemSetkeys = Object.keys(itemSetSup);
+                //itemSetkeys = Object.keys( itemSetSup );
                 // console.log(itemSetkeys);
                 itemSetSup = {};
                 for (var i = 0; i < itemSetkeys.length; i++) {
@@ -200,9 +203,11 @@ var RecommendComponent = (function () {
                         delete itemSetSup[itemSetkeys[i]];
                     }
                 }
+                itemSetkeys = Object.keys(itemSetSup);
+                itemSetLength = itemSetkeys.length;
                 console.log("Itemsets que pasaron el min support: " + this.minSupport);
                 console.log(itemSetSup);
-                console.log("Cantidad de etiquetas:" + Object.keys(itemSetSup).length);
+                console.log("Cantidad de etiquetas:" + itemSetLength);
                 this.itemSetsCollectionTables.push(itemSetSup);
             }
         }
@@ -217,6 +222,7 @@ var RecommendComponent = (function () {
         }
         result = result.filter(function (a, b, c) { return c.indexOf(a, b + 1) < 0; });
         console.log(result);
+        console.log(this.idsSelectedMovies);
     };
     RecommendComponent.prototype.firstEspecialPermutation = function (movieIds) {
         var results = new Array();

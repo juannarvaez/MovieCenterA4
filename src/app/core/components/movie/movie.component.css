@@ -1,0 +1,307 @@
+.main-panel{
+	background: black;
+	padding: 0px;
+	margin: 0px;
+}
+
+.poster-background{
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-size: 500px 750px;
+	padding: 0px;
+	margin: 0px;
+}
+
+.movie-info-container{
+	width: : 100%;
+	height: 680px;
+
+	padding: 0px;
+	margin: 0px;
+	
+	background: rgba(0,0,0,0.4);
+	background: -moz-linear-gradient(left, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.64) 15%, rgba(0,0,0,1) 38%);
+	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(0,0,0,0.4)), color-stop(15%, rgba(0,0,0,0.64)), color-stop(38%, rgba(0,0,0,1)));
+	background: -webkit-linear-gradient(left, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.64) 15%, rgba(0,0,0,1) 38%);
+	background: -o-linear-gradient(left, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.64) 15%, rgba(0,0,0,1) 38%);
+	background: -ms-linear-gradient(left, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.64) 15%, rgba(0,0,0,1) 38%);
+	background: linear-gradient(to right, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.64) 15%, rgba(0,0,0,1) 38%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000', GradientType=1 );
+}
+
+/*========================== PANEL LEFT ============================*/
+
+.movie-info-panel-left{
+	width: 42%;
+	height: 680px;
+	color: white;
+	padding: 0px;
+	margin: 0px;
+	float: left;
+}
+
+.movie-description{
+	position: relative;
+	height: 660px;
+	vertical-align: bottom;
+	display: table-cell; 
+	padding: 10px;
+}
+
+.movie-title{
+	margin: 0px; 
+	padding: 0px; 
+	color:white;
+}
+
+.movie-tagline{
+	margin: 0px; 
+	padding: 0px; 
+	color: rgba(255,255,255,0.7);
+}
+
+.link-color{
+	color: #FFBF00;
+}
+
+.extra-detail{
+	float:left; 
+	width:44%; 
+	padding:  0% 3% 0% 3% ;
+}
+
+.tag{
+	float: left; 
+	margin-right: 10px;
+	margin-bottom: 0px;
+	padding-left: 5px;
+	padding-right: 5px; 
+	border-radius: 10%;
+	background-color: rgba(255,255,255, 0.1);
+}
+
+
+/*========================== PANEL RIGHHT ============================*/
+
+.movie-info-panel-right{
+	width: 58%; 
+	height: 680px; 
+	float: left; 
+}
+
+.movie-trailer{
+	width: 70%; 
+	position: relative; 
+	left: 15%; 
+	padding-top: 50px;
+}
+
+.trailer-container{
+	height: 0;
+	padding-bottom: 56.25%;
+	margin:1%;
+	position: relative;
+}
+
+.trailer-iframe{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;	
+}
+
+.actors-container{
+	position: relative;
+	padding: 0px;
+	width: 73%;
+	left: 14.5%;
+}
+
+.actor{
+	cursor: pointer;
+ 	width:  18.1%;
+ 	padding-top: 14.1%;
+ 	float: left;
+ 	margin-left: 5px;
+ 	margin-top: 5px;
+ 	background-size: 100px 150px;
+ 	background-position: 0px -10px;
+ 	background-repeat: no-repeat;
+ 	outline: 1px solid rgba(255, 255,255, 0.1);
+ 	color: white;
+}
+
+.shadow-container{
+	background-color:rgba(0, 0, 0, 0.5); 
+	width: 100%; 
+	height: 20px;
+	position: relative;
+}
+
+.shadow-info{
+	position:absolute; 
+	bottom:1px;
+	padding: 0px; 
+	margin: 0px;
+	font-size: 100%; 
+}
+
+/* ================= ACTOR INFO PANEL ==============*/
+
+#actorDetailPanel{
+	position: absolute;
+	width: 50%; 
+	background-color: white; 
+	height: 450px; 
+	display: none;
+	left: 15%;
+	top: 10%;
+	z-index: 200;
+}
+
+#actorDetailPanelPicture{
+	width: 47%;
+	height: 450px;
+	float: left;
+	/*outline: 1px solid pink;*/
+	background-size: 300px 450px;
+}
+
+#actor-info-right{
+	width: 49%;
+	float: left;
+	padding: 2%;
+}
+
+.actor-name{
+	padding: 0px; 
+	margin: 0px; 
+	padding-top: 15px; 
+	font-size: 30px; 
+	color: rgba(220,7,0,1) ;
+}
+
+.actor-character{
+	padding: 0px; 
+	margin: 0px
+}
+#Personal-information{
+	padding: 0px; 
+	margin: 0px;
+}
+
+.half-panel{
+	float: left; 
+	padding: 0px; 
+	margin: 0px; 
+	width: 50%
+}
+
+#birth-info{
+	float: left; 
+	padding: 0px; 
+	margin: 0px;
+}
+
+#biography-container{
+	margin-left:auto;
+	margin-right:auto; 
+	width:100%; 
+	height:200px; 
+	overflow-y:auto;
+}
+
+#biography{
+	float:left;  
+	width:100%;  
+	font-size: 15px; 
+	line-height: 18px;
+}
+
+#go-detail-link{
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	color: red;
+}
+
+#close-button{
+	position: absolute;
+	left: 0px;
+}
+
+
+/*================= SIMILAR MOVIES ==================*/
+.similar-movies-container {
+	box-shadow: 1px 1px 25px black;
+	padding: 0px;
+	height: 170px;
+	background-image: url('../../../../assets/images/background_6.jpg');
+}
+
+.similar-movies-title {
+	position: relative;
+	top: -20px;
+	width: 15%;
+	left: 37.5%;
+	height: 0px;
+
+	color: rgba(255,255,255,0.8);
+	margin: 0px;
+	font-size: 17px;
+
+	border-top-right-radius: 50%;
+	border-top-left-radius: 50%;
+	border-bottom: 20px solid #151515;
+	border-left: 40px solid transparent;
+	border-right: 40px solid transparent;
+}
+
+/*SLIDER*/
+.form_container{
+	position: relative;
+	top: -20px;
+	padding-top: 10px;
+	width: 100%;
+	height: 150px;
+	position: relative;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+#slide_container{
+	white-space: nowrap;
+	margin-left: 0px;
+	transition: margin 300ms ease-in-out;
+}
+
+.slide{
+	cursor: pointer;
+	width: 100px; 
+ 	height: 150px; 
+ 	background-size: 100px 150px;
+    display: inline-block;
+    margin-right:  8px;
+    vertical-align: top;
+    background-repeat: no-repeat;
+    background-position: 20%;
+}
+
+.bt_left{
+	position: absolute;
+	top: 40%;
+	font: 4em;
+	border: none;
+	height: 20%;
+	left: 0px;
+}
+
+.bt_right{
+	position: absolute;
+	top: 40%;
+	font: 4em;
+	border: none;
+	height: 20%;
+	right: 0px;
+}

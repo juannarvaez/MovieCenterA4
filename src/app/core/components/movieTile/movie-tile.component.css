@@ -1,0 +1,56 @@
+.movie-tile-container{
+	float: left; 
+	margin: 10px; 
+	width: 150px; 
+	height: 225px;
+	background-size: 150px;
+	cursor: pointer;
+	color: white
+	box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+}
+
+.shadow-info-container{
+	position: relative;
+	height: 225px;
+	width: 150px; 
+	vertical-align: bottom;
+	display: table-cell; 
+}
+
+.shadow-info{
+	background-color: rgba(0, 0, 0, 0.5);
+	width: 100%; 
+	height: 50px;
+	position: relative;
+	color: white;
+	overflow: hidden;
+}
+
+.vote-average{
+	float:left; width: 25%;
+}
+
+.start{
+	padding-left: 10px; 
+	float:left; 
+	opacity: 1; 
+	background-repeat: no-repeat; 
+	height: 24px; 
+	width: 24px;
+}
+.start-image-red{
+	background-image:url('../../../../assets/icons/star-24.png'); 
+}
+
+.start-image-border{
+	background-image:url('../../../../assets/icons/star-border-24.png'); 
+}
+
+.start-image-white{
+	background-image:url('../../../../assets/icons/star-white-24.png'); 
+}
+
+.movie-title{
+	float:left; 
+	width: 75%;
+}

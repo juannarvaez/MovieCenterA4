@@ -1,71 +1,33 @@
-<div style="background-image: url('../../../../assets/images/background_6.jpg'); padding-top: 100px;  padding-bottom: 100px;">
-	<div 
-		*ngFor="let person of view.people.results| slice:0:18; let i=index"
-		
-			style="width: 80%; margin: 0 auto; "
-		 >
-
-		 <div *ngIf="person"
+<div class="main-panel">
+	<div class="people-container"
+		*ngFor="let person of view.people.results| slice:0:18">
+		 
+		 <div class="person-tile" *ngIf="person"
 			[ngStyle]="{'background-image': 'url(' + view.images + person.profile_path + ')'}"
-			(click)="goPersonDetail(person.id)" 
-			style="
-				float: left; 
-				margin: 10px; 
-				width: 150px; 
-				height: 225px;
-				background-size: 150px;
-				cursor: pointer;
-				box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
-			" >
-			<div style="
-					position: relative;
-					height: 225px;
-					width: 150px; 
-					vertical-align: bottom;
-					display: table-cell; 
-				">
+			(click)="goPersonDetail(person.id)" >
+			<div class="shadow-container">
 				
-				<div style="
-					background-color: rgba(0, 0, 0, 0.5);
-					width: 100%; 
-					height: 50px;
-					position: relative;
-					color: white;
-					overflow: hidden;
-					">
-					<div style="float:left; width: 32%;">
-						<div style="margin: 0 auto; background-repeat: no-repeat; background-image:url('../../../../assets/icons/thumb-up-white-24.png'); height: 24px; width: 24px;">
-							
-						</div>
-						
-						<div style="font-size: 12px; ">
+				<div class="shadow-info">
+					<div class="info-panel-left">
+						<div class="thumb-up-icon"></div>
+						<div>
 							<p align="center">{{person.popularity | percentage : 4 }}</p>
-							
-
 							<!-- {{substringPorcent(person.popularity) }} -->
 						</div>
 					</div>
-					<div style="float:left; width: 68%; ">
+
+					<div class="info-panel-right" >
 						<div>
 							{{person.name }}
 						</div>
-						<div style="font-size: 10px;font-style: italic; color: rgba(255,255,255,0.6);" *ngIf="person.known_for">
+						<div class="known-for-info" *ngIf="person.known_for">
 							{{person.known_for[0].title}}
 						</div>
-						
 					</div>
 				</div>
-
-				
 			</div>
 		</div>
-
-
-
 	</div>
 	<!-- clear both agregado para que el float left para agregar el height al contenedor -->
-	<div style="clear: both;"></div>
-
-
-
+	<div class="clear-both"></div>
 </div>

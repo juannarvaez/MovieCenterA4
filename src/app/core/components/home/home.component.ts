@@ -17,7 +17,7 @@ import {TMDBAPIService} from '../../services/tmdb/tmdb-api.service'
 @Component({
 	selector: 'home-component',
 	templateUrl: './home.component.html',
-	styleUrls: [],
+	styleUrls: ['./home.component.css'],
 	providers: [TMDBAPIService]
 })
 

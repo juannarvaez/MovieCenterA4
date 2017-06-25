@@ -9,7 +9,7 @@ import {TMDBAPIService} from '../../services/tmdb/tmdb-api.service'
 @Component({
 	selector: 'people',
 	templateUrl: './people.component.html',
-	styleUrls: [],
+	styleUrls: ['./people.component.css'],
 })
 
 export class PeopleComponent implements OnInit{

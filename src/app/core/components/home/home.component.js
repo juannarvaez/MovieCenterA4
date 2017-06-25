@@ -52,7 +52,7 @@ HomeComponent = __decorate([
     core_1.Component({
         selector: 'home-component',
         templateUrl: './home.component.html',
-        styleUrls: [],
+        styleUrls: ['./home.component.css'],
         providers: [tmdb_api_service_1.TMDBAPIService]
     }),
     __metadata("design:paramtypes", [tmdb_api_service_1.TMDBAPIService,

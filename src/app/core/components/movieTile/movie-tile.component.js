@@ -32,7 +32,7 @@ MovieTileComponent = __decorate([
     core_1.Component({
         selector: 'movie-tile',
         templateUrl: './movie-tile.component.html',
-        styleUrls: []
+        styleUrls: ['./movie-tile.component.css']
     }),
     __metadata("design:paramtypes", [router_1.Router])
 ], MovieTileComponent);

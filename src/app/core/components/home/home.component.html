@@ -1,39 +1,12 @@
 
-<!-- <iframe width="560" height="315" 
-	    			[src]="video|safe-video" frameborder="0" style="
-	    				position: absolute;
-	    				top: 0;
-	    				left: 0;
-	    				width: 100%;
-	    				height: 100%;
-	    			">
-</iframe> -->
-<!-- <router-outlet></router-outlet> -->
-<div style="background-image: url('../../../../assets/images/background_6.jpg'); 
-			padding-top: 100px; 
-			padding-bottom: 100px;
-			/*display: table;*/
-			/*height: 750px;*/
-			/*clear: both;*/
+<div class= "main-panel">
 
-			">
-
-	<div style="
-		width: 80%; 
-		margin: 0 auto;
-
-
-		"
+	<div class="movies-container" 
 		*ngFor="let movie of view.movies.results| slice:0:18; let i=index" >
-
 		<movie-tile [movie]="movie"> </movie-tile>
-
 	</div>
-
 	<!-- clear both agregado para que el float left para agregar el height al contenedor -->
-	<div style="clear: both;"></div>
-
-
+	<div class="clear-both" ></div>
 
 </div>
 <!-- <button (click)="searchMovie()">Peticion movies tmdb</button> -->

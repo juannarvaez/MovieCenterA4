@@ -9,7 +9,7 @@ import {TMDBAPIService} from '../../services/tmdb/tmdb-api.service'
 @Component({
 	selector: 'movie',
 	templateUrl: './movie.component.html',
-	styleUrls: [],
+	styleUrls: ['./movie.component.css'],
 })
 
 export class MovieComponent implements OnInit{
@@ -102,8 +102,12 @@ export class MovieComponent implements OnInit{
 
         var slide: NodeListOf<any> = document.getElementsByClassName('slide');
         var limit = slide.length;
-        var div_width = parseInt(slide[0].style.width.substring(0,3))+8;
-        console.log("limit: " + limit);
+        var div_width = parseInt(slide[0].clientWidth)+8;
+
+        // console.log("slide");
+        // console.log(slide);
+        // console.log("limit: " + limit);
+        // console.log(slide[0].clientWidth);
 
         this.pointer = (direction == 'right') ? this.pointer + 1 : this.pointer-1;
         // this.pointer = (this.pointer >= limit) ? 0 : this.pointer ;
@@ -111,15 +115,15 @@ export class MovieComponent implements OnInit{
 
 
         var slide_container = document.getElementById('slide_container');
-        console.log("widht: "+div_width);
+        // console.log("widht: "+div_width);
 
         var move_left = -1*this.pointer*div_width;
-        console.log("move: " + move_left);
+        // console.log("move: " + move_left);
 
         slide_container.style.marginLeft = move_left+'px';
         // slide_container.style.margin = '0px 0px 0px '+move_left+'px';
         slide_container.style.color = 'red';
-        console.log(slide_container);
+        // console.log(slide_container);
 
     }
 

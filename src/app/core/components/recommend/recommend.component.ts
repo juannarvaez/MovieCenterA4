@@ -194,11 +194,12 @@ export class  RecommendComponent implements OnInit{
 			let iterationNumber = 1;
 
 
-
+			itemSetkeys = Object.keys( itemSetSup );
+			itemSetLength = itemSetkeys.length;
 			// ITERACIONES DEL ALGORITMO
-			
+			console.log("keys iteracion 1:"+ itemSetLength);
 
-			while(iterationNumber<4 ){
+			while(iterationNumber<4 && itemSetLength>1){
 			// while(false ){
 
 			// while(itemSetkeys.length>2 ){
@@ -207,7 +208,7 @@ export class  RecommendComponent implements OnInit{
 				iterationNumber++;
 				console.log("================  ITERACION # "+iterationNumber+"  ================");
 
-				itemSetkeys = Object.keys( itemSetSup );
+				//itemSetkeys = Object.keys( itemSetSup );
 				// console.log(itemSetkeys);
 				itemSetSup = {};
 
@@ -274,9 +275,13 @@ export class  RecommendComponent implements OnInit{
 					if(itemSetSup[itemSetkeys[i]] < this.minSupport){delete itemSetSup[itemSetkeys[i]]}	
 				}
 
+				itemSetkeys = Object.keys( itemSetSup );
+				itemSetLength = itemSetkeys.length;
+
 				console.log("Itemsets que pasaron el min support: "+ this.minSupport );
 				console.log(itemSetSup);
-				console.log("Cantidad de etiquetas:"+Object.keys( itemSetSup ).length);
+				console.log("Cantidad de etiquetas:"+itemSetLength);
+
 				this.itemSetsCollectionTables.push(itemSetSup);
 
 			}
@@ -296,6 +301,7 @@ export class  RecommendComponent implements OnInit{
 
 		result = result.filter(function(a,b,c){return c.indexOf(a,b+1)<0;});
 		console.log(result);
+		console.log(this.idsSelectedMovies);
 	}
 
 	firstEspecialPermutation(movieIds:Array<any>):Array<any>{

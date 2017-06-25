@@ -37,7 +37,7 @@ PeopleComponent = __decorate([
     core_1.Component({
         selector: 'people',
         templateUrl: './people.component.html',
-        styleUrls: [],
+        styleUrls: ['./people.component.css'],
     }),
     __metadata("design:paramtypes", [tmdb_api_service_1.TMDBAPIService,
         router_1.Router])

@@ -1,0 +1,67 @@
+.main-panel{
+	background-image: url('../../../../assets/images/background_6.jpg'); 
+	padding-top: 100px;  
+	padding-bottom: 100px;
+}
+
+.people-container{
+	width: 80%;
+	margin: 0 auto; 
+}
+
+.person-tile{
+	float: left; 
+	margin: 10px; 
+	width: 150px; 
+	height: 225px;
+	background-size: 150px;
+	cursor: pointer;
+	box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+	
+}
+
+.shadow-container{
+	position: relative;
+	height: 225px;
+	width: 150px; 
+	vertical-align: bottom;
+	display: table-cell;
+}
+
+.shadow-info{
+	background-color: rgba(0, 0, 0, 0.5);
+	width: 100%; 
+	height: 50px;
+	position: relative;
+	color: white;
+	overflow: hidden;
+}
+.info-panel-left{
+	float:left; 
+	width: 32%;
+	font-size: 12px;
+}
+
+.thumb-up-icon{
+	margin: 0 auto;
+	background-repeat: no-repeat; 
+	background-image:url('../../../../assets/icons/thumb-up-white-24.png'); 
+	height: 24px; 
+	width: 24px;
+}
+
+.info-panel-right{
+	float:left; 
+	width: 68%; "
+}
+
+.known-for-info{
+	font-size: 10px;
+	font-style: italic; 
+	color: rgba(255,255,255,0.6);
+
+}
+
+.clear-both{
+	clear: both;
+}

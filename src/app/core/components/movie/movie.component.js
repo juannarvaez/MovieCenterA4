@@ -81,19 +81,22 @@ var MovieComponent = (function () {
     MovieComponent.prototype.movieSlider = function (direction) {
         var slide = document.getElementsByClassName('slide');
         var limit = slide.length;
-        var div_width = parseInt(slide[0].style.width.substring(0, 3)) + 8;
-        console.log("limit: " + limit);
+        var div_width = parseInt(slide[0].clientWidth) + 8;
+        // console.log("slide");
+        // console.log(slide);
+        // console.log("limit: " + limit);
+        // console.log(slide[0].clientWidth);
         this.pointer = (direction == 'right') ? this.pointer + 1 : this.pointer - 1;
         // this.pointer = (this.pointer >= limit) ? 0 : this.pointer ;
         // this.pointer = (this.pointer < 0 ) ? limit - 1 : this.pointer ;
         var slide_container = document.getElementById('slide_container');
-        console.log("widht: " + div_width);
+        // console.log("widht: "+div_width);
         var move_left = -1 * this.pointer * div_width;
-        console.log("move: " + move_left);
+        // console.log("move: " + move_left);
         slide_container.style.marginLeft = move_left + 'px';
         // slide_container.style.margin = '0px 0px 0px '+move_left+'px';
         slide_container.style.color = 'red';
-        console.log(slide_container);
+        // console.log(slide_container);
     };
     return MovieComponent;
 }());
@@ -105,7 +108,7 @@ MovieComponent = __decorate([
     core_1.Component({
         selector: 'movie',
         templateUrl: './movie.component.html',
-        styleUrls: [],
+        styleUrls: ['./movie.component.css'],
     }),
     __metadata("design:paramtypes", [tmdb_api_service_1.TMDBAPIService,
         router_1.ActivatedRoute,

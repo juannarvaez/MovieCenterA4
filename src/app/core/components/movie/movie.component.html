@@ -1,409 +1,141 @@
-<div class="col-md-12" 
-	style="
-		background: black;
-		padding: 0px;
-		margin: 0px;
-		">
-
-	<div *ngIf="view.movie.poster_path" class="col-md-12" 
-		[ngStyle]="{'background-image': 'url(' + view.images + view.movie.poster_path + ')'}"
-		style="
-			background-repeat:no-repeat;
-			background-attachment:fixed;
-			background-size: 500px 750px;
-			padding: 0px;
-			margin: 0px;
-		">
-		<div class="col-md-12"  style="
-			padding: 0px;
-			margin: 0px;
-			width: : 100%;
-			height: 680px;
-			background: rgba(0,0,0,0.4);
-			background: -moz-linear-gradient(left, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.64) 15%, rgba(0,0,0,1) 38%);
-			background: -webkit-gradient(left top, right top, color-stop(0%, rgba(0,0,0,0.4)), color-stop(15%, rgba(0,0,0,0.64)), color-stop(38%, rgba(0,0,0,1)));
-			background: -webkit-linear-gradient(left, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.64) 15%, rgba(0,0,0,1) 38%);
-			background: -o-linear-gradient(left, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.64) 15%, rgba(0,0,0,1) 38%);
-			background: -ms-linear-gradient(left, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.64) 15%, rgba(0,0,0,1) 38%);
-			background: linear-gradient(to right, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.64) 15%, rgba(0,0,0,1) 38%);
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000', GradientType=1 );
-		">
-
-			<div  class="Panel left"
-
-				style="
-				width: 42%;
-				height: 680px;
-				color: white;
-				padding: 0px;
-				margin: 0px;
-				float: left;
-				/*outline: 1px solid red;*/
-
-			">
-				<div style="
-					position: relative;
-					height: 660px;
-					vertical-align: bottom;
-					display: table-cell; 
-					padding: 10px;
-
-					">
-
-			        <h1 style="margin: 0px; padding: 0px; color:white;">{{ view.movie.original_title | uppercase }} </h1>
-			        <p style="margin: 0px; padding: 0px; color: rgba(255,255,255,0.7);"><i>{{view.movie.tagline}}</i></p>
-			        
+<div class="main-panel col-md-12" >
+	<div  class="poster-background col-md-12"  
+		*ngIf="view.movie.poster_path"
+		[ngStyle]="{'background-image': 'url(' + view.images + view.movie.poster_path + ')'}">
+		<div class="movie-info-container col-md-12">
+			<div  class="movie-info-panel-left">
+				<div class="movie-description">
+			        <h1 class="movie-title">{{ view.movie.original_title | uppercase }}</h1>
+			        <p class="movie-tagline" ><i>{{view.movie.tagline}}</i></p>
 			        <br>
-			        
 			        <p>{{view.movie.overview}}</p>
-			        <span ng-if="view.movie.homepage"><a href="{{ view.movie.homepage }}" target=_new 
-			        style="color: #FFBF00">{{ view.movie.homepage }}</a></span>
-			        
+			        <span ng-if="view.movie.homepage">
+			        	<a class="link-color" href="{{ view.movie.homepage }}" target=_new>
+			        		{{ view.movie.homepage }}
+			        	</a>
+			        </span>
 			        <br>
 			        <br>
-
 			        <div >
-				        <div  style="float:left; width:44%; padding:  0% 3% 0% 3% ;">
-				            <div class="detail">
+				        <div class="extra-detail">
+				            <div>
 				                Release Date {{ view.movie.release_date | date }}
 				            </div>
-				            <div class="detail">
+				            <div >
 				                Running Time {{ view.movie.runtime }} minutes
 				            </div>
 				        </div>
-				        <div  style="float:left; width:44%; padding: 0% 3% 0% 3%; ">
-				            <div class="detail">
+				        <div class="extra-detail">
+				            <div>
 				                Budget ${{ view.movie.budget | number }} USD
 				            </div>
-				            <div class="detail">
+				            <div>
 				                Revenue ${{ view.movie.revenue | number }} USD
 				            </div>
 				        </div>
 			        </div>
-
 			        <br>
 			        <br>
 					<br>
-
-
-			        <p *ngFor="let gen of view.movie.genres" 
-			        	style="
-			        		float: left; 
-			        		margin-right: 10px;
-			        		margin-bottom: 0px;
-			        		padding-left: 5px;
-			        		padding-right: 5px; 
-			        		border-radius: 10%;
-			        		background-color: rgba(255,255,255, 0.1);
-			        	">
+			        <p class="tag" *ngFor="let gen of view.movie.genres">
 			        	{{gen.name}} 
 			        </p>
-			        
 			        <br>
-
-			        <h2>{{ view.movie.original_language }}</h2>
+			        <h3>Language: {{ view.movie.original_language |uppercase }}</h3>
 			    </div>
-		       
-
 		    </div>
 		    <!--  ====================DETAIL DERECHA =========================-->	
-
-			<div class="Panel right" style="
-		    	width: 58%; 
-		    	height: 680px; 
-		    	float: left; 
-		    	/*outline: 	1px solid blue;*/
-		    	" >
-
+			<div class="movie-info-panel-right">
 		    	<br>
 		    	<br>
-
-		    	<div  style="width: 70%; position: relative; left: 15%; padding-top: 50px;">
-			    	<div style="
-			    			height: 0;
-			    			padding-bottom: 56.25%;
-			    			margin:1%;
-			    			position: relative;
-			    			/*outline: 1px solid blue;*/
-			    		">
-
-			    		<iframe width="560" height="315" 
-			    				[src]="getTrailer()|safe" frameborder="0" 
-			    				style="
-				    				position: absolute;
-				    				top: 0;
-				    				left: 0;
-				    				width: 100%;
-				    				height: 100%;
-			    				">
+		    	<div class="movie-trailer" >
+			    	<div class="trailer-container">
+			    		<iframe class ="trailer-iframe" frameborder="0"
+			    				[src]="getTrailer()|safe">
 			    		</iframe>
 			    	</div>	
 		    	</div>
-		    	
 		    	<br>
-		<!-- ========================= ACTORES DE PELICULA  ======================= -->
+		<!--  ACTORES DE PELICULA-->
 				<div align="center">
 					<p style="color:white; ">
 						<b>IMPORTANT CAST</b>
 					</p>
 				</div>
-				<!-- <div class="col-md-12" style="
-					position: relative;
-					width: 30%;
-					/*bottom: 0px;*/
-					margin: 0 auto;
-					height: 0px;
-					border-top-right-radius: 50%;
-					border-top-left-radius: 50%;
-					border-bottom: 20px solid rgba(255,255,255,0.1);
-					border-left: 40px solid transparent;
-					border-right: 40px solid transparent;
-				">
-				<p align="center" style="color: rgba(255,255,255,0.4);margin: 0px; padding-top: 3px; font-size: 15px; opacity: 1;">
-					Important Cast
-				</p>	
-				</div> -->
-				<div style="
-						position: relative;
-						padding: 0px;
-						width: 73%;
-						left: 14.5%;
-						/*outline: 1px solid red;*/
-					">
+				<div class="actors-container">
 					<!-- ng-click="showActor(actor.id)"  -->
-		    		<div  
-		    			
+		    		<div   class="actor"
 		    			*ngFor="let actor of view.movie.credits.cast | slice:0:10; let i=index " 
 		    			(click)="showActor(actor.id)"
-		    			[ngStyle]="{'background-image': 'url(' + view.images + actor.profile_path + ')'}"
-		    			style="
-		    			cursor: pointer;
-		    		 	width:  18.1%;
-		    		 	padding-top: 14.1%;
-		    		 	float: left;
-		    		 	margin-left: 5px;
-		    		 	margin-top: 5px;
-		    		 	background-size: 100px 150px;
-		    		 	background-position: 0px -10px;
-		    		 	background-repeat: no-repeat;
-		    		 	outline: 1px solid rgba(255, 255,255, 0.1);
-		    		 	color: white;
-		    		">
-		    			<div style="
-			    				background-color:rgba(0, 0, 0, 0.5); 
-			    				width: 100%; 
-			    				height: 20px;
-			    				position: relative;
-
-		    				">
-		    				<p  style="
-		    					
-		    					
-			    				position:absolute; 
-			    				bottom:1px;
-			    				padding: 0px; 
-			    				margin: 0px;
-			    				font-size: 100%; 
-			    				/*outline: 1px solid green;*/
-			    				
-
-			    			">
+		    			[ngStyle]="{'background-image': 'url(' + view.images + actor.profile_path + ')'}">
+		    			<div class="shadow-container">
+		    				<p  class="shadow-info">
 		    					{{actor.name}}
 		    				</p>
 		    			</div>	
-		    			
 					</div>
-					
 				</div>
-			
 			</div>
-
 			<!-- ===============================ACTOR PANEL EMERGENTE =========================== -->
-			<div id="actorDetailPanel" 
-				style="
-					position: absolute;
-					width: 50%; 
-					background-color: white; 
-					height: 450px; 
-					display: none;
-					left: 15%;
-					top: 10%;
-					z-index: 200;
-
-				">
-					<div id="actorDetailPanelPicture" style="
-								width: 47%;
-								height: 450px;
-								float: left;
-								/*outline: 1px solid pink;*/
-								background-size: 300px 450px;
-							 ">
-
-						
-					</div>
-					<div *ngIf="actorInfo" 
-						style="
-							width: 49%;
-							float: left;
-							padding: 2%;
-							/*outline: 1px solid red;	*/
-						">
+			<div id="actorDetailPanel">
+					<div id="actorDetailPanelPicture"></div>
+					<div id="actor-info-right" *ngIf="actorInfo">
 						<div>
-							<h1 style="padding: 0px; margin: 0px; padding-top: 15px; font-size: 30px; color: rgba(220,7,0,1) ;">
-								{{actorInfo.name}}
-							</h1>
-							<p style="padding: 0px; margin: 0px">
-								Character: {{view.actor.character}}
-							</p>
+							<h1 class="actor-name">{{actorInfo.name}}</h1>
+							<p class="actor-character">Character: {{view.actor.character}}</p>
 						</div>
-
 						<br>
-
-						<div id="bodydesc" style="margin-left:auto; margin-right:auto; width:100%; height:200px; overflow-y:auto;">
-
-					        <p id="desc" style="float:left;  width:100%;  font-size: 15px; line-height: 18px;">
-					        	{{actorInfo.biography}}
-					        </p>
-
+						<div id="biography-container">
+					        <p id="biography">{{actorInfo.biography}}</p>
 						</div>
-
 						<br>
-
-						<dir style="padding: 0px; margin: 0px;">
+						<div id="Personal-information">
 							<p>Personal Information:</p>
-							<div style="float: left; padding: 0px; margin: 0px; width: 50%">
+							<div class="half-panel" >
 								<p>Gender:</p>
 								<p *ngIf="actorInfo.gender==1">Female</p>
 								<p *ngIf="actorInfo.gender==2">Male</p>
 							</div>
-							<div style="float: left; padding: 0px; margin: 0px; width: 50%">
+							<div class="half-panel">
 								<p>Birthday:</p>
 								<p>{{actorInfo.birthday}}</p>	
 							</div>
 							
-						</dir>
-						<div style="float: left; padding: 0px; margin: 0px; ">
+						</div>
+						<div id="birth-info">
 							<p>Place of birth:</p>
 							<p>{{actorInfo.place_of_birth}}</p>
-								
 						</div>
-						<div style="
-								position: absolute;
-								bottom: 0px;
-								right: 0px;
-							">
-							 <p style="color: red" (click)="goPersonDetail(actorInfo.id)">go detail</p>
+						<div id="go-detail-link">
+							 <p (click)="goPersonDetail(actorInfo.id)">go detail</p>
 						</div>
-						
 					</div>
-					<button (click)="closeActorDetail()"
-						style="
-							position: absolute;
-							left: 0px;
-						">
-						X
-					</button>
+					<button id="close-button" (click)="closeActorDetail()"> X </button>
 			</div>
 		</div>
 			<!-- ========================== PELICULAS SIMILARES ======================-->
-
-		<div class="col-md-12" 
-			style="
-				box-shadow: 1px 1px 25px black;
-				padding: 0px;
-				height: 170px;
-				background-image: url('../../../../assets/images/background_6.jpg');
-				/*background: #151515;*/
-			">
-			<div class="col-md-12" style="
-					position: relative;
-					top: -20px;
-					width: 15%;
-					/*bottom: 0px;*/
-					left: 37.5%;
-					height: 0px;
-					border-top-right-radius: 50%;
-					border-top-left-radius: 50%;
-					border-bottom: 20px solid #151515;
-					border-left: 40px solid transparent;
-					border-right: 40px solid transparent;
-				">
-				<p align="center" style="color: white;margin: 0px; padding-top: 3px; font-size: 17px; opacity: 0.3;">
+		<div class="similar-movies-container col-md-12">
+			<div class="similar-movies-title col-md-12">
+				<p align="center" style="opacity: 0.3;">
 					Similar Movies
 				</p>	
 			</div>
-			<div class="form_container"
-					style="
-						position: relative;
-						top: -20px;
-						padding-top: 10px;
-						width: 100%;
-						height: 150px;
-						position: relative;
-						margin: 0 auto;
-						overflow: hidden;
-					">
-
+			<div class="form_container">
 				<!-- transition: [property] [duration] [ease] [delay] , [property] [duration] [ease] [delay], ... -->
-				<div id="slide_container" 
-						style="
-							white-space: nowrap;
-							margin-left: 0px;
-							transition: margin 300ms ease-in-out;
-						">    
+				<div id="slide_container">    
 				    <div >
-				       
 			            <!-- <a href="/detailMovie/{{ similar.id }}" title="{{ similar.title }}" *ngFor="let similar of view.movie.similar.results"> -->
-
 		             	<div class="slide"
 		             		*ngFor="let similar of view.movie.similar.results"
 		             		(click)="goMovieDetail(similar.id)" 
-		             		[ngStyle]="{'background-image': 'url(' + view.images + similar.poster_path  + ')'}" 
-		             		style="
-		             			cursor: pointer;
-			             		width: 100px; 
-					         	height: 150px; 
-					         	background-size: 100px 150px;
-						        display: inline-block;
-						        margin-right:  8px;
-						        vertical-align: top;
-						        background-repeat: no-repeat;
-						        background-position: 20%;	         	
-				         	">
+		             		[ngStyle]="{'background-image': 'url(' + view.images + similar.poster_path  + ')'}" >
 		                </div>
-			            <!-- </a> -->
-				        
 				    </div>
 			    </div>
-
-			    <button class="bt_left"
-			    		style="
-			    			position: absolute;
-			    			top: 40%;
-			    			font: 4em;
-			    			border: none;
-			    			height: 20%;
-			    			left: 0px;
-			    		"
-			    		(click) = "movieSlider('left')"> 
-			    	< 
-			    </button>
-			    <button class="bt_right"
-			    		style="
-			    			position: absolute;
-			    			top: 40%;
-			    			font: 4em;
-			    			border: none;
-			    			height: 20%;
-			    			right: 0px;
-
-			    		"
-			    		(click) = "movieSlider('right')"> 
-			    	> 
-			    </button>
+			    <button class="bt_left"(click) = "movieSlider('left')"> < </button>
+			    <button class="bt_right"(click) = "movieSlider('right')"> > </button>
 			</div>
 		</div>
-
 	</div>
 </div>
 
