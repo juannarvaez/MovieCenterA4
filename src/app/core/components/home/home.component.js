@@ -10,25 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-// Observable class extensions
-require("rxjs/add/observable/of");
-// Observable operators
-require("rxjs/add/operator/catch");
-require("rxjs/add/operator/debounceTime");
-require("rxjs/add/operator/distinctUntilChanged");
-// import {TMDBAPIService} from '../../services/tmdb/tmdb-api.service'
 var HomeComponent = (function () {
-    function HomeComponent(
-        // private tmdbapiservice : TMDBAPIService,
-        router) {
+    function HomeComponent(router) {
         this.router = router;
-        this.view = {
-            movies: '',
-            images: 'https://image.tmdb.org/t/p/w500',
-        };
     }
-    HomeComponent.prototype.ngOnInit = function () {
-    };
     HomeComponent.prototype.goMovies = function () {
         this.router.navigate(['movies']);
     };
