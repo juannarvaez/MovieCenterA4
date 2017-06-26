@@ -1,0 +1,1 @@
+{"version":3,"file":"aboutme.component.js","sourceRoot":"","sources":["aboutme.component.ts"],"names":[],"mappings":";;;;;;;AAAA,sCAAkD;AASlD,IAAa,gBAAgB;IAA7B;IAMA,CAAC;IAJA,mCAAQ,GAAR;IAEA,CAAC;IAEF,uBAAC;AAAD,CAAC,AAND,IAMC;AANY,gBAAgB;IAN5B,gBAAS,CAAC;QACV,QAAQ,EAAE,UAAU;QACpB,WAAW,EAAE,0BAA0B;QACvC,SAAS,EAAE,CAAC,yBAAyB,CAAC;KACtC,CAAC;GAEW,gBAAgB,CAM5B;AANY,4CAAgB"}

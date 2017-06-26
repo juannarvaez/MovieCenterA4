@@ -59,7 +59,7 @@ var RecommendComponent = (function () {
     };
     RecommendComponent.prototype.goMovieDetail = function (id_movie) {
         this.clearData();
-        this.router.navigate(['home/detailMovie', String(id_movie)]);
+        this.router.navigate(['movie', String(id_movie)]);
     };
     RecommendComponent.prototype.getMovieDetail = function (id_movie) {
         var _this = this;

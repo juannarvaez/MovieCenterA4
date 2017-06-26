@@ -29,7 +29,7 @@ var PeopleComponent = (function () {
         this.tmdbapiservice.getPopularPersons().subscribe(function (data) { return _this.view.people = data; });
     };
     PeopleComponent.prototype.goPersonDetail = function (id_person) {
-        this.router.navigate(['home/person', String(id_person)]);
+        this.router.navigate(['person', String(id_person)]);
     };
     return PeopleComponent;
 }());

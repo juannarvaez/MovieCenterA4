@@ -66,6 +66,10 @@
 	height: 30px;
 }
 
+.aboutme-link{
+	cursor: pointer;
+}
+
 .copyright{
 	float:left;
 	padding-left: 10%; 

@@ -34,7 +34,7 @@ export class PeopleComponent implements OnInit{
 	}
 
 	goPersonDetail(id_person: number ):void {
-		this.router.navigate(['home/person', String(id_person)]);
+		this.router.navigate(['person', String(id_person)]);
 	}	
 
 

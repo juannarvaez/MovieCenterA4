@@ -42,7 +42,7 @@ export class PersonComponent implements OnInit{
 	}
 
 	goMovieDetail(id_movie: number ):void {
-		this.router.navigate(['home/detailMovie', String(id_movie)]);
+		this.router.navigate(['movie', String(id_movie)]);
 	}
 
 	detail():void{

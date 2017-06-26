@@ -9,8 +9,16 @@ import { RouterModule, ActivatedRoute, Params, Router } from '@angular/router';
 
 export class FooterComponent implements OnInit{
 
+	constructor(
+    	private router: Router
+    ) {}
+
 	ngOnInit(): void{
 
+	}
+
+	goAboutMe():void{
+		this.router.navigate(['aboutme']);
 	}
 
 }

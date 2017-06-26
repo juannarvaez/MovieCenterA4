@@ -21,6 +21,7 @@ import { FooterComponent } from './core/components/footer/footer.component'
 import { HeaderComponent } from './core/components/header/header.component'
 import { PeopleComponent } from './core/components/people/people.component';
 import { RecommendComponent } from './core/components/recommend/recommend.component';
+import { AboutmeComponent } from './core/components/aboutme/aboutme.component';
 
 
 
@@ -43,6 +44,7 @@ import { RecommendComponent } from './core/components/recommend/recommend.compon
 		HeaderComponent,
 		FooterComponent,
 		RecommendComponent,
+		AboutmeComponent,
 		Percentage,
 		SafeVideo
 	],

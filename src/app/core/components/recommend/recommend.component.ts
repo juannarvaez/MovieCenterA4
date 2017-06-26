@@ -73,7 +73,7 @@ export class  RecommendComponent implements OnInit{
 	
 	goMovieDetail(id_movie: number ):void {
 		this.clearData();
-		this.router.navigate(['home/detailMovie', String(id_movie)]);
+		this.router.navigate(['movie', String(id_movie)]);
 	}
 
 

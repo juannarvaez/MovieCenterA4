@@ -67,11 +67,11 @@ var HeaderComponent = (function () {
     HeaderComponent.prototype.goMovies = function () {
         this.location = 'MOVIES';
         this.menuAnimation(-1);
-        this.router.navigate(['home/movies']);
+        this.router.navigate(['movies']);
     };
     HeaderComponent.prototype.goMovieDetail = function (id_movie) {
         this.location = 'MOVIE DETAIL';
-        this.router.navigate(['home/detailMovie', String(id_movie)]);
+        this.router.navigate(['movie', String(id_movie)]);
         this.ngOnInit();
         var searchInput = document.getElementById('search-box');
         searchInput.value = '';
@@ -81,11 +81,11 @@ var HeaderComponent = (function () {
     HeaderComponent.prototype.goPeople = function () {
         this.location = 'PEOPLE';
         this.menuAnimation(-1);
-        this.router.navigate(['home/people']);
+        this.router.navigate(['people']);
     };
     HeaderComponent.prototype.goPersonDetail = function (id_person) {
         this.location = 'PERSON DETAIL';
-        this.router.navigate(['home/person', String(id_person)]);
+        this.router.navigate(['person', String(id_person)]);
         this.ngOnInit();
         var searchInput = document.getElementById('search-box');
         searchInput.value = '';
@@ -96,7 +96,7 @@ var HeaderComponent = (function () {
     HeaderComponent.prototype.goRecommend = function () {
         this.location = 'RECOMMEND ME A MOVIE';
         this.menuAnimation(-1);
-        this.router.navigate(['home/recommend']);
+        this.router.navigate(['recommend']);
     };
     HeaderComponent.prototype.menuAnimation = function (pointer) {
         this.pointer = this.pointer * pointer;

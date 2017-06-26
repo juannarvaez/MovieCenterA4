@@ -86,12 +86,12 @@ export class HeaderComponent implements OnInit{
 	goMovies():void {
 		this.location='MOVIES';
 		this.menuAnimation(-1);
-		this.router.navigate(['home/movies']);
+		this.router.navigate(['movies']);
 	}
 
 	goMovieDetail(id_movie: number ):void {
 		this.location='MOVIE DETAIL';
-		this.router.navigate(['home/detailMovie', String(id_movie)]);
+		this.router.navigate(['movie', String(id_movie)]);
 		this.ngOnInit();
 		let searchInput = <HTMLInputElement> document.getElementById('search-box');
 		searchInput.value = '';
@@ -102,12 +102,12 @@ export class HeaderComponent implements OnInit{
 	goPeople():void {
 		this.location='PEOPLE';
 		this.menuAnimation(-1);
-		this.router.navigate(['home/people']);
+		this.router.navigate(['people']);
 	}
 
 	goPersonDetail(id_person: number ):void {
 		this.location='PERSON DETAIL';
-      	this.router.navigate(['home/person', String(id_person)]);
+      	this.router.navigate(['person', String(id_person)]);
       	this.ngOnInit();
       	let searchInput = <HTMLInputElement>document.getElementById('search-box');
 		searchInput.value = '';
@@ -119,7 +119,7 @@ export class HeaderComponent implements OnInit{
   	goRecommend():void {
 		this.location='RECOMMEND ME A MOVIE';
 		this.menuAnimation(-1);
-		this.router.navigate(['home/recommend']);
+		this.router.navigate(['recommend']);
 	}
 
 
