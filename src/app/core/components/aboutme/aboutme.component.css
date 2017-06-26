@@ -1,0 +1,25 @@
+.clear-both{
+	clear: both;
+}
+.ico{
+	padding-left: 10px; 
+	float:left;
+	background-repeat: no-repeat; 
+	height: 24px; 
+	width: 24px;
+}
+.github{
+	background-image:url('../../../../assets/icons/github-logo-24.png'); 
+}
+
+.cellphone{
+	background-image:url('../../../../assets/icons/cellphone-24.png'); 
+}
+
+.mail{
+	background-image:url('../../../../assets/icons/mail-24.png'); 
+}
+
+.info{
+	background-image:url('../../../../assets/icons/information-24.png'); 
+}

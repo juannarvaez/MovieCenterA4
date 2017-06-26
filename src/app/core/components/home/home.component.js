@@ -16,10 +16,11 @@ require("rxjs/add/observable/of");
 require("rxjs/add/operator/catch");
 require("rxjs/add/operator/debounceTime");
 require("rxjs/add/operator/distinctUntilChanged");
-var tmdb_api_service_1 = require("../../services/tmdb/tmdb-api.service");
+// import {TMDBAPIService} from '../../services/tmdb/tmdb-api.service'
 var HomeComponent = (function () {
-    function HomeComponent(tmdbapiservice, router) {
-        this.tmdbapiservice = tmdbapiservice;
+    function HomeComponent(
+        // private tmdbapiservice : TMDBAPIService,
+        router) {
         this.router = router;
         this.view = {
             movies: '',
@@ -27,21 +28,9 @@ var HomeComponent = (function () {
         };
     }
     HomeComponent.prototype.ngOnInit = function () {
-        this.getMovies();
     };
-    HomeComponent.prototype.getMovies = function () {
-        var _this = this;
-        this.tmdbapiservice.getPopularMovies().subscribe(function (data) { return _this.view.movies = data; });
-    };
-    HomeComponent.prototype.searchMovie = function () {
-        console.log("Popular movies: ");
-        this.tmdbapiservice.getPopularMovies().subscribe(function (data) { return console.log(data); });
-        console.log("Movies detail: ");
-        this.tmdbapiservice.getMovieDetail("166426").subscribe(function (data) { return console.log(data); });
-        console.log("Top movies: ");
-        this.tmdbapiservice.getTopMovies().subscribe(function (data) { return console.log(data); });
-        console.log("Up coming movies: ");
-        this.tmdbapiservice.getUpcomingMovies().subscribe(function (data) { return console.log(data); });
+    HomeComponent.prototype.goMovies = function () {
+        this.router.navigate(['movies']);
     };
     return HomeComponent;
 }());
@@ -50,10 +39,8 @@ HomeComponent = __decorate([
         selector: 'home-component',
         templateUrl: './home.component.html',
         styleUrls: ['./home.component.css'],
-        providers: [tmdb_api_service_1.TMDBAPIService]
     }),
-    __metadata("design:paramtypes", [tmdb_api_service_1.TMDBAPIService,
-        router_1.Router])
+    __metadata("design:paramtypes", [router_1.Router])
 ], HomeComponent);
 exports.HomeComponent = HomeComponent;
 //# sourceMappingURL=home.component.js.map

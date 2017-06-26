@@ -7,15 +7,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var movie_component_1 = require("./core/components/movie/movie.component");
 var home_component_1 = require("./core/components/home/home.component");
+var movies_component_1 = require("./core/components/movies/movies.component");
+var movie_component_1 = require("./core/components/movie/movie.component");
 var person_component_1 = require("./core/components/person/person.component");
 var people_component_1 = require("./core/components/people/people.component");
 var recommend_component_1 = require("./core/components/recommend/recommend.component");
 var aboutme_component_1 = require("./core/components/aboutme/aboutme.component");
 var routes = [
-    { path: '', redirectTo: 'movies', pathMatch: 'full' },
-    { path: 'movies', component: home_component_1.HomeComponent },
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: 'home', component: home_component_1.HomeComponent },
+    { path: 'movies', component: movies_component_1.MoviesComponent },
     { path: 'people', component: people_component_1.PeopleComponent },
     { path: 'recommend', component: recommend_component_1.RecommendComponent },
     { path: 'movie/:id', component: movie_component_1.MovieComponent },

@@ -1,12 +1,29 @@
 
 <div class= "main-panel">
 
-	<div class="movies-container" 
-		*ngFor="let movie of view.movies.results| slice:0:18; let i=index" >
-		<movie-tile [movie]="movie"> </movie-tile>
+	<div style="
+		z-index: 50;
+			background-color: black;
+			position: absolute;
+			width: 100%;
+			height: 0;
+			padding-bottom: 8%;
+			margin-top: 34%;
+			opacity: 0.5;
+		">
+			
 	</div>
-	<!-- clear both agregado para que el float left para agregar el height al contenedor -->
-	<div class="clear-both" ></div>
 
+	<div class="container">
+		<video autoplay="true" style="filter:grayscale(0%);" muted loop>
+			<source src="../../../../assets/videos/Movie Mashup Trailer 2017.mp4" type="video/mp4">
+		</video>
+		<p align="center" class="text"> MOVIE CENTER</p>
+		<p align="center" class="subtitle"> Final web site project of Alert Logic course</p>
+		<p align="center" class="subtitle"> BY JUAN NARVAEZ</p>
+		<div align="center" style="position: relative">
+			<button  (click)="goMovies()" class="btn">GO MOVIES</button>
+		</div>	
+	</div>
+	
 </div>
-<!-- <button (click)="searchMovie()">Peticion movies tmdb</button> -->

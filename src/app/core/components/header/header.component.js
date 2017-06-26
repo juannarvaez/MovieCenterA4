@@ -64,6 +64,11 @@ var HeaderComponent = (function () {
             ? this.searchService.search(term, specificSearch)
             : Observable_1.Observable.of([]);
     };
+    HeaderComponent.prototype.goHome = function () {
+        this.location = 'HOME';
+        this.pointer = -1;
+        this.router.navigate(['home']);
+    };
     HeaderComponent.prototype.goMovies = function () {
         this.location = 'MOVIES';
         this.menuAnimation(-1);
@@ -142,10 +147,6 @@ var HeaderComponent = (function () {
             searchBoxInput.style.marginLeft = "0%";
             setTimeout(function () { locationTag.style.opacity = "1"; }, 600);
             searchComponent.style.zIndex = "0";
-        }
-        if (this.pointer == -1) {
-        }
-        else {
         }
     };
     return HeaderComponent;

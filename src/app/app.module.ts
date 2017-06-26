@@ -14,6 +14,7 @@ import { SearchService } from './core/services/search/search.service';
 
 import { AppComponent }  from './app.component';
 import { HomeComponent } from './core/components/home/home.component'
+import { MoviesComponent } from './core/components/movies/movies.component';
 import { MovieTileComponent } from './core/components/movieTile/movie-tile.component'
 import { MovieComponent } from './core/components/movie/movie.component'
 import { PersonComponent } from './core/components/person/person.component'
@@ -37,6 +38,7 @@ import { AboutmeComponent } from './core/components/aboutme/aboutme.component';
 	declarations:[
 		AppComponent,
 		HomeComponent,
+		MoviesComponent,
 		MovieTileComponent,
 		MovieComponent,
 		PersonComponent,

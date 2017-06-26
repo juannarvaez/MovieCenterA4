@@ -1,6 +1,7 @@
 .main-footer-panel{
 	color: white; 
 	position: relative;
+	overflow: hidden;
 }
 
 .footer-gradient{

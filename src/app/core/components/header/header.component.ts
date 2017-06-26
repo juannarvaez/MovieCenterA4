@@ -83,6 +83,12 @@ export class HeaderComponent implements OnInit{
 		: Observable.of<any>([])
 	}
 
+	goHome():void{
+		this.location='HOME';
+		this.pointer = -1;
+		this.router.navigate(['home']);
+	}
+
 	goMovies():void {
 		this.location='MOVIES';
 		this.menuAnimation(-1);
@@ -180,17 +186,6 @@ export class HeaderComponent implements OnInit{
 
 			searchComponent.style.zIndex = "0";
 		}
-
-		if(this.pointer == -1){
-
-
-			
-			
-		}else{
-			
-		}
-		
-
 
 	}
 
