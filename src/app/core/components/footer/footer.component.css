@@ -1,0 +1,74 @@
+.main-footer-panel{
+	color: white; 
+	position: relative;
+}
+
+.footer-gradient{
+	height: 300px;
+	background: rgba(191,2,2,1);
+	background: -moz-linear-gradient(left, rgba(191,2,2,1) 0%, rgba(240,0,0,1) 51%, rgba(179,2,2,1) 99%, rgba(179,2,2,1) 100%);
+	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(191,2,2,1)), color-stop(51%, rgba(240,0,0,1)), color-stop(99%, rgba(179,2,2,1)), color-stop(100%, rgba(179,2,2,1)));
+	background: -webkit-linear-gradient(left, rgba(191,2,2,1) 0%, rgba(240,0,0,1) 51%, rgba(179,2,2,1) 99%, rgba(179,2,2,1) 100%);
+	background: -o-linear-gradient(left, rgba(191,2,2,1) 0%, rgba(240,0,0,1) 51%, rgba(179,2,2,1) 99%, rgba(179,2,2,1) 100%);
+	background: -ms-linear-gradient(left, rgba(191,2,2,1) 0%, rgba(240,0,0,1) 51%, rgba(179,2,2,1) 99%, rgba(179,2,2,1) 100%);
+	background: linear-gradient(to right, rgba(191,2,2,1) 0%, rgba(240,0,0,1) 51%, rgba(179,2,2,1) 99%, rgba(179,2,2,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf0202', endColorstr='#b30202', GradientType=1 );
+			
+}
+
+.footer-info-panel{
+	float: left;
+	width: 25%;
+	padding-top: 50px;
+}
+
+.footer-subtitle{
+	color: rgba(255,255,255,0.6);
+}
+
+.footer-white-title{
+	font-weight: bold; 
+	font-size: 20px;
+}
+
+.footer-ico{
+	padding-left: 10px; 
+	float:left;
+	background-repeat: no-repeat; 
+	height: 24px; 
+	width: 24px;
+}
+.social-media{
+	position: relative;
+	padding-top: 3px; 
+	margin-left:35%; 
+	width: 100%
+}
+.facebook{
+	background-image:url('../../../../assets/icons/social-facebook-circular-button-24.png');
+}
+
+.github{
+	background-image:url('../../../../assets/icons/github-logo-24.png'); 
+}
+
+.youtube{
+	background-image:url('../../../../assets/icons/social-youtube-circular-button-24.png');
+}
+
+.footer-dark-title{
+	font-weight: bold; color: rgba(0,0,0,0.4);
+}
+
+
+.footer-bottom-bar{
+	background-image:url('../../../../assets/images/footer_2.jpg'); 
+	height: 30px;
+}
+
+.copyright{
+	float:left;
+	padding-left: 10%; 
+	padding-top: 5px;
+}
+
