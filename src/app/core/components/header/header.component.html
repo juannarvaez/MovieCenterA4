@@ -1,12 +1,5 @@
 <!-- <div style="position: absolute; z-index: 100;"> -->
-<div style="position: absolute;
-            height: 100px; 
-            z-index: 100; 
-            width: 100%;
-
-
-
-      ">
+<div class="main-header-panel">
   <!-- =============================== MENU DESPLEGABLE =================================   -->
   <div style=" float:left; padding-left: 12%;padding-top: 20px;">
     <p style=" font-size: 45px; font-weight: bold; color: white; padding: 0px; margin: 0px;">M</p>
@@ -19,231 +12,79 @@
       Center
     </p>
   </div>
-
-  <div class= "menu-button" style=" float:left; width: 48px; height: 24px; margin-left: 10px; margin-right: 15px; ">
-    <button (click)="menuAnimation(-1)" id="menu-button" style="cursor: pointer; position: relative; float:left; background: none; border: none; outline: none; height: 24px; width: 24px; margin-top: 32px; left: 12px; ">
-      <img id="menu-img-button" src="../../../../assets/icons/menu-2-24.png" style="position: relative; height: 24px;  width: 24px; transition: all 300ms ease;"> 
+  <div class= "menu-button-container">
+    <button id="menu-button" (click)="menuAnimation(-1)" >
+      <img id="menu-img-button" src="../../../../assets/icons/menu-2-24.png"> 
     </button>
 
-    <button (click)="menuAnimation(-1)" id="menu-cancel-button" style="cursor: pointer; position: relative; float:left; background: none; border: none; outline: none; height: 24px; width: 24px; margin-top: 34px; right: 12px;">
-      <img id="cancel-img-button" src="../../../../assets/icons/cancel-x-white-16.png" style="cursor: pointer; position: relative;  height: 0px;  width: 16px; transition: all 300ms ease; margin-left: 2px; top: 0px; left:2px; line-height: 16px;"> 
+    <button  id="menu-cancel-button" (click)="menuAnimation(-1)">
+      <img id="cancel-img-button" src="../../../../assets/icons/cancel-x-white-16.png"> 
     </button>
   </div>
-
-       
-            
-  <div id="separator" style="float:left; margin: 0px; padding: 0px;  margin-top: 35px; height: 20px; width: 1px; background-color: white; opacity: 0.3; transition: opacity 300ms ease-in-out;"></div>
-  
-
-  <div class="form_container_menu"
-    style="
-      float: left;
-      position: relative;
-      width: 400px;
-      overflow: hidden;
-      /*visibility: show;*/
-      
-    "><div  style="
-            position:absolute;
-            margin-top:35px; 
-            margin-left: 10px; 
-            color:white;
-            z-index: -100;
-           
-            ">
-        <div  id="location-tag" style="float: left; transition: all 300ms ease-in-out ;
-             ">
-            {{location}}
-        
-        </div>
-        <div id="sub-location-tag" style="float: left; margin-left:20px; color: red;transition: all 300ms ease-in-out" >
-              {{subLocation}}
-        </div>
+  <div id="separator"></div>
+  <div class="form_container_menu">
+    <div  class="location-tag-container">
+      <div  id="location-tag">
+        {{location}}    
       </div>
-
-      <div id="slide_menu" 
-        style="
-          z-index: 100;
-          white-space: nowrap;
-          margin-left: -100%;
-          transition: margin 300ms ease-in-out;
-            ">    
-
-        <div class="menu-bar" style="float: left; color: white; margin-top:35px; ">
-          <div (click)="goMovies()" style="float: left; cursor: pointer; ">
+    </div>
+    <div id="slide_menu">    
+      <div class="menu-bar">
+        <div (click)="goMovies()" class="first-tag-bar-menu">
             MOVIE
-          </div >
-          <div (click)="goPeople()" style="float: left;margin-left:20px; cursor: pointer;">
+        </div >
+        <div (click)="goPeople()" class="tag-bar-menu">
             PEOPLE
-          </div >
-          <div (click)="goRecommend()" style="float: left; margin-left:20px; cursor: pointer;">
+        </div >
+        <div (click)="goRecommend()" class="tag-bar-menu">
             RECOMMEND ME A MOVIE
-          </div>    
-        </div>
-
+        </div>    
       </div>
-      
-   </div>
-
-   
-  
- <!--  <div style="float:left; margin-left: 20px; margin-top: 35px; ">
-    <p style="color: white;">{{"MOVIE"}}</p>
+    </div>
   </div>
- -->
-  
 <!-- ================================= BUSCADOR ========================================== -->
- 
-  
-  <div style="position:absolute; 
-              height: 20px;
-              width: 20px; 
-              right: 11.5%; 
-              top:34%;
-              opacity: 1;
-              background-image:url('../../../../assets/icons/searcher.png');
-              background-repeat: no-repeat;
-              background-size: cover;
-        ">
-       <!-- <img src="../../../../assets/icons/searcher.png"> -->
-  </div>
+  <div class="search-img-icon"></div>
   <!-- ==========================SEARCH BAR================= -->
-  <div style="position: absolute; 
-              right: 15%; 
-              top: 35%;
-              z-index: 0;
-              /*padding-top: 0px; */
-              /*padding-right: 20px; */
-              overflow: hidden;
-              width: 35%;" 
-    id="search-component">
-
-
-
+  <div id="search-component">
     <input #searchBox id="search-box"  placeholder="search a movie, person..." 
-            style="
-                  position: relative;
-                  width:  100%;
-                  outline:0px; 
-                  border: none;
-                  margin-left: 0%;
-                  transition: all 300ms ease;
-                  background-color: rgba(255,255,255, 0.2); " 
-    (keyup)="searchTerm(searchBox.value)" />
-
-
-
-
-
-    <div>
-
-      <div class="search-result" 
-            *ngFor="let result of resultsMovies | async | slice:0:7; let i=index"
-              style="
-                color:white;
-                width: 100%;
-                background-color: white;
-                
-                outline: 1px solid rgba(0,0,0,0.1);
-              " >
-              
-                
-                <div (click)="goMovieDetail(result.id)" style="
-                      cursor: pointer;
-                      position: relative;
-                      height: 40px;
-                      width: 100%;
-                      
-                    ">
-                    
-                    <div style="color: black; float: left; position:relative; width: 100%; overflow: hidden;">
-                        <div style="white-space: nowrap;">
-               
-                            <div style="margin-left: 50px; width:100%; color: rgba(0,0,0,0.8);font-weight: bold; ">
+      (keyup)="searchTerm(searchBox.value)" />
+      <div>
+        <div class="search-result" 
+            *ngFor="let result of resultsMovies | async | slice:0:7">
+                <div class="search-movie-result" (click)="goMovieDetail(result.id)">
+                    <div class="overflow-container">
+                        <div class="nowrap-container">
+                            <div class="title-result">
                               {{result.original_title}} 
                             </div>
-                            <div style="margin-left: 50px; width:100%; color: rgba(0,0,0,0.5); font-style: italic; ">
+                            <div class="subtitle-result">
                               Release date: {{result.release_date  | date : 'longDate'}}
                             </div>
                         </div>
                     </div>
-
-                    <div *ngIf="result"
-                      [ngStyle]="{'background-image': 'url(' + view.images + result.poster_path + ')'}"  
-                      style="
-                        position: absolute;
-                        width: 40px;
-                        height: 40px;
-                        background-size:40px;
-                        background-color: white;
-                        /*background-color: blue;*/
-                        
-                      ">
-                     
+                    <div class="search-result-img" *ngIf="result"
+                      [ngStyle]="{'background-image': 'url(' + view.images + result.poster_path + ')'}">
                     </div>
-                    
                 </div>
-             
       </div> <!-- search movie end  -->
-
-      <!-- <div class="search-result"  
-            *ngFor="let result of resultsPersons | async | slice:0:7; let i=index"
-              style="
-                color:white
-              " >
-            {{result.name}}
-      </div> -->
       <div class="search-result" 
-            *ngFor="let result of resultsPersons | async | slice:0:7; let i=index"
-              style="
-                color:white;
-                width: 100%;
-                background-color: white;
-                
-                outline: 1px solid rgba(0,0,0,0.1);
-              " >
-              
-                
-          <div (click)="goPersonDetail(result.id)" style="
-                position: relative;
-                height: 40px;
-                width: 100%;
-                cursor: pointer;
-                
-              ">
-              
-              <div style="color: black; float: left; position:relative; width: 100%; overflow: hidden;">
-                  <div style="white-space: nowrap;">
-         
-                      <div style="margin-left: 50px; width:100%; color: rgba(0,0,0,0.8); font-weight: bold; ">
+          *ngFor="let result of resultsPersons | async | slice:0:7">
+          <div class="search-person-result"(click)="goPersonDetail(result.id)">
+              <div  class="overflow-container">
+                  <div class="nowrap-container" >
+                      <div class="title-result">
                         {{result.name}} 
                       </div>
-                      <div style="margin-left: 50px; width:100%; color: rgba(0,0,0,0.5);font-style: italic; ">
+                      <div class="subtitle-result">
                         Known for: {{result.known_for[0].title}}
                       </div>
                   </div>
               </div>
-
-              <div *ngIf="result"
-                [ngStyle]="{'background-image': 'url(' + view.images + result.profile_path + ')'}"  
-                style="
-                  position: absolute;
-                  width: 40px;
-                  height: 40px;
-                  background-size:40px;
-                  background-color: white;
-                  /*background-color: blue;*/
-                  
-                ">
-               
+              <div class="search-result-img"  *ngIf="result"
+                [ngStyle]="{'background-image': 'url(' + view.images + result.profile_path + ')'}">
               </div>
-              
           </div>
-
     </div> <!-- search person end  -->
-    
-
   </div>
-
 </div>
 

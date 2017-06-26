@@ -24,7 +24,6 @@ var HeaderComponent = (function () {
         this.searchService = searchService;
         this.router = router;
         this.location = 'MOVIES';
-        this.subLocation = 'POPULAR';
         this.searchMovieTerms = new Subject_1.Subject(); //es un observable, ante cambios en su definicion hay repuesta
         this.searchPersonTerms = new Subject_1.Subject();
         this.pointer = -1;
@@ -109,7 +108,6 @@ var HeaderComponent = (function () {
         var separator = document.getElementById('separator');
         var searchBoxInput = document.getElementById('search-box');
         var locationTag = document.getElementById('location-tag');
-        var subLocationTag = document.getElementById('sub-location-tag');
         var searchComponent = document.getElementById('search-component');
         // menuImgButton.style.width = "24px";
         // menuImgButton.style.height = "0px"; 
@@ -123,7 +121,6 @@ var HeaderComponent = (function () {
             searchBoxInput.style.width = "0%";
             searchBoxInput.style.marginLeft = "100%";
             locationTag.style.opacity = "0";
-            subLocationTag.style.opacity = "0";
             searchComponent.style.zIndex = "-100";
             cancelImgButton.style.width = "16px";
             cancelImgButton.style.height = "16px";
@@ -143,8 +140,7 @@ var HeaderComponent = (function () {
             separator.style.opacity = "0.3";
             searchBoxInput.style.width = "100%";
             searchBoxInput.style.marginLeft = "0%";
-            setTimeout(function () { locationTag.style.opacity = "1"; }, 800);
-            setTimeout(function () { subLocationTag.style.opacity = "1"; }, 800);
+            setTimeout(function () { locationTag.style.opacity = "1"; }, 600);
             searchComponent.style.zIndex = "0";
         }
         if (this.pointer == -1) {
@@ -158,7 +154,7 @@ HeaderComponent = __decorate([
     core_1.Component({
         selector: 'header',
         templateUrl: './header.component.html',
-        styleUrls: [],
+        styleUrls: ['./header.component.css'],
         providers: [search_service_1.SearchService],
     }),
     __metadata("design:paramtypes", [search_service_1.SearchService,

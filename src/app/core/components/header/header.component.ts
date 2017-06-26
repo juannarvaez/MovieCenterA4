@@ -17,7 +17,7 @@ import { SearchService } from '../../services/search/search.service';
 @Component({
 	selector: 'header',
 	templateUrl: './header.component.html',
-	styleUrls: [],
+	styleUrls: ['./header.component.css'],
 	providers: [SearchService],
 })
 
@@ -26,7 +26,6 @@ export class HeaderComponent implements OnInit{
 	resultsMovies: Observable<any>;
 	resultsPersons: Observable<any>;
 	location = 'MOVIES';
-	subLocation = 'POPULAR';
 
 	private searchMovieTerms = new Subject<string>(); //es un observable, ante cambios en su definicion hay repuesta
 	private searchPersonTerms = new Subject<string>();
@@ -135,7 +134,6 @@ export class HeaderComponent implements OnInit{
 		var separator = document.getElementById('separator');
 		var searchBoxInput = document.getElementById('search-box');
 		var locationTag = document.getElementById('location-tag'); 
-		var subLocationTag = document.getElementById('sub-location-tag'); 
 		var searchComponent = document.getElementById('search-component'); 
 		// menuImgButton.style.width = "24px";
 		// menuImgButton.style.height = "0px"; 
@@ -153,7 +151,6 @@ export class HeaderComponent implements OnInit{
 			searchBoxInput.style.marginLeft = "100%";
 
 			locationTag.style.opacity = "0";
-			subLocationTag.style.opacity = "0";
 
 			searchComponent.style.zIndex = "-100";
 
@@ -179,8 +176,7 @@ export class HeaderComponent implements OnInit{
 
 			searchBoxInput.style.width = "100%";
 			searchBoxInput.style.marginLeft = "0%";
-			setTimeout(function(){ locationTag.style.opacity = "1"}, 800);
-			setTimeout(function(){ subLocationTag.style.opacity = "1"}, 800);
+			setTimeout(function(){ locationTag.style.opacity = "1"}, 600);
 
 			searchComponent.style.zIndex = "0";
 		}
