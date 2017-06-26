@@ -1,102 +1,75 @@
-<div style="background-image: url('../../../../assets/images/background_6.jpg'); 
-			padding-top: 100px; 
-			padding-bottom: 100px;">
-
-	<div style="position: relative; top: 20%; right: 10%">
-		<div style="
-		position: absolute; 
-		right: 15%; 
-		top: 55%;
-		z-index:100;
-		/*padding-top: 0px; */
-		/*padding-right: 20px; */
-		overflow: hidden;
-		width: 35%;" 
-		id="search-component-recommend">
-
-
-
-			<input #searchBox id="search-box-recommend"  placeholder="search a movie, person..." 
-			style="
-			position: relative;
-			width:  100%;
-			outline:0px; 
-			border: none;
-			margin-left: 0%;
-			transition: all 300ms ease;
-			background-color: rgba(255,255,255, 0.2); " 
-			(keyup)="searchTerm(searchBox.value)" />
-
-
-
-
-
+<div class="main-panel" >
+	<div id="recommend-movies-panel" align="center">
+		<div *ngIf="RecommendedMovies[0]" >
+			<div  align="center">
+				<div><h1 class="restult-tag">RESULTS</h1></div>			
+			</div>
 			<div>
-
+				<p class="result-description">These movies you might like:</p>
+			</div>
+			<div class="recommend-movie-container">
+				<div class="recommend-movie"
+					
+					*ngFor="let RecommendedMovie of RecommendedMovies | slice:0:24" 
+					(click)="goMovieDetail(RecommendedMovie.id)"
+					[ngStyle]="{'background-image': 'url(' + view.images + RecommendedMovie.poster_path + ')'}">
+				</div>
+				<div class="clear-both"></div>
+			</div>
+		</div>
+		<div *ngIf="!RecommendedMovies[0]">
+			<div align="center">
+				<div><h1 class="restult-tag">NO RESULTS</h1></div>			
+			</div >
+			<div>
+				<p class="result-description">These selected movies are so divergent</p>
+				<p class="result-description">Try again with another selections</p>
+			</div>
+		</div>
+		<div class="close-container" align="center">
+			<button class="btn" (click)="closeRecommendMovies()"  >CLOSE</button>
+		</div>
+	</div>
+	<div align="center">
+		<div><h1 class="main-title">RECOMMEND ME A MOVIE</h1></div>
+	</div>
+	<div align="center">
+		<p class="description"> <b>1.</b> Search and select movies that you like <b>2.</b> Make sure your selection is right <b>3.</b> Click on go recommend</p>
+	</div>
+	<div class="search-bar-container">
+		<div id="search-component-recommend">
+			<input #searchBox id="search-box-recommend"  placeholder="choose some movies..." 
+				(keyup)="searchTerm(searchBox.value)" />
+			<div>
 				<div class="search-result-recommend" 
-				*ngFor="let result of resultsMovies | async | slice:0:7; let i=index"
-				style="
-				color:white;
-				width: 100%;
-				background-color: white;
-
-				outline: 1px solid rgba(0,0,0,0.1);
-				" >
-
-
-					<div (click)="getMovieDetail(result.id)" style="
-					cursor: pointer;
-					position: relative;
-					height: 40px;
-					width: 100%;
-
-					">
-
-						<div style="color: black; float: left; position:relative; width: 100%; overflow: hidden;">
-							<div style="white-space: nowrap;">
-
-								<div style="margin-left: 50px; width:100%; color: rgba(0,0,0,0.8);font-weight: bold; ">
-								{{result.original_title}} 
+				*ngFor="let result of resultsMovies | async | slice:0:7;">
+					<div (click)="getMovieDetail(result.id)" class="search-movie-result">
+						<div class="overflow-container">
+							<div class="nowrap-container">
+								<div class="title-result">
+									{{result.original_title}} 
 								</div>
-								<div style="margin-left: 50px; width:100%; color: rgba(0,0,0,0.5); font-style: italic; ">
-								Release date: {{result.release_date  | date : 'longDate'}}
+								<div class="italic-result" >
+									Release date: {{result.release_date  | date : 'longDate'}}
 								</div>
 							</div>
 						</div>
-
-						<div *ngIf="result"
-						[ngStyle]="{'background-image': 'url(' + view.images + result.poster_path + ')'}"  
-						style="
-						position: absolute;
-						width: 40px;
-						height: 40px;
-						background-size:40px;
-						background-color: white;
-						/*background-color: blue;*/
-
-						">
-
-						</div>
-
+						<div class="search-movie-result-image" *ngIf="result"
+						[ngStyle]="{'background-image': 'url(' + view.images + result.poster_path + ')'}"></div>
 					</div>
-
 				</div> <!-- search movie end  -->
 			</div>
 		</div>
 	</div>
-
-	<!-- ======================== SELECTED MOVIES ===========================-->
-	<div *ngIf="selectedMovies[0]">
-		<div *ngFor="let movieSelected of selectedMovies">
-			{{movieSelected.title}}
+	<div align="center" style="">
+		<button class="btn" (click)="associationAlgorithm()" >GO RECOMMEND</button>
+	</div>
+	<br>
+	<div align="center" class="movies-selected-container">
+					<!-- ng-click="showActor(actor.id)"  -->
+		<div class="movies-selected"
+			*ngFor="let movieSelected of selectedMovies" 
+			[ngStyle]="{'background-image': 'url(' + view.images + movieSelected.poster_path + ')'}">
 		</div>
 	</div>
-
-
-	<div>
-
-	<button (click)="setIdsSimilarMovies()">Pre!</button>
-	<button (click)="associationAlgorithm()" >GO!</button>
-	</div>
-
 </div>

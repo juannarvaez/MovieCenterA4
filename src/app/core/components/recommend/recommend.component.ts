@@ -18,30 +18,25 @@ import { TMDBAPIService } from '../../services/tmdb/tmdb-api.service'
 @Component({
 	selector: 'recommend',
 	templateUrl: './recommend.component.html',
-	styleUrls: [],
+	styleUrls: ['./recommend.component.css'],
 	providers: [SearchService, TMDBAPIService]
 })
 
 export class  RecommendComponent implements OnInit{
 	
 	private dataSet =  new Array();
-	// [
-	// 	[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,40],
-	// 	[41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,13,14,15,16,17,18],
-	// 	[34,35,36,37,38,39,6,7,8,9,10,11,12,13,46,47,48,49,50,51,52,53,],
-	// 	[2,1,12,13,14,15,16,17,6,7,8,9,25,26,27,28,50,51,52,53,54,55,56,57,],
-	// 	[1223,33,4,33,1,6,22,56621,2,3,4,5,6,7,8,9,10,]
-	// ];
 	private minSupport = 0;
 	private itemSetsCollectionTables= new Array();
 	private numberOfSelectedMovies = 0;
+	selectedMovies = new Array();
+	idsSelectedMovies = new Array();
+	RecommendedMovies = new Array();
 
 	private searchMovieTerms = new Subject<string>(); //es un observable, ante cambios en su definicion hay repuesta
 	private searchPersonTerms = new Subject<string>();
 
 	resultsMovies: Observable<any>;
-	selectedMovies = new Array();
-	idsSelectedMovies = new Array();	
+		
 
 	view = {
 		images: 'https://image.tmdb.org/t/p/w500',
@@ -68,22 +63,17 @@ export class  RecommendComponent implements OnInit{
 	searchTerm(term: string): void {
 		
 		this.searchMovieTerms.next(term);
-		// console.log("Observable");
-		// console.log(term);
 		
 	}
 
 	test(term: string, specificSearch=""){
-
-		console.log("En el switchMap service response");
-		//console.log(this.searchService.search(term));
-
-		return term  
-		//condicional devuelve la búsqueda HTTP observable 
-		? this.searchService.search(term, specificSearch)
-
-		//o el observable de los héroes vacíos si no había término de búsqueda
-		: Observable.of<any>([])
+		// console.log("En el switchMap service response");
+		return term ? this.searchService.search(term, specificSearch): Observable.of<any>([])
+	}
+	
+	goMovieDetail(id_movie: number ):void {
+		this.clearData();
+		this.router.navigate(['home/detailMovie', String(id_movie)]);
 	}
 
 
@@ -105,12 +95,41 @@ export class  RecommendComponent implements OnInit{
 		searchInput.value = '';
 		this.ngOnInit();
 	}
+	
+	showRecommendMovies():void{
+		var recommendPanel = document.getElementById('recommend-movies-panel');
+        recommendPanel.style.display='block';
+
+	}
+
+	closeRecommendMovies():void{
+		var recommendPanel = document.getElementById('recommend-movies-panel');
+        recommendPanel.style.display='none';
+        this.clearData();
+
+	}
+
+	clearData():void{
+		this.dataSet =  [];
+		this.minSupport = 0;
+		this.itemSetsCollectionTables= [];
+		this.numberOfSelectedMovies = 0;
+		this.selectedMovies = [];
+		this.idsSelectedMovies = [];
+		this.RecommendedMovies = [];
+	}
+
 
 	setIdsSimilarMovies():void{
 
 		let length = this.selectedMovies.length;
-		this.minSupport = length%2 == 0 ? length/2 :Math.ceil(length/2);
-		if(this.minSupport == 1 && length==2){this.minSupport = 2;}
+		
+		if(length ==2 || length==3){
+			this.minSupport = 2;
+		}else{
+			this.minSupport = length%2 == 0 ? length/2 :Math.floor(length/2);
+		}
+		
 		console.log(this.minSupport);
 
 		for (var i = 0; i < length ; i++){
@@ -127,9 +146,12 @@ export class  RecommendComponent implements OnInit{
 	}
 
 	associationAlgorithm():void{
-		// this.setIdsSimilarMovies();
 
-		if(this.selectedMovies.length>1){
+		
+
+		if(this.selectedMovies.length>=2){
+
+			this.setIdsSimilarMovies();
 
 			let dataSetLength = this.dataSet.length;		
 			let auxKeysItemSet= new Array(); 
@@ -285,12 +307,14 @@ export class  RecommendComponent implements OnInit{
 				this.itemSetsCollectionTables.push(itemSetSup);
 
 			}
+			this.getRecommendedMovies();
 		}
 
-		// for (var i = 0; i < this.itemSetsCollectionTables.length; i++) {
-		// 	console.log(this.itemSetsCollectionTables[i]);	
-		// }
+		
 
+	}
+
+	getRecommendedMovies():void{
 		let lastIteration = Object.keys(this.itemSetsCollectionTables.pop());
 		console.log(lastIteration);
 		let result = new Array();
@@ -302,6 +326,14 @@ export class  RecommendComponent implements OnInit{
 		result = result.filter(function(a,b,c){return c.indexOf(a,b+1)<0;});
 		console.log(result);
 		console.log(this.idsSelectedMovies);
+
+		let lengthResults = result.length;
+		for (var i = 0; i < lengthResults; i++) {
+			this.tmdbapiservice.getMovieDetailRecommend(result[i]).subscribe(data => this.RecommendedMovies.push(data));	
+		}
+
+		this.showRecommendMovies();
+
 	}
 
 	firstEspecialPermutation(movieIds:Array<any>):Array<any>{
@@ -325,11 +357,9 @@ export class  RecommendComponent implements OnInit{
 	}
 
 	countItemSets(perm:Array<string>):number{
-		// console.log("paso 2");
 		let length = this.dataSet.length;
 		let result = 0;
 		for (var i =0; i < length; i++) {
-			// console.log("paso 3");
 			result += this.countItemSet(this.dataSet[i], perm);			
 		}
 		return result;
@@ -337,24 +367,18 @@ export class  RecommendComponent implements OnInit{
 	}
 
 	countItemSet(data:Array<number>, items:Array<string>):number{
-		// console.log("paso 4");
 		let itemLength = items.length;
-		// console.log("paso 4.1");
 		let dataLength = data.length;
-		// console.log("paso 4.2");
 		let flag = 0;
 
 		for (var i = 0; i < itemLength; i++) {
-			// console.log("paso 5");
 			for (var j = 0; j < dataLength; j++) {
-				// console.log("paso 6");
 				if(data[j]+"" == items[i]){
 					flag++;
 				}
 			}
 		}
 
-		// console.log("flag: "+flag);
 		return flag == itemLength ?  1 : 0;
 	}
 
