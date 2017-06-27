@@ -14,9 +14,10 @@ var FooterComponent = (function () {
     function FooterComponent(router) {
         this.router = router;
     }
-    FooterComponent.prototype.ngOnInit = function () {
-    };
+    /**Redirect to juan narvaez information profile section
+    * @return {:void} */
     FooterComponent.prototype.goAboutMe = function () {
+        window.scrollTo(0, 0);
         this.router.navigate(['aboutme']);
     };
     return FooterComponent;

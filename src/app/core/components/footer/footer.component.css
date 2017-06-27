@@ -45,6 +45,20 @@
 	margin-left:35%; 
 	width: 100%
 }
+
+.tmdb-logo{
+	cursor: pointer;
+	float: left;
+	margin-left:30%; 
+	opacity: 0.9; 
+	margin-top:5%; 
+	width: 60%; 
+	height:0; 
+	padding-bottom: 23%; 
+	background-size:cover; 
+	background-repeat:no-repeat; 
+	background-image:url('../../../../assets/images/tmdb-white-log.png');
+}
 .facebook{
 	background-image:url('../../../../assets/icons/social-facebook-circular-button-24.png');
 }
@@ -57,14 +71,13 @@
 	background-image:url('../../../../assets/icons/social-youtube-circular-button-24.png');
 }
 
-.footer-dark-title{
-	font-weight: bold; color: rgba(0,0,0,0.4);
-}
-
-
 .footer-bottom-bar{
 	background-image:url('../../../../assets/images/footer_2.jpg'); 
 	height: 30px;
+}
+
+.footer-dark-title{
+	font-weight: bold; color: rgba(0,0,0,0.4);
 }
 
 .aboutme-link{

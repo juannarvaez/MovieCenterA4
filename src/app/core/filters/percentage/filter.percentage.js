@@ -7,8 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = require("@angular/core");
 var Percentage = (function () {
-    /**Pipe que permite acceder a enlaces que el navegador
-        determina como inseguros*/
+    /**Transform add porcentage simbol at the en of the number and cut some decimals, it depends of limit*/
     function Percentage() {
     }
     Percentage.prototype.transform = function (percentage, limit) {

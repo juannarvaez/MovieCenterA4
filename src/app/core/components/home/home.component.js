@@ -14,6 +14,8 @@ var HomeComponent = (function () {
     function HomeComponent(router) {
         this.router = router;
     }
+    /**Redirect to movies section
+    * @return {:void} */
     HomeComponent.prototype.goMovies = function () {
         this.router.navigate(['movies']);
     };

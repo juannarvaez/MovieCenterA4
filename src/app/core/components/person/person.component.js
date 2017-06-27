@@ -23,23 +23,28 @@ var PersonComponent = (function () {
             images: 'https://image.tmdb.org/t/p/w500'
         };
     }
+    /**Load person information
+   * @return {:void} */
     PersonComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params
             .switchMap(function (params) { return _this.tmdbapiservice.getDetailPerson(String(+params['id'])); })
             .subscribe(function (response) { return _this.person = response; });
     };
+    /**Redirects to a movie detail
+   * @param {id_movie:number} unique identification for the movie in the data base,
+   * @return {:void} */
     PersonComponent.prototype.getProfileImage = function () {
         var limit = this.person.images.profiles.length;
         return limit == 1 ?
             this.person.images.profiles[0].file_path :
             this.person.images.profiles[1].file_path;
     };
+    /**Redirects to a movie detail
+   * @param {id_movie:number} unique identification for the movie in the data base,
+   * @return {:void} */
     PersonComponent.prototype.goMovieDetail = function (id_movie) {
         this.router.navigate(['movie', String(id_movie)]);
-    };
-    PersonComponent.prototype.detail = function () {
-        console.log(this.person);
     };
     return PersonComponent;
 }());

@@ -1,90 +1,82 @@
-<!-- <div style="position: absolute; z-index: 100;"> -->
-<div class="main-header-panel">
-  <!-- =============================== MENU DESPLEGABLE =================================   -->
-  <div (click)="goHome()" style=" float:left; padding-left: 12%;padding-top: 20px;">
-    <p style=" font-size: 45px; font-weight: bold; color: white; padding: 0px; margin: 0px;">M</p>
-  </div>
-  <div style=" float:left; padding-top: 37px;">
-    <p style=" font-size: 12px; font-weight: bold; color: white; padding: 0px; margin: 0px;">
-      ovie 
-    </p>
-    <p  style=" position: relative; top:-4px; font-size: 12px; font-weight: bold; color: white; padding: 0px; margin: 0px;">
-      Center
-    </p>
-  </div>
-  <div class= "menu-button-container">
-    <button id="menu-button" (click)="menuAnimation(-1)" >
-      <img id="menu-img-button" src="../../../../assets/icons/menu-2-24.png"> 
-    </button>
+<div class="main-header-panel"> <!--  MENU BAR -->
+    <div (click)="goHome()" style=" float:left; padding-left: 12%;padding-top: 20px;">
+        <p style=" font-size: 45px; font-weight: bold; color: white; padding: 0px; margin: 0px;">M</p>
+    </div>
+    <div style=" float:left; padding-top: 37px;">
+        <p style=" font-size: 12px; font-weight: bold; color: white; padding: 0px; margin: 0px;">ovie</p>
+        <p  style=" position: relative; top:-4px; font-size: 12px; font-weight: bold; color: white; padding: 0px; margin: 0px;">Center</p>
+    </div>
+    <div class= "menu-button-container">
+        <button id="menu-button" (click)="menuAnimation(-1)" >
+            <img id="menu-img-button" src="../../../../assets/icons/menu-2-24.png"> 
+        </button>
 
-    <button  id="menu-cancel-button" (click)="menuAnimation(-1)">
-      <img id="cancel-img-button" src="../../../../assets/icons/cancel-x-white-16.png"> 
-    </button>
-  </div>
-  <div id="separator"></div>
-  <div class="form_container_menu">
-    <div  class="location-tag-container">
-      <div  id="location-tag">
-        {{location}}    
-      </div>
+        <button  id="menu-cancel-button" (click)="menuAnimation(-1)">
+            <img id="cancel-img-button" src="../../../../assets/icons/cancel-x-white-16.png"> 
+        </button>
     </div>
-    <div id="slide_menu">    
-      <div class="menu-bar">
-        <div (click)="goMovies()" class="first-tag-bar-menu">
-            MOVIE
-        </div >
-        <div (click)="goPeople()" class="tag-bar-menu">
-            PEOPLE
-        </div >
-        <div (click)="goRecommend()" class="tag-bar-menu">
-            RECOMMEND ME A MOVIE
-        </div>    
-      </div>
+    <div id="separator"></div>
+    <div class="form_container_menu">
+        <div  class="location-tag-container">
+            <div  id="location-tag">
+                {{location}}    
+            </div>
+        </div>
+        <div id="slide_menu">    
+            <div class="menu-bar">
+                <div (click)="goMovies()" class="first-tag-bar-menu">
+                  MOVIE
+                </div >
+                <div (click)="goPeople()" class="tag-bar-menu">
+                  PEOPLE
+                </div >
+                <div (click)="goRecommend()" class="tag-bar-menu">
+                  RECOMMEND ME A MOVIE
+                </div>    
+            </div>
+        </div>
     </div>
-  </div>
-<!-- ================================= BUSCADOR ========================================== -->
-  <div class="search-img-icon"></div>
-  <!-- ==========================SEARCH BAR================= -->
-  <div id="search-component">
-    <input #searchBox id="search-box"  placeholder="search a movie, person..." 
-      (keyup)="searchTerm(searchBox.value)" />
-      <div>
-        <div class="search-result" 
-            *ngFor="let result of resultsMovies | async | slice:0:7">
+    <div id="search-component"> <!-- SEARCH BAR -->
+         <input #searchBox id="search-box"  placeholder="search a movie, person..." 
+        (keyup)="searchTerm(searchBox.value)" />
+        <div>
+            <div class="search-result" 
+                *ngFor="let result of resultsMovies | async | slice:0:7">
                 <div class="search-movie-result" (click)="goMovieDetail(result.id)">
                     <div class="overflow-container">
                         <div class="nowrap-container">
                             <div class="title-result">
-                              {{result.original_title}} 
+                            {{result.original_title}} 
                             </div>
                             <div class="subtitle-result">
-                              Release date: {{result.release_date  | date : 'longDate'}}
+                            Release date: {{result.release_date  | date : 'longDate'}}
                             </div>
                         </div>
                     </div>
                     <div class="search-result-img" *ngIf="result"
-                      [ngStyle]="{'background-image': 'url(' + view.images + result.poster_path + ')'}">
+                    [ngStyle]="{'background-image': 'url(' + view.images + result.poster_path + ')'}">
                     </div>
                 </div>
-      </div> <!-- search movie end  -->
-      <div class="search-result" 
-          *ngFor="let result of resultsPersons | async | slice:0:7">
-          <div class="search-person-result"(click)="goPersonDetail(result.id)">
-              <div  class="overflow-container">
-                  <div class="nowrap-container" >
-                      <div class="title-result">
-                        {{result.name}} 
-                      </div>
-                      <div class="subtitle-result">
-                        Known for: {{result.known_for[0].title}}
-                      </div>
-                  </div>
-              </div>
-              <div class="search-result-img"  *ngIf="result"
-                [ngStyle]="{'background-image': 'url(' + view.images + result.profile_path + ')'}">
-              </div>
-          </div>
-    </div> <!-- search person end  -->
-  </div>
+            </div> <!-- search movie end  -->
+            <div class="search-result" 
+                *ngFor="let result of resultsPersons | async | slice:0:7">
+                <div class="search-person-result"(click)="goPersonDetail(result.id)">
+                    <div  class="overflow-container">
+                        <div class="nowrap-container" >
+                            <div class="title-result">
+                              {{result.name}} 
+                            </div>
+                            <div class="subtitle-result">
+                              Known for: {{result.known_for[0].title}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search-result-img"  *ngIf="result"
+                      [ngStyle]="{'background-image': 'url(' + view.images + result.profile_path + ')'}">
+                    </div>
+                </div>
+            </div> <!-- search person end  -->
+        </div>
+    </div>
 </div>
 

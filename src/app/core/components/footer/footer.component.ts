@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterModule, ActivatedRoute, Params, Router } from '@angular/router';
+import { Component} from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'footer',
@@ -7,17 +7,16 @@ import { RouterModule, ActivatedRoute, Params, Router } from '@angular/router';
 	styleUrls: ['./footer.component.css'],
 })
 
-export class FooterComponent implements OnInit{
+export class FooterComponent{
 
 	constructor(
     	private router: Router
     ) {}
 
-	ngOnInit(): void{
-
-	}
-
+	/**Redirect to juan narvaez information profile section
+   	* @return {:void} */
 	goAboutMe():void{
+		window.scrollTo(0, 0);
 		this.router.navigate(['aboutme']);
 	}
 

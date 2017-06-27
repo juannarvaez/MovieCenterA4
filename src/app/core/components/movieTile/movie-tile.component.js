@@ -17,8 +17,9 @@ var MovieTileComponent = (function () {
             images: 'https://image.tmdb.org/t/p/w500',
         };
     }
-    MovieTileComponent.prototype.ngOnInit = function () {
-    };
+    /**Redirect to movie detail section
+    * @param {id_movie:number} unique identification for the movie in the data base,
+    * @return {:void} */
     MovieTileComponent.prototype.goMovieDetail = function (id_movie) {
         this.router.navigate(['movie', String(id_movie)]);
     };

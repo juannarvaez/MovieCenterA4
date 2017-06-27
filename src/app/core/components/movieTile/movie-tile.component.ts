@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router }            from '@angular/router';
 
 
@@ -8,10 +8,9 @@ import { Router }            from '@angular/router';
 	styleUrls: ['./movie-tile.component.css']
 })
 
-export class  MovieTileComponent implements OnInit{
+export class  MovieTileComponent{
 
 	@Input() movie: any;
-
 
 	view = {
 		images: 'https://image.tmdb.org/t/p/w500',
@@ -21,10 +20,9 @@ export class  MovieTileComponent implements OnInit{
 		private router: Router
 	){}
 
-	ngOnInit():void{
-		
-	}
-
+	/**Redirect to movie detail section
+	* @param {id_movie:number} unique identification for the movie in the data base,  
+   	* @return {:void} */
 	goMovieDetail(id_movie: number ):void {
 		this.router.navigate(['movie', String(id_movie)]);
 	}	
