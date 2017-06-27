@@ -6,6 +6,19 @@
 
 }
 
+.logo{
+	width: 90px;
+	height: 50px;
+	opacity: 0.85;
+	background-image:url('../../../../assets/images/logo-2.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.logo:hover{
+	opacity: 1;
+}
+
 .menu-button-container{
 	float:left; 
 	width: 48px; 
