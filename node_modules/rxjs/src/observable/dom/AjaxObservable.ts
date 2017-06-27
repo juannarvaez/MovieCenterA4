@@ -25,7 +25,11 @@ export interface AjaxRequest {
 
 function getCORSRequest(this: AjaxRequest): XMLHttpRequest {
   if (root.XMLHttpRequest) {
-    return new root.XMLHttpRequest();
+    const xhr = new root.XMLHttpRequest();
+    if ('withCredentials' in xhr) {
+      xhr.withCredentials = !!this.withCredentials;
+    }
+    return xhr;
   } else if (!!root.XDomainRequest) {
     return new root.XDomainRequest();
   } else {
@@ -62,7 +66,6 @@ export interface AjaxCreationMethod {
   get(url: string, headers?: Object): Observable<AjaxResponse>;
   post(url: string, body?: any, headers?: Object): Observable<AjaxResponse>;
   put(url: string, body?: any, headers?: Object): Observable<AjaxResponse>;
-  patch(url: string, body?: any, headers?: Object): Observable<AjaxResponse>;
   delete(url: string, headers?: Object): Observable<AjaxResponse>;
   getJSON<T>(url: string, headers?: Object): Observable<T>;
 }
@@ -81,10 +84,6 @@ export function ajaxDelete(url: string, headers?: Object): Observable<AjaxRespon
 
 export function ajaxPut(url: string, body?: any, headers?: Object): Observable<AjaxResponse> {
   return new AjaxObservable<AjaxResponse>({ method: 'PUT', url, body, headers });
-};
-
-export function ajaxPatch(url: string, body?: any, headers?: Object): Observable<AjaxResponse> {
-  return new AjaxObservable<AjaxResponse>({ method: 'PATCH', url, body, headers });
 };
 
 export function ajaxGetJSON<T>(url: string, headers?: Object): Observable<T> {
@@ -133,7 +132,6 @@ export class AjaxObservable<T> extends Observable<T> {
     create.post = ajaxPost;
     create.delete = ajaxDelete;
     create.put = ajaxPut;
-    create.patch = ajaxPatch;
     create.getJSON = ajaxGetJSON;
 
     return <AjaxCreationMethod>create;
@@ -226,12 +224,7 @@ export class AjaxSubscriber<T> extends Subscriber<Event> {
     } else {
       this.xhr = xhr;
 
-      // set up the events before open XHR
-      // https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest
-      // You need to add the event listeners before calling open() on the request.
-      // Otherwise the progress events will not fire.
-      this.setupEvents(xhr, request);
-      // open XHR
+      // open XHR first
       let result: any;
       if (user) {
         result = tryCatch(xhr.open).call(xhr, method, url, async, user, password);
@@ -244,18 +237,15 @@ export class AjaxSubscriber<T> extends Subscriber<Event> {
         return null;
       }
 
-      // timeout, responseType and withCredentials can be set once the XHR is open
-      if (async) {
-        xhr.timeout = request.timeout;
-        xhr.responseType = request.responseType;
-      }
-
-      if ('withCredentials' in xhr) {
-        xhr.withCredentials = !!request.withCredentials;
-      }
+      // timeout and responseType can be set once the XHR is open
+      xhr.timeout = request.timeout;
+      xhr.responseType = request.responseType;
 
       // set headers
       this.setHeaders(xhr, headers);
+
+      // now set up the events
+      this.setupEvents(xhr, request);
 
       // finally send the request
       result = body ? tryCatch(xhr.send).call(xhr, body) : tryCatch(xhr.send).call(xhr);
@@ -314,18 +304,14 @@ export class AjaxSubscriber<T> extends Subscriber<Event> {
     (<any>xhrTimeout).request = request;
     (<any>xhrTimeout).subscriber = this;
     (<any>xhrTimeout).progressSubscriber = progressSubscriber;
-    if (xhr.upload && 'withCredentials' in xhr) {
+    if (xhr.upload && 'withCredentials' in xhr && root.XDomainRequest) {
       if (progressSubscriber) {
         let xhrProgress: (e: ProgressEvent) => void;
         xhrProgress = function(e: ProgressEvent) {
           const { progressSubscriber } = (<any>xhrProgress);
           progressSubscriber.next(e);
         };
-        if (root.XDomainRequest) {
-          xhr.onprogress = xhrProgress;
-        } else {
-          xhr.upload.onprogress = xhrProgress;
-        }
+        xhr.onprogress = xhrProgress;
         (<any>xhrProgress).progressSubscriber = progressSubscriber;
       }
       let xhrError: (e: ErrorEvent) => void;

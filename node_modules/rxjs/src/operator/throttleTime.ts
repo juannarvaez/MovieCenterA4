@@ -1,10 +1,9 @@
 import { Operator } from '../Operator';
 import { Subscriber } from '../Subscriber';
-import { IScheduler } from '../Scheduler';
+import { Scheduler } from '../Scheduler';
 import { Subscription, TeardownLogic } from '../Subscription';
 import { async } from '../scheduler/async';
 import { Observable } from '../Observable';
-import { ThrottleConfig, defaultThrottleConfig } from './throttle';
 
 /**
  * Emits a value from the source Observable, then ignores subsequent source
@@ -22,7 +21,7 @@ import { ThrottleConfig, defaultThrottleConfig } from './throttle';
  * is enabled. After `duration` milliseconds (or the time unit determined
  * internally by the optional `scheduler`) has passed, the timer is disabled,
  * and this process repeats for the next source value. Optionally takes a
- * {@link IScheduler} for managing timers.
+ * {@link Scheduler} for managing timers.
  *
  * @example <caption>Emit clicks at a rate of at most one click per second</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
@@ -38,31 +37,24 @@ import { ThrottleConfig, defaultThrottleConfig } from './throttle';
  * @param {number} duration Time to wait before emitting another value after
  * emitting the last value, measured in milliseconds or the time unit determined
  * internally by the optional `scheduler`.
- * @param {Scheduler} [scheduler=async] The {@link IScheduler} to use for
- * managing the timers that handle the throttling.
+ * @param {Scheduler} [scheduler=async] The {@link Scheduler} to use for
+ * managing the timers that handle the sampling.
  * @return {Observable<T>} An Observable that performs the throttle operation to
  * limit the rate of emissions from the source.
  * @method throttleTime
  * @owner Observable
  */
-export function throttleTime<T>(this: Observable<T>,
-                                duration: number,
-                                scheduler: IScheduler = async,
-                                config: ThrottleConfig = defaultThrottleConfig): Observable<T> {
-  return this.lift(new ThrottleTimeOperator(duration, scheduler, config.leading, config.trailing));
+export function throttleTime<T>(this: Observable<T>, duration: number, scheduler: Scheduler = async): Observable<T> {
+  return this.lift(new ThrottleTimeOperator(duration, scheduler));
 }
 
 class ThrottleTimeOperator<T> implements Operator<T, T> {
   constructor(private duration: number,
-              private scheduler: IScheduler,
-              private leading: boolean,
-              private trailing: boolean) {
+              private scheduler: Scheduler) {
   }
 
   call(subscriber: Subscriber<T>, source: any): TeardownLogic {
-    return source.subscribe(
-      new ThrottleTimeSubscriber(subscriber, this.duration, this.scheduler, this.leading, this.trailing)
-    );
+    return source.subscribe(new ThrottleTimeSubscriber(subscriber, this.duration, this.scheduler));
   }
 }
 
@@ -73,39 +65,23 @@ class ThrottleTimeOperator<T> implements Operator<T, T> {
  */
 class ThrottleTimeSubscriber<T> extends Subscriber<T> {
   private throttled: Subscription;
-  private _hasTrailingValue: boolean = false;
-  private _trailingValue: T = null;
 
   constructor(destination: Subscriber<T>,
               private duration: number,
-              private scheduler: IScheduler,
-              private leading: boolean,
-              private trailing: boolean) {
+              private scheduler: Scheduler) {
     super(destination);
   }
 
   protected _next(value: T) {
-    if (this.throttled) {
-      if (this.trailing) {
-        this._trailingValue = value;
-        this._hasTrailingValue = true;
-      }
-    } else {
+    if (!this.throttled) {
       this.add(this.throttled = this.scheduler.schedule(dispatchNext, this.duration, { subscriber: this }));
-      if (this.leading) {
-        this.destination.next(value);
-      }
+      this.destination.next(value);
     }
   }
 
   clearThrottle() {
     const throttled = this.throttled;
     if (throttled) {
-      if (this.trailing && this._hasTrailingValue) {
-        this.destination.next(this._trailingValue);
-        this._trailingValue = null;
-        this._hasTrailingValue = false;
-      }
       throttled.unsubscribe();
       this.remove(throttled);
       this.throttled = null;

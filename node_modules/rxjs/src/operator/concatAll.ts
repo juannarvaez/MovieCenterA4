@@ -5,7 +5,7 @@ import { MergeAllOperator } from './mergeAll';
 /* tslint:disable:max-line-length */
 export function concatAll<T>(this: Observable<T>): T;
 export function concatAll<T, R>(this: Observable<T>): Subscribable<R>;
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 
 /**
  * Converts a higher-order Observable into a first-order Observable by

@@ -1,12 +1,10 @@
 import { async } from '../scheduler/async';
 import { isDate } from '../util/isDate';
 import { Operator } from '../Operator';
-import { IScheduler } from '../Scheduler';
+import { Scheduler } from '../Scheduler';
 import { Subscriber } from '../Subscriber';
-import { Action } from '../scheduler/Action';
 import { Notification } from '../Notification';
 import { Observable } from '../Observable';
-import { PartialObserver } from '../Observer';
 import { TeardownLogic } from '../Subscription';
 
 /**
@@ -41,7 +39,7 @@ import { TeardownLogic } from '../Subscription';
  *
  * @param {number|Date} delay The delay duration in milliseconds (a `number`) or
  * a `Date` until which the emission of the source items is delayed.
- * @param {Scheduler} [scheduler=async] The IScheduler to use for
+ * @param {Scheduler} [scheduler=async] The Scheduler to use for
  * managing the timers that handle the time-shift for each item.
  * @return {Observable} An Observable that delays the emissions of the source
  * Observable by the specified timeout or Date.
@@ -49,7 +47,7 @@ import { TeardownLogic } from '../Subscription';
  * @owner Observable
  */
 export function delay<T>(this: Observable<T>, delay: number|Date,
-                         scheduler: IScheduler = async): Observable<T> {
+                         scheduler: Scheduler = async): Observable<T> {
   const absoluteDelay = isDate(delay);
   const delayFor = absoluteDelay ? (+delay - scheduler.now()) : Math.abs(<number>delay);
   return this.lift(new DelayOperator(delayFor, scheduler));
@@ -57,18 +55,12 @@ export function delay<T>(this: Observable<T>, delay: number|Date,
 
 class DelayOperator<T> implements Operator<T, T> {
   constructor(private delay: number,
-              private scheduler: IScheduler) {
+              private scheduler: Scheduler) {
   }
 
   call(subscriber: Subscriber<T>, source: any): TeardownLogic {
     return source.subscribe(new DelaySubscriber(subscriber, this.delay, this.scheduler));
   }
-}
-
-interface DelayState<T> {
-  source: DelaySubscriber<T>;
-  destination: PartialObserver<T>;
-  scheduler: IScheduler;
 }
 
 /**
@@ -77,11 +69,11 @@ interface DelayState<T> {
  * @extends {Ignored}
  */
 class DelaySubscriber<T> extends Subscriber<T> {
-  private queue: Array<DelayMessage<T>> = [];
+  private queue: Array<any> = [];
   private active: boolean = false;
   private errored: boolean = false;
 
-  private static dispatch<T>(this: Action<DelayState<T>>, state: DelayState<T>): void {
+  private static dispatch(state: any): void {
     const source = state.source;
     const queue = source.queue;
     const scheduler = state.scheduler;
@@ -93,7 +85,7 @@ class DelaySubscriber<T> extends Subscriber<T> {
 
     if (queue.length > 0) {
       const delay = Math.max(0, queue[0].time - scheduler.now());
-      this.schedule(state, delay);
+      (<any> this).schedule(state, delay);
     } else {
       source.active = false;
     }
@@ -101,18 +93,18 @@ class DelaySubscriber<T> extends Subscriber<T> {
 
   constructor(destination: Subscriber<T>,
               private delay: number,
-              private scheduler: IScheduler) {
+              private scheduler: Scheduler) {
     super(destination);
   }
 
-  private _schedule(scheduler: IScheduler): void {
+  private _schedule(scheduler: Scheduler): void {
     this.active = true;
-    this.add(scheduler.schedule<DelayState<T>>(DelaySubscriber.dispatch, this.delay, {
+    this.add(scheduler.schedule(DelaySubscriber.dispatch, this.delay, {
       source: this, destination: this.destination, scheduler: scheduler
     }));
   }
 
-  private scheduleNotification(notification: Notification<T>): void {
+  private scheduleNotification(notification: Notification<any>): void {
     if (this.errored === true) {
       return;
     }
@@ -142,7 +134,7 @@ class DelaySubscriber<T> extends Subscriber<T> {
 }
 
 class DelayMessage<T> {
-  constructor(public readonly time: number,
-              public readonly notification: Notification<T>) {
+  constructor(private time: number,
+              private notification: any) {
   }
 }

@@ -1,7 +1,6 @@
 import { Operator } from '../Operator';
 import { Subscriber } from '../Subscriber';
 import { Observable } from '../Observable';
-import { TeardownLogic } from '../Subscription';
 
 /**
  * Buffers the source Observable values until the size hits the maximum
@@ -49,18 +48,11 @@ export function bufferCount<T>(this: Observable<T>, bufferSize: number, startBuf
 }
 
 class BufferCountOperator<T> implements Operator<T, T[]> {
-  private subscriberClass: any;
-
   constructor(private bufferSize: number, private startBufferEvery: number) {
-    if (!startBufferEvery || bufferSize === startBufferEvery) {
-      this.subscriberClass = BufferCountSubscriber;
-    } else {
-      this.subscriberClass = BufferSkipCountSubscriber;
-    }
   }
 
-  call(subscriber: Subscriber<T[]>, source: any): TeardownLogic {
-    return source.subscribe(new this.subscriberClass(subscriber, this.bufferSize, this.startBufferEvery));
+  call(subscriber: Subscriber<T[]>, source: any): any {
+    return source.subscribe(new BufferCountSubscriber(subscriber, this.bufferSize, this.startBufferEvery));
   }
 }
 
@@ -70,38 +62,6 @@ class BufferCountOperator<T> implements Operator<T, T[]> {
  * @extends {Ignored}
  */
 class BufferCountSubscriber<T> extends Subscriber<T> {
-  private buffer: T[] = [];
-
-  constructor(destination: Subscriber<T[]>, private bufferSize: number) {
-    super(destination);
-  }
-
-  protected _next(value: T): void {
-    const buffer = this.buffer;
-
-    buffer.push(value);
-
-    if (buffer.length == this.bufferSize) {
-      this.destination.next(buffer);
-      this.buffer = [];
-    }
-  }
-
-  protected _complete(): void {
-    const buffer = this.buffer;
-    if (buffer.length > 0) {
-      this.destination.next(buffer);
-    }
-    super._complete();
-  }
-}
-
-/**
- * We need this JSDoc comment for affecting ESDoc.
- * @ignore
- * @extends {Ignored}
- */
-class BufferSkipCountSubscriber<T> extends Subscriber<T> {
   private buffers: Array<T[]> = [];
   private count: number = 0;
 
@@ -109,11 +69,12 @@ class BufferSkipCountSubscriber<T> extends Subscriber<T> {
     super(destination);
   }
 
-  protected _next(value: T): void {
-    const { bufferSize, startBufferEvery, buffers, count } = this;
+  protected _next(value: T) {
+    const count = this.count++;
+    const { destination, bufferSize, startBufferEvery, buffers } = this;
+    const startOn = (startBufferEvery == null) ? bufferSize : startBufferEvery;
 
-    this.count++;
-    if (count % startBufferEvery === 0) {
+    if (count % startOn === 0) {
       buffers.push([]);
     }
 
@@ -122,14 +83,14 @@ class BufferSkipCountSubscriber<T> extends Subscriber<T> {
       buffer.push(value);
       if (buffer.length === bufferSize) {
         buffers.splice(i, 1);
-        this.destination.next(buffer);
+        destination.next(buffer);
       }
     }
   }
 
-  protected _complete(): void {
-    const { buffers, destination } = this;
-
+  protected _complete() {
+    const destination = this.destination;
+    const buffers = this.buffers;
     while (buffers.length > 0) {
       let buffer = buffers.shift();
       if (buffer.length > 0) {
@@ -138,5 +99,4 @@ class BufferSkipCountSubscriber<T> extends Subscriber<T> {
     }
     super._complete();
   }
-
 }

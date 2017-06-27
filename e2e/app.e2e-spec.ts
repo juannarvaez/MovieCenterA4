@@ -1,14 +1,15 @@
-import { MovieCenterPage } from './app.po';
+import { browser, element, by } from 'protractor';
 
-describe('movie-center App', function() {
-  let page: MovieCenterPage;
+describe('QuickStart E2E Tests', function () {
 
-  beforeEach(() => {
-    page = new MovieCenterPage();
+  let expectedMsg = 'Hello Angular';
+
+  beforeEach(function () {
+    browser.get('');
   });
 
-  it('should display message saying app works', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+  it('should display: ' + expectedMsg, function () {
+    expect(element(by.css('h1')).getText()).toEqual(expectedMsg);
   });
+
 });

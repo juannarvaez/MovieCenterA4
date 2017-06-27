@@ -5,7 +5,7 @@
 	height: 225px;
 	background-size: 150px;
 	cursor: pointer;
-	color: white;
+	color: white
 	box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
 	transition: filter 300ms ease-in-out;
 }

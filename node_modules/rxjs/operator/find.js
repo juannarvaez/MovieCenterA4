@@ -5,7 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var Subscriber_1 = require('../Subscriber');
-/* tslint:enable:max-line-length */
+/* tslint:disable:max-line-length */
 /**
  * Emits only the first value emitted by the source Observable that meets some
  * condition.

@@ -13,7 +13,7 @@ export type TeardownLogic = AnonymousSubscription | Function | void;
 
 export interface ISubscription extends AnonymousSubscription {
   unsubscribe(): void;
-  readonly closed: boolean;
+  closed: boolean;
 }
 
 /**
@@ -40,10 +40,6 @@ export class Subscription implements ISubscription {
    */
   public closed: boolean = false;
 
-  protected _parent: Subscription = null;
-  protected _parents: Subscription[] = null;
-  private _subscriptions: ISubscription[] = null;
-
   /**
    * @param {function(): void} [unsubscribe] A function describing how to
    * perform the disposal of resources when the `unsubscribe` method is called.
@@ -68,42 +64,24 @@ export class Subscription implements ISubscription {
       return;
     }
 
-    let { _parent, _parents, _unsubscribe, _subscriptions } = (<any> this);
-
     this.closed = true;
-    this._parent = null;
-    this._parents = null;
-    // null out _subscriptions first so any child subscriptions that attempt
-    // to remove themselves from this subscription will noop
-    this._subscriptions = null;
 
-    let index = -1;
-    let len = _parents ? _parents.length : 0;
+    const { _unsubscribe, _subscriptions } = (<any> this);
 
-    // if this._parent is null, then so is this._parents, and we
-    // don't have to remove ourselves from any parent subscriptions.
-    while (_parent) {
-      _parent.remove(this);
-      // if this._parents is null or index >= len,
-      // then _parent is set to null, and the loop exits
-      _parent = ++index < len && _parents[index] || null;
-    }
+    (<any> this)._subscriptions = null;
 
     if (isFunction(_unsubscribe)) {
       let trial = tryCatch(_unsubscribe).call(this);
       if (trial === errorObject) {
         hasErrors = true;
-        errors = errors || (
-          errorObject.e instanceof UnsubscriptionError ?
-            flattenUnsubscriptionErrors(errorObject.e.errors) : [errorObject.e]
-        );
+        (errors = errors || []).push(errorObject.e);
       }
     }
 
     if (isArray(_subscriptions)) {
 
-      index = -1;
-      len = _subscriptions.length;
+      let index = -1;
+      const len = _subscriptions.length;
 
       while (++index < len) {
         const sub = _subscriptions[index];
@@ -114,7 +92,7 @@ export class Subscription implements ISubscription {
             errors = errors || [];
             let err = errorObject.e;
             if (err instanceof UnsubscriptionError) {
-              errors = errors.concat(flattenUnsubscriptionErrors(err.errors));
+              errors = errors.concat(err.errors);
             } else {
               errors.push(err);
             }
@@ -155,33 +133,25 @@ export class Subscription implements ISubscription {
       return this;
     }
 
-    let subscription = (<Subscription> teardown);
+    let sub = (<Subscription> teardown);
 
     switch (typeof teardown) {
       case 'function':
-        subscription = new Subscription(<(() => void) > teardown);
+        sub = new Subscription(<(() => void) > teardown);
       case 'object':
-        if (subscription.closed || typeof subscription.unsubscribe !== 'function') {
-          return subscription;
+        if (sub.closed || typeof sub.unsubscribe !== 'function') {
+          break;
         } else if (this.closed) {
-          subscription.unsubscribe();
-          return subscription;
-        } else if (typeof subscription._addParent !== 'function' /* quack quack */) {
-          const tmp = subscription;
-          subscription = new Subscription();
-          subscription._subscriptions = [tmp];
+          sub.unsubscribe();
+        } else {
+          ((<any> this)._subscriptions || ((<any> this)._subscriptions = [])).push(sub);
         }
         break;
       default:
         throw new Error('unrecognized teardown ' + teardown + ' added to Subscription.');
     }
 
-    const subscriptions = this._subscriptions || (this._subscriptions = []);
-
-    subscriptions.push(subscription);
-    subscription._addParent(this);
-
-    return subscription;
+    return sub;
   }
 
   /**
@@ -191,7 +161,16 @@ export class Subscription implements ISubscription {
    * @return {void}
    */
   remove(subscription: Subscription): void {
-    const subscriptions = this._subscriptions;
+
+    // HACK: This might be redundant because of the logic in `add()`
+    if (subscription == null   || (
+        subscription === this) || (
+        subscription === Subscription.EMPTY)) {
+      return;
+    }
+
+    const subscriptions = (<any> this)._subscriptions;
+
     if (subscriptions) {
       const subscriptionIndex = subscriptions.indexOf(subscription);
       if (subscriptionIndex !== -1) {
@@ -199,24 +178,4 @@ export class Subscription implements ISubscription {
       }
     }
   }
-
-  private _addParent(parent: Subscription) {
-    let { _parent, _parents } = this;
-    if (!_parent || _parent === parent) {
-      // If we don't have a parent, or the new parent is the same as the
-      // current parent, then set this._parent to the new parent.
-      this._parent = parent;
-    } else if (!_parents) {
-      // If there's already one parent, but not multiple, allocate an Array to
-      // store the rest of the parent Subscriptions.
-      this._parents = [parent];
-    } else if (_parents.indexOf(parent) === -1) {
-      // Only add the new parent to the _parents list if it's not already there.
-      _parents.push(parent);
-    }
-  }
-}
-
-function flattenUnsubscriptionErrors(errors: any[]) {
- return errors.reduce((errs, err) => errs.concat((err instanceof UnsubscriptionError) ? err.errors : err), []);
 }

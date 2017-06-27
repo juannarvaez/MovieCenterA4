@@ -1,2 +1,6 @@
-declare const _root: any;
-export { _root as root };
+/**
+ * window: browser in DOM main thread
+ * self: browser in WebWorker
+ * global: Node.js/other
+ */
+export declare const root: any;

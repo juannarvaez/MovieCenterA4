@@ -1,14 +1,14 @@
 import { root } from './root';
-import { isArrayLike } from './isArrayLike';
+import { isArray } from './isArray';
 import { isPromise } from './isPromise';
 import { isObject } from './isObject';
 import { Subscriber } from '../Subscriber';
 import { Observable, ObservableInput } from '../Observable';
-import { iterator as Symbol_iterator } from '../symbol/iterator';
+import { $$iterator } from '../symbol/iterator';
 import { Subscription } from '../Subscription';
 import { InnerSubscriber } from '../InnerSubscriber';
 import { OuterSubscriber } from '../OuterSubscriber';
-import { observable as Symbol_observable } from '../symbol/observable';
+import { $$observable } from '../symbol/observable';
 
 export function subscribeToResult<T, R>(outerSubscriber: OuterSubscriber<T, R>,
                                         result: any,
@@ -32,7 +32,7 @@ export function subscribeToResult<T>(outerSubscriber: OuterSubscriber<any, any>,
     } else {
       return result.subscribe(destination);
     }
-  } else if (isArrayLike(result)) {
+  } else if (isArray(result)) {
     for (let i = 0, len = result.length; i < len && !destination.closed; i++) {
       destination.next(result[i]);
     }
@@ -54,8 +54,8 @@ export function subscribeToResult<T>(outerSubscriber: OuterSubscriber<any, any>,
       root.setTimeout(() => { throw err; });
     });
     return destination;
-  } else if (result && typeof result[Symbol_iterator] === 'function') {
-    const iterator = <any>result[Symbol_iterator]();
+  } else if (result && typeof result[$$iterator] === 'function') {
+    const iterator = <any>result[$$iterator]();
     do {
       let item = iterator.next();
       if (item.done) {
@@ -67,8 +67,8 @@ export function subscribeToResult<T>(outerSubscriber: OuterSubscriber<any, any>,
         break;
       }
     } while (true);
-  } else if (result && typeof result[Symbol_observable] === 'function') {
-    const obs = result[Symbol_observable]();
+  } else if (result && typeof result[$$observable] === 'function') {
+    const obs = result[$$observable]();
     if (typeof obs.subscribe !== 'function') {
       destination.error(new TypeError('Provided object does not correctly implement Symbol.observable'));
     } else {

@@ -14,8 +14,8 @@ import { TeardownLogic } from '../Subscription';
  *
  * @throws {EmptyError} Delivers an EmptyError to the Observer's `error`
  * callback if the Observable completes before any `next` notification was sent.
- * @param {Function} predicate - A predicate function to evaluate items emitted by the source Observable.
- * @return {Observable<T>} An Observable that emits the single item emitted by the source Observable that matches
+ * @param {Function} a predicate function to evaluate items emitted by the source Observable.
+ * @return {Observable<T>} an Observable that emits the single item emitted by the source Observable that matches
  * the predicate.
  .
  * @method single
@@ -61,18 +61,19 @@ class SingleSubscriber<T> extends Subscriber<T> {
   }
 
   protected _next(value: T): void {
-    const index = this.index++;
-
-    if (this.predicate) {
-      this.tryNext(value, index);
+    const predicate = this.predicate;
+    this.index++;
+    if (predicate) {
+      this.tryNext(value);
     } else {
       this.applySingleValue(value);
     }
   }
 
-  private tryNext(value: T, index: number): void {
+  private tryNext(value: T): void {
     try {
-      if (this.predicate(value, index, this.source)) {
+      const result = this.predicate(value, this.index, this.source);
+      if (result) {
         this.applySingleValue(value);
       }
     } catch (err) {

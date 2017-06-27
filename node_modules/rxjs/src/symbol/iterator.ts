@@ -30,9 +30,4 @@ export function symbolIteratorPonyfill(root: any) {
   }
 }
 
-export const iterator = symbolIteratorPonyfill(root);
-
-/**
- * @deprecated use iterator instead
- */
-export const $$iterator = iterator;
+export const $$iterator = symbolIteratorPonyfill(root);

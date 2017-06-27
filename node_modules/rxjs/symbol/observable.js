@@ -18,9 +18,5 @@ function getSymbolObservable(context) {
     return $$observable;
 }
 exports.getSymbolObservable = getSymbolObservable;
-exports.observable = getSymbolObservable(root_1.root);
-/**
- * @deprecated use observable instead
- */
-exports.$$observable = exports.observable;
+exports.$$observable = getSymbolObservable(root_1.root);
 //# sourceMappingURL=observable.js.map

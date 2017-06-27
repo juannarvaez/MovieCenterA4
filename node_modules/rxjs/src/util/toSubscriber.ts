@@ -1,5 +1,5 @@
 import { Subscriber } from '../Subscriber';
-import { rxSubscriber as rxSubscriberSymbol } from '../symbol/rxSubscriber';
+import { $$rxSubscriber } from '../symbol/rxSubscriber';
 import { PartialObserver, empty as emptyObserver } from '../Observer';
 
 export function toSubscriber<T>(
@@ -12,8 +12,8 @@ export function toSubscriber<T>(
       return (<Subscriber<T>> nextOrObserver);
     }
 
-    if (nextOrObserver[rxSubscriberSymbol]) {
-      return nextOrObserver[rxSubscriberSymbol]();
+    if (nextOrObserver[$$rxSubscriber]) {
+      return nextOrObserver[$$rxSubscriber]();
     }
   }
 
