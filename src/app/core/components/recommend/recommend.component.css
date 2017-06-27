@@ -71,6 +71,10 @@
 	outline: 1px solid rgba(0,0,0,0.1);
 }
 
+.search-result-recommend:hover{
+    background-color: #c4c4c4;
+}
+
 .search-movie-result{
 	cursor: pointer;
 	position: relative;
@@ -103,6 +107,7 @@
   padding: 10px 20px 10px 20px;
   text-decoration: none;
   border: none;
+  outline: 0;
 }
 
 .btn:hover {

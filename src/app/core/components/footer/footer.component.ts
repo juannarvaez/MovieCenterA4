@@ -20,4 +20,24 @@ export class FooterComponent{
 		this.router.navigate(['aboutme']);
 	}
 
+	/**Redirects to movies section 
+   * @return {:void} */
+	goMovies():void {
+		window.scrollTo(0, 0);
+		this.router.navigate(['movies']);
+	}
+
+	/**Redirects to people section
+   * @return {:void} */
+	goPeople():void {
+		window.scrollTo(0, 0);
+		this.router.navigate(['people']);
+	}
+
+	/**Redirects to Recommend me a movie section
+   * @return {:void} */
+  	goRecommend():void {
+  		window.scrollTo(0, 0);
+		this.router.navigate(['recommend']);
+	}
 }

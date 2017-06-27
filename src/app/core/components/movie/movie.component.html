@@ -82,7 +82,7 @@
 					<div id="actor-info-right" *ngIf="actorInfo">
 						<div>
 							<h1 class="actor-name">{{actorInfo.name}}</h1>
-							<p class="actor-character">Character: {{view.actor.character}}</p>
+							<p class="actor-character"><b>Character: {{view.actor.character}}</b></p>
 						</div>
 						<br>
 						<div id="biography-container">
@@ -90,7 +90,7 @@
 						</div>
 						<br>
 						<div id="Personal-information">
-							<p>Personal Information:</p>
+							<p><b>Personal Information:</b></p>
 							<div class="half-panel" >
 								<p>Gender:</p>
 								<p *ngIf="actorInfo.gender==1">Female</p>
@@ -107,7 +107,7 @@
 							<p>{{actorInfo.place_of_birth}}</p>
 						</div>
 						<div id="go-detail-link">
-							 <p (click)="goPersonDetail(actorInfo.id)">go detail</p>
+							 <p (click)="goPersonDetail(actorInfo.id)">GO DETAIL</p>
 						</div>
 					</div>
 					<button id="close-button" (click)="closeActorDetail()"> X </button>

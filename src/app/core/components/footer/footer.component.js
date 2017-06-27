@@ -20,6 +20,24 @@ var FooterComponent = (function () {
         window.scrollTo(0, 0);
         this.router.navigate(['aboutme']);
     };
+    /**Redirects to movies section
+   * @return {:void} */
+    FooterComponent.prototype.goMovies = function () {
+        window.scrollTo(0, 0);
+        this.router.navigate(['movies']);
+    };
+    /**Redirects to people section
+   * @return {:void} */
+    FooterComponent.prototype.goPeople = function () {
+        window.scrollTo(0, 0);
+        this.router.navigate(['people']);
+    };
+    /**Redirects to Recommend me a movie section
+   * @return {:void} */
+    FooterComponent.prototype.goRecommend = function () {
+        window.scrollTo(0, 0);
+        this.router.navigate(['recommend']);
+    };
     return FooterComponent;
 }());
 FooterComponent = __decorate([

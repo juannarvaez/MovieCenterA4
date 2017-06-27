@@ -130,7 +130,12 @@
  	background-repeat: no-repeat;
  	outline: 1px solid rgba(255, 255,255, 0.1);
  	color: white;
+ 	transition: filter 300ms ease-in-out;
 }
+.actor:hover{
+	filter: brightness(150%);
+}
+
 
 .shadow-container{
 	background-color:rgba(0, 0, 0, 0.5); 
@@ -150,6 +155,9 @@
 /* ================= ACTOR INFO PANEL ==============*/
 
 #actorDetailPanel{
+	background-image: url('../../../../assets/images/background_3.jpg'); 
+	background-repeat: no-repeat;
+	background-size: cover;
 	position: absolute;
 	width: 50%; 
 	background-color: white; 
@@ -220,15 +228,32 @@
 }
 
 #go-detail-link{
+	cursor: pointer;
 	position: absolute;
-	bottom: 0px;
-	right: 0px;
+	bottom: 10px;
+	right: 10px;
 	color: red;
+	transition: all 300ms ease-in-out;
+}
+
+#go-detail-link:hover{
+	color: #960000;
 }
 
 #close-button{
+	cursor: pointer;
+	border: none;
+	outline: 0;
+	background-color: transparent;
 	position: absolute;
 	left: 0px;
+	font-weight: bold;
+	font-size: 20px;
+	transition: all 300ms ease-in-out;
+}
+
+#close-button:hover{
+	color: red;
 }
 
 
@@ -286,6 +311,12 @@
     vertical-align: top;
     background-repeat: no-repeat;
     background-position: 20%;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    transition: filter 300ms ease-in-out;
+}
+
+.slide:hover{
+	filter: brightness(150%);
 }
 
 .bt_left{
