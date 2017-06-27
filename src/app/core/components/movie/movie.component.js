@@ -20,7 +20,7 @@ var MovieComponent = (function () {
         this.location = location;
         this.router = router;
         this.apiYoutube = 'https://www.youtube.com/embed/';
-        this.pointer = 0;
+        this.pointer = 0; //slider var
         this.view = {
             movie: {
                 videos: { results: [{ type: '', key: '' }] },
@@ -30,12 +30,16 @@ var MovieComponent = (function () {
             images: 'https://image.tmdb.org/t/p/w500'
         };
     }
+    /**Loads movie information
+  * @return {:void} */
     MovieComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params
             .switchMap(function (params) { return _this.tmdbapiservice.getMovieDetail(String(+params['id'])); })
             .subscribe(function (response) { return _this.view.movie = response; });
     };
+    /**Search the trailer from the videos results and returns the key
+   * @return {:string} youtube url of trailer video for this movie*/
     MovieComponent.prototype.getTrailer = function () {
         var trailer = '';
         var index = this.view.movie.videos.results.length;
@@ -48,13 +52,22 @@ var MovieComponent = (function () {
         }
         return trailer;
     };
+    /**Redirects to a movie detail selected from slider
+   * @param {id_movie:number} unique identification for the movie in the data base,
+   * @return {:void} */
     MovieComponent.prototype.goMovieDetail = function (id_movie) {
         window.scrollTo(0, 0);
         this.router.navigate(['movie', String(id_movie)]);
     };
+    /**Redirects to people detail information panel, by using Go to detail button
+   * @return {:void} */
     MovieComponent.prototype.goPersonDetail = function (id_person) {
         this.router.navigate(['person', String(id_person)]);
     };
+    /**Search and shows the actor information on the actor panel
+   * @param {id_actor:string} unique identification for the person in the data base,
+   * en el componente siguiente
+   * @return {:void} */
     MovieComponent.prototype.showActor = function (id_actor) {
         var _this = this;
         this.tmdbapiservice.getDetailPerson(id_actor).subscribe(function (response) { return _this.actorInfo = response; });
@@ -70,34 +83,25 @@ var MovieComponent = (function () {
         actorPanel.style.display = 'block';
         actorPanelPicture.style.backgroundRepeat = 'no-repeat';
         actorPanelPicture.style.backgroundImage = "url(" + this.view.images + this.view.actor.profile_path + ")";
-        // $("#actorDetailPanel").css({
-        //    'background-image': "url(https:"+ $scope.view.images + $scope.view.actor.profile_path +")",
-        //    'background-repeat': 'no-repeat',
-        //    'display':'block',
-        // });
     };
+    /**Close actor panel
+   * @return {:void} */
     MovieComponent.prototype.closeActorDetail = function () {
         document.getElementById("actorDetailPanel").style.display = 'none';
     };
+    /**Slider javascript logic to see similar movies on the movie detail panel
+   * @param {direction:string} Indicates the move direction
+   * en el componente siguiente
+   * @return {:void} */
     MovieComponent.prototype.movieSlider = function (direction) {
         var slide = document.getElementsByClassName('slide');
         var limit = slide.length;
         var div_width = parseInt(slide[0].clientWidth) + 8;
-        // console.log("slide");
-        // console.log(slide);
-        // console.log("limit: " + limit);
-        // console.log(slide[0].clientWidth);
         this.pointer = (direction == 'right') ? this.pointer + 1 : this.pointer - 1;
-        // this.pointer = (this.pointer >= limit) ? 0 : this.pointer ;
-        // this.pointer = (this.pointer < 0 ) ? limit - 1 : this.pointer ;
         var slide_container = document.getElementById('slide_container');
-        // console.log("widht: "+div_width);
         var move_left = -1 * this.pointer * div_width;
-        // console.log("move: " + move_left);
         slide_container.style.marginLeft = move_left + 'px';
-        // slide_container.style.margin = '0px 0px 0px '+move_left+'px';
         slide_container.style.color = 'red';
-        // console.log(slide_container);
     };
     return MovieComponent;
 }());

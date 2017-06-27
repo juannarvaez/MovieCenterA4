@@ -27,13 +27,18 @@ export class PersonComponent implements OnInit{
 		private router: Router
 	){}
 
+	/**Load person information
+   * @return {:void} */
 	ngOnInit(): void {
 		this.route.params
 		.switchMap((params: Params) => this.tmdbapiservice.getDetailPerson(String(+params['id'])))
 		.subscribe(response => this.person = response);
 	}
 
-	getProfileImage():void{
+	/**Redirects to a movie detail
+   * @param {id_movie:number} unique identification for the movie in the data base,  
+   * @return {:void} */
+	getProfileImage():string{
 		let limit = this.person.images.profiles.length;
 		return limit == 1 ? 
 			this.person.images.profiles[0].file_path :  
@@ -41,15 +46,15 @@ export class PersonComponent implements OnInit{
 
 	}
 
+	/**Redirects to a movie detail
+   * @param {id_movie:number} unique identification for the movie in the data base,  
+   * @return {:void} */
 	goMovieDetail(id_movie: number ):void {
 		this.router.navigate(['movie', String(id_movie)]);
 	}
 
-	detail():void{
-		console.log(this.person);
-	}
-
-
-	
+	// detail():void{
+	// 	console.log(this.person);
+	// }
 
 }

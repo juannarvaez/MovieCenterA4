@@ -5,8 +5,7 @@ import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
     name: 'safe'
 })
 
-/**Pipe que permite acceder a enlaces que el navegador
-    determina como inseguros*/
+/** This pipe helps to make the url safe, to use it for example on a iframe, as is the case on this page*/
 export class SafeVideo implements PipeTransform {
 
     constructor( private sanitizer: DomSanitizer){}

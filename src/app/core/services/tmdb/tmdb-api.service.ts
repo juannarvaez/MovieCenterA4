@@ -16,7 +16,11 @@ export class TMDBAPIService {
 	constructor(private http: Http){}
 
 
-	//Abstract funtion to get info in json format from the tmdb api 
+	
+	/**Abstract funtion to get info in json format from the tmdb api 
+   * @param {search:string} link to access to a especific information 
+   * @param {extra_params:string} Extra params to get additional info
+   * @return {:void} */
 	getFromTMDB(search: string, extra_params=""): Observable<any>{
 		var url = this.baseUrl+search+"?api_key="+this.apiKey+"&language="+this.language+extra_params;
 		return this.http.get(url)
@@ -25,39 +29,56 @@ export class TMDBAPIService {
 			});
 	}
 
-	//=========================== MOVIES ===============================
+	/**Get the popular movies info
+   * @return {:Observable<any>} */
 	getPopularMovies():Observable<any>{
 		return this.getFromTMDB('movie/popular');
 	}
 
+	/**Get the the detail of a movie
+   * @param {id:string} movie id
+   * @return {:Observable<any>} */
 	getMovieDetail(id: string):Observable<any>{
 		var extra_params = '&append_to_response=alternative_titles,credits,releases,videos,similar,reviews,images';
 		return this.getFromTMDB('movie/'+id, extra_params );
 	}
 
+	/**Get the movie detail for data mining algotihm
+   * @param {id:string} id of movie
+   * @return {:Observable<any>} */
 	getMovieDetailRecommend(id: string):Observable<any>{
 		var extra_params = '&append_to_response=similar,images';
 		return this.getFromTMDB('movie/'+id, extra_params );
 	}
 
+	/**Get the top movies
+   * @return {:Observable<any>} */
 	getTopMovies(): Observable<any>{
 		return this.getFromTMDB('movie/top_rated');
 	}
 
+	/**Get the upcoming movies
+   * @return {:Observable<any>} */
 	getUpcomingMovies():Observable<any>{
 		return this.getFromTMDB('movie/now_playing');
 	}
 
-	//=========================== PERSONS ==============================
+	/**Get popular people
+   * @return {:Observable<any>} */
 	getPopularPersons():Observable<any>{
 		return this.getFromTMDB('person/popular');
 	}
 
+	/**Get the detail of a person
+   * @param {id:string} id of person
+   * @return {:Observable<any>} */
 	getDetailPerson(id: string): Observable<any>{
 		var extra_params = '&append_to_response=movie_credits,images';
 		return this.getFromTMDB('person/'+id, extra_params);
 	}
 
+	/**Get the credits
+   * @return {:Observable<any>} */
 	getMovieCreditsPerson(id: string):Observable<any>{
 		return this.getFromTMDB('person/'+id+'/movie_credits');
 	}

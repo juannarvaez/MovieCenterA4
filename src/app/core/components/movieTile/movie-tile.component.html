@@ -2,30 +2,19 @@
 	*ngIf="movie"
 	[ngStyle]="{'background-image': 'url(' + view.images + movie.poster_path + ')'}" 
 	(click)="goMovieDetail(movie.id)">
-
 	<div class="shadow-info-container">
-		
 		<div class="shadow-info">
-			
 			<div class="vote-average">
-				
 				<div class="start start-image-red" *ngIf="movie.vote_average<=6"></div>
 				<div class="start start-image-border" *ngIf="movie.vote_average >6 && movie.vote_average<=7 " ></div>
 				<div class="start start-image-white" *ngIf="movie.vote_average > 7"></div>
-
 				<div>
 					{{movie.vote_average}}
 				</div>
-
 			</div>
-
 			<div class="movie-title">
 				{{movie.original_title}}
 			</div>
-		
 		</div>
-
-		
 	</div>
-	
 </div>

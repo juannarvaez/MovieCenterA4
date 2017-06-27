@@ -25,15 +25,15 @@ var RecommendComponent = (function () {
         this.tmdbapiservice = tmdbapiservice;
         this.searchService = searchService;
         this.router = router;
-        this.dataSet = new Array();
-        this.minSupport = 0;
-        this.itemSetsCollectionTables = new Array();
-        this.numberOfSelectedMovies = 0;
-        this.selectedMovies = new Array();
-        this.idsSelectedMovies = new Array();
-        this.RecommendedMovies = new Array();
-        this.searchMovieTerms = new Subject_1.Subject(); //es un observable, ante cambios en su definicion hay repuesta
+        this.dataSet = new Array(); //Movie ids selected to do the algorithm
+        this.minSupport = 0; // var used in the algorithm
+        this.itemSetsCollectionTables = new Array(); //Results of the loops
+        this.numberOfSelectedMovies = 0; //Number of movie selected
+        this.searchMovieTerms = new Subject_1.Subject(); //Observable, There is an answer if there are changes in these variables
         this.searchPersonTerms = new Subject_1.Subject();
+        this.selectedMovies = new Array(); //Movies selected to do the algorithm
+        this.idsSelectedMovies = new Array(); //Ids of the movies selected
+        this.RecommendedMovies = new Array(); //Results of the algorithm
         this.view = {
             images: 'https://image.tmdb.org/t/p/w500',
         };
@@ -41,26 +41,37 @@ var RecommendComponent = (function () {
     RecommendComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.resultsMovies = this.searchMovieTerms
-            .debounceTime(300) //Espere 300 ms después de cada pulsación antes de considerar el término    
-            .distinctUntilChanged() //No volver a consultar si no hay cambios en la consulta
-            .switchMap(function (term) { return _this.test(term, '/movie'); }) //term es la respuesta de lo archivado en serchTerms
+            .debounceTime(300) //Wait 300 ms after search the term 
+            .distinctUntilChanged() //If there are no changes, dont do the request
+            .switchMap(function (term) { return _this.test(term, '/movie'); }) //Request and stored of the response
             .catch(function (error) {
             console.log(error);
-            return Observable_1.Observable.of([]); //en caso de error para debugea
+            return Observable_1.Observable.of([]);
         });
     };
+    /**Add word typed by user to searchMovieTerms and searchPersonTerms observables
+   * @param {term:string} Word typed by user
+   * @return {:void} */
     RecommendComponent.prototype.searchTerm = function (term) {
         this.searchMovieTerms.next(term);
     };
+    /**Do the request to the service
+   * @param {term:string} Word stored on  searchMovieTerms or searchPersonTerms observable
+   * @return {:void} */
     RecommendComponent.prototype.test = function (term, specificSearch) {
         if (specificSearch === void 0) { specificSearch = ""; }
-        // console.log("En el switchMap service response");
         return term ? this.searchService.search(term, specificSearch) : Observable_1.Observable.of([]);
     };
+    /**Redirects to a movie detail of the results of the algorithm
+   * @param {id_movie:number} unique identification for the movie in the data base,
+   * @return {:void} */
     RecommendComponent.prototype.goMovieDetail = function (id_movie) {
         this.clearData();
         this.router.navigate(['movie', String(id_movie)]);
     };
+    /**Get the info of the movie selected and added it to the slectedMovies Array if the movie is not already stored,
+   * @param {id_movie:number} unique identification for the movie in the data base,
+   * @return {:void} */
     RecommendComponent.prototype.getMovieDetail = function (id_movie) {
         var _this = this;
         this.numberOfSelectedMovies += 1;
@@ -75,15 +86,21 @@ var RecommendComponent = (function () {
         searchInput.value = '';
         this.ngOnInit();
     };
+    /**Show the panel with the results of the algorithm
+   * @return {:void} */
     RecommendComponent.prototype.showRecommendMovies = function () {
         var recommendPanel = document.getElementById('recommend-movies-panel');
         recommendPanel.style.display = 'block';
     };
+    /**Close the panel with the results of the algorithm and clear the data
+   * @return {:void} */
     RecommendComponent.prototype.closeRecommendMovies = function () {
         var recommendPanel = document.getElementById('recommend-movies-panel');
         recommendPanel.style.display = 'none';
         this.clearData();
     };
+    /**Clear the data used by the algorithm
+   * @return {:void} */
     RecommendComponent.prototype.clearData = function () {
         this.dataSet = [];
         this.minSupport = 0;
@@ -93,6 +110,8 @@ var RecommendComponent = (function () {
         this.idsSelectedMovies = [];
         this.RecommendedMovies = [];
     };
+    /**Set ids of selectedMovies to dataSet and calculate the min support
+   * @return {:void} */
     RecommendComponent.prototype.setIdsSimilarMovies = function () {
         var length = this.selectedMovies.length;
         if (length == 2 || length == 3) {
@@ -101,7 +120,8 @@ var RecommendComponent = (function () {
         else {
             this.minSupport = length % 2 == 0 ? length / 2 : Math.floor(length / 2);
         }
-        console.log(this.minSupport);
+        console.log("Min support: " + this.minSupport);
+        console.log("Data target a ser usada por el algoritmo de mineria");
         for (var i = 0; i < length; i++) {
             var similarMoviesId = new Array();
             var auxLength = this.selectedMovies[i]["similar"]["results"].length;
@@ -115,6 +135,7 @@ var RecommendComponent = (function () {
     };
     RecommendComponent.prototype.associationAlgorithm = function () {
         if (this.selectedMovies.length >= 2) {
+            console.log("================  ITERATCION # 1  ================");
             this.setIdsSimilarMovies();
             var dataSetLength = this.dataSet.length;
             var auxKeysItemSet = new Array();
@@ -127,17 +148,14 @@ var RecommendComponent = (function () {
             // unique filter a=elemente b=index c=array
             auxKeysItemSet = auxKeysItemSet.filter(function (a, b, c) { return c.indexOf(a, b + 1) < 0; });
             //ORDENAR LAS KEYS
-            // console.log(auxKeysItemSet);
             auxKeysItemSet.sort(function (a, b) { return a - b; });
             console.log("Etiquetas de itemsets");
             console.log(auxKeysItemSet);
             //CREAR EL PRIMER ITEM SET PARA CONTEO
-            // console.log(auxKeysItemSet);
             for (var i = 0; i < auxKeysItemSet.length; i++) {
-                // console.log(auxKeysItemSet[i]);
                 itemSetSup[auxKeysItemSet[i]] = 0;
             }
-            //HACER EL CONTEO
+            //HACER EL CONTEO DE OCURRENCIAS
             for (var i = 0; i < dataSetLength; i++) {
                 var auxLength = this.dataSet[i].length;
                 var data = this.dataSet[i];
@@ -148,7 +166,7 @@ var RecommendComponent = (function () {
             //ELIMINAR LO QUE NO CUMPLE CON EL MIN SUPPORT ITEMSET
             var itemSetkeys = Object.keys(itemSetSup);
             var itemSetLength = itemSetkeys.length;
-            console.log("Hash con conteo itemset sup ");
+            console.log("Itemsets de esta iteracion: ");
             console.log(itemSetSup);
             for (var i = 0; i < itemSetLength; i++) {
                 if (itemSetSup[itemSetkeys[i]] < this.minSupport) {
@@ -156,56 +174,37 @@ var RecommendComponent = (function () {
                 }
             }
             //HACER LAS COMBINACIONES DE LOS QUE PASARON EL MIN SUPPORT
-            console.log("Itemsets que pasaron el min support ");
+            console.log("Itemsets que pasaron el min support: ");
             console.log(itemSetSup);
             this.itemSetsCollectionTables.push(itemSetSup);
             var iterationNumber = 1;
             itemSetkeys = Object.keys(itemSetSup);
             itemSetLength = itemSetkeys.length;
             // ITERACIONES DEL ALGORITMO
-            console.log("keys iteracion 1:" + itemSetLength);
             while (iterationNumber < 4 && itemSetLength > 1) {
-                // while(false ){
-                // while(itemSetkeys.length>2 ){
                 iterationNumber++;
-                console.log("================  ITERACION # " + iterationNumber + "  ================");
-                //itemSetkeys = Object.keys( itemSetSup );
-                // console.log(itemSetkeys);
+                console.log("================  ITERATCION # " + iterationNumber + "  ================");
                 itemSetSup = {};
                 for (var i = 0; i < itemSetkeys.length; i++) {
                     var auxItemsetString = new Array();
                     for (var j = i; j < itemSetkeys.length; j++) {
                         if (itemSetkeys[j + 1]) {
-                            // console.log("========================");
-                            // console.log("en el concat");
-                            // console.log( itemSetkeys[i].split("-"));
-                            // console.log( itemSetkeys[j+1].split("-"));
-                            // console.log("========================");
                             auxItemsetString = itemSetkeys[i].split("-").concat(itemSetkeys[j + 1].split("-"));
                             auxItemsetString = auxItemsetString.filter(function (a, b, c) { return c.indexOf(a, b + 1) < 0; });
                         }
                         var key = '';
                         if (auxItemsetString.length <= iterationNumber && auxItemsetString.length > 0) {
-                            // console.log("Desordenado ");
-                            // console.log(auxItemsetString);
                             var auxItemsetNumber = auxItemsetString.map(function (a) { return parseInt(a); });
                             auxItemsetNumber = auxItemsetNumber.sort(function (a, b) { return a - b; });
-                            // console.log("Ordenado ");
-                            // console.log(auxItemsetNumber);
                             key = auxItemsetNumber.join("-");
                             itemSetSup[key] = 0;
                         }
                     }
                 }
-                //==
-                // let perms = this.firstEspecialPermutation(itemSetkeys);
-                console.log("Permutaciones (itemsets):");
+                console.log("Itemsets de esta iteracion:");
                 console.log(itemSetSup);
-                // perms = Object.keys(itemSetSup);
-                // itemSetSup={};
                 itemSetkeys = Object.keys(itemSetSup);
                 for (var i = 0; i < itemSetkeys.length; i++) {
-                    // console.log("paso 1");
                     itemSetSup[itemSetkeys[i]] = this.countItemSets(itemSetkeys[i].split("-"));
                 }
                 console.log("Conteo de ocurrencias de los itemsets: ");
@@ -218,7 +217,7 @@ var RecommendComponent = (function () {
                 }
                 itemSetkeys = Object.keys(itemSetSup);
                 itemSetLength = itemSetkeys.length;
-                console.log("Itemsets que pasaron el min support: " + this.minSupport);
+                console.log("Itemsets que pasaron el min support: ");
                 console.log(itemSetSup);
                 console.log("Cantidad de etiquetas:" + itemSetLength);
                 this.itemSetsCollectionTables.push(itemSetSup);
@@ -226,6 +225,8 @@ var RecommendComponent = (function () {
             this.getRecommendedMovies();
         }
     };
+    /**Get info of the movies that the algorithm recommended
+   * @return {:void} */
     RecommendComponent.prototype.getRecommendedMovies = function () {
         var _this = this;
         var lastIteration = Object.keys(this.itemSetsCollectionTables.pop());
@@ -243,6 +244,9 @@ var RecommendComponent = (function () {
         }
         this.showRecommendMovies();
     };
+    /**Calculate the first permutation of the movie ids selected
+   * @param {movieIds:Array<any>} array with the movie ids
+   * @return {:Array<any>} return an array with the permutations*/
     RecommendComponent.prototype.firstEspecialPermutation = function (movieIds) {
         var results = new Array();
         var length = movieIds.length;
@@ -258,6 +262,9 @@ var RecommendComponent = (function () {
         }
         return results;
     };
+    /**Return the total number of occurrences of the itemset in the dataset
+   * @param {perm:Array<any>} array with the itemsets
+   * @return {:Array<any>} return an array with the permutations*/
     RecommendComponent.prototype.countItemSets = function (perm) {
         var length = this.dataSet.length;
         var result = 0;
@@ -266,6 +273,10 @@ var RecommendComponent = (function () {
         }
         return result;
     };
+    /**Count the number of occurrences of the itemset in the dataSet
+   * @param {data:Array<any>} Similar movies  associated to de i selected movie
+   * @param {items:Array<any>} array with the itemsets
+   * @return {:Array<any>} Return the number of occurrences of the itemset in the dataSet[i]  */
     RecommendComponent.prototype.countItemSet = function (data, items) {
         var itemLength = items.length;
         var dataLength = data.length;

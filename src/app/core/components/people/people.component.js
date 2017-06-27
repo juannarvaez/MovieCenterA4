@@ -24,10 +24,15 @@ var PeopleComponent = (function () {
     PeopleComponent.prototype.ngOnInit = function () {
         this.getPeople();
     };
+    /**Get people info and load the data
+   * @return {:void} */
     PeopleComponent.prototype.getPeople = function () {
         var _this = this;
         this.tmdbapiservice.getPopularPersons().subscribe(function (data) { return _this.view.people = data; });
     };
+    /**Redirects to a person detail
+   * @param {id_person:number} unique identification for the person in the data base,
+   * @return {:void} */
     PeopleComponent.prototype.goPersonDetail = function (id_person) {
         this.router.navigate(['person', String(id_person)]);
     };

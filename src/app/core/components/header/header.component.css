@@ -107,11 +107,20 @@
 	float: left; 
 	margin-left:20px; 
 	cursor: pointer;
+	transition: color 100ms ease-in-out; 
+}
+.tag-bar-menu:hover{
+	color:red;
 }
 
 .first-tag-bar-menu{
 	float: left; 
-	cursor: pointer; 
+	cursor: pointer;
+	transition: color 100ms ease-in-out; 
+}
+
+.first-tag-bar-menu:hover{
+	color:red;
 }
 
 /*BUSCADOR*/
@@ -130,7 +139,7 @@
 
 #search-component{
 	position: absolute; 
-	right: 15%; 
+	right: 11.5%; 
 	top: 35%;
 	z-index: 0;
 	overflow: hidden;
@@ -141,7 +150,7 @@
 #search-box{
 	position: relative;
 	width:  100%;
-	outline:0px; 
+	outline-color: rgba(255,255,255,0.4);
 	border: none;
 	margin-left: 0%;
 	transition: all 300ms ease;
@@ -155,12 +164,19 @@
     outline: 1px solid rgba(0,0,0,0.1);
 }
 
+.search-result:hover{
+    background-color: #c4c4c4;
+}
+
+
 .search-movie-result{
 	cursor: pointer;
 	position: relative;
 	height: 40px;
 	width: 100%;
 }
+
+
 
 .search-person-result{
 	cursor: pointer;

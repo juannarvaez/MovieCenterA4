@@ -14,7 +14,8 @@ export class  HomeComponent{
 		private router: Router
 	){}
 
-
+	/**Redirect to movies section
+   	* @return {:void} */
 	goMovies():void {
 		this.router.navigate(['movies']);
 	}

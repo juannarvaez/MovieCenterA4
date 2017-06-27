@@ -9,7 +9,9 @@
 				
 				<div class="shadow-info">
 					<div class="info-panel-left">
-						<div class="thumb-up-icon"></div>
+						<div *ngIf="person.popularity>=40" class="start start-image-white"></div>
+						<div *ngIf="person.popularity<40 && person.popularity>30" class="start start-image-border"></div>
+						<div *ngIf="person.popularity<=30" class="start start-image-red"></div>
 						<div>
 							<p align="center">{{person.popularity | percentage : 4 }}</p>
 							<!-- {{substringPorcent(person.popularity) }} -->

@@ -1,17 +1,25 @@
 <div class="main-footer-panel">
 	<div class="footer-gradient">
-		
-		<div class="footer-info-panel">
-			<div style="float: left;margin-left:30%; opacity: 0.9; margin-top:5%; width: 60%; height:0; padding-bottom: 23%; background-size:cover; background-repeat:no-repeat; background-image:url('../../../../assets/images/tmdb-white-log.png') ">
-				
-			</div>
+		<div class="footer-info-panel"> <!-- tmbd section -->
+			<a target="_blank" href="https://www.themoviedb.org/?language=es">
+				<div class="tmdb-logo"></div>
+			</a>
 		</div>
-
-		<div  class="footer-info-panel">
-			
+		<div  class="footer-info-panel"> <!-- links section -->
+			<div (click)="goAboutMe()" >
+                <p class="tag-link-footer">ABOUT ME</p>
+            </div >
+			<div (click)="goMovies()">
+                <p class="tag-link-footer">MOVIE</p>
+            </div >
+            <div (click)="goPeople()">
+              	<p class="tag-link-footer">PEOPLE</p>
+            </div >
+            <div (click)="goRecommend()">
+              	 <p class="tag-link-footer">RECOMMEND ME A MOVIE</p>
+            </div>   
 		</div>
-
-		<div class="footer-info-panel">
+		<div class="footer-info-panel">  <!-- Movie center info section -->
 			<div>
 				<div>
 					<p align="center" class="footer-white-title" >MOVIE CENTER</p>
@@ -21,26 +29,19 @@
 				<br>
 				<br>
 				<div class="social-media">
-					<a href="https://github.com/juannarvaez">
-					<div class="footer-ico github">
-						
-					</div>
+					<a  target="_blank" href="https://github.com/juannarvaez">
+					<div class="footer-ico github"></div>
 					</a>
-					<a href="https://es-la.facebook.com/AlertLogic/">
-					<div class="footer-ico facebook">
-						
-					</div>
+					<a  target="_blank" href="https://es-la.facebook.com/AlertLogic/">
+					<div class="footer-ico facebook"></div>
 					</a>
-					<a href="https://www.youtube.com/user/AlertLogicTV">
-					<div class="footer-ico youtube">
-						
-					</div>
+					<a  target="_blank" href="https://www.youtube.com/user/AlertLogicTV">
+					<div class="footer-ico youtube"></div>
 					</a>
 				</div>
 			</div>
 		</div>
-
-		<div class="footer-info-panel">
+		<div class="footer-info-panel"> <!-- Personal information section -->
 			<div >
 				<p class="footer-dark-title">ABOUT JUAN NARVAEZ</p>
 
@@ -57,13 +58,10 @@
 				<p class="aboutme-link" (click)="goAboutMe()">About me detail</p>
 			</div>
 		</div>
-		
 	</div>
-
-	<div class="footer-bottom-bar">
+	<div class="footer-bottom-bar"> <!-- Copiright section -->
 		<p class="footer-subtitle copyright"> 
 			© Juan Camilo Narvaez
 		</p>
-		
 	</div>
 </div>

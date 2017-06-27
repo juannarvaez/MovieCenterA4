@@ -1,12 +1,8 @@
-
 <div class= "main-panel">
-
 	<div class="movies-container" 
 		*ngFor="let movie of view.movies.results| slice:0:18; let i=index" >
 		<movie-tile [movie]="movie"> </movie-tile>
 	</div>
-	<!-- clear both agregado para que el float left para agregar el height al contenedor -->
-	<div class="clear-both" ></div>
-
+	<div class="clear-both" ></div><!-- clear both agregado para que el float left para agregar el height al contenedor -->
 </div>
 <!-- <button (click)="searchMovie()">Peticion movies tmdb</button> -->

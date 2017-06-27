@@ -180,4 +180,9 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 	float: left;
+	transition: filter 300ms ease-in-out;
+}
+
+.movie-cast:hover{
+	filter: brightness(150%);
 }

@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterModule, Router }            from '@angular/router';
-
+// import { RouterModule, Router }            from '@angular/router';
 import { Observable }        from 'rxjs/Observable';
 import { Subject }           from 'rxjs/Subject';
- 
-// Observable class extensions
+
 import 'rxjs/add/observable/of';
- 
-// Observable operators
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -22,7 +18,6 @@ import {TMDBAPIService} from '../../services/tmdb/tmdb-api.service'
 })
 
 export class  MoviesComponent implements OnInit{
-
 	
 	view = {
 		movies: '',
@@ -31,27 +26,26 @@ export class  MoviesComponent implements OnInit{
 
 	constructor(
 		private tmdbapiservice : TMDBAPIService,
-		private router: Router
+		// private router: Router
 	){}
 
+	
+	/**Get movies info and load the data
+   * @return {:void} */
 	ngOnInit():void{
-		this.getMovies();
+		this.tmdbapiservice.getPopularMovies().subscribe(data => this.view.movies = data);
 		
 	}
 
-	getMovies(): void{
-		this.tmdbapiservice.getPopularMovies().subscribe(data => this.view.movies = data);
-	}
-
-	searchMovie(): void{
-		console.log("Popular movies: ");
-		this.tmdbapiservice.getPopularMovies().subscribe(data => console.log(data));
-		console.log("Movies detail: ");
-		this.tmdbapiservice.getMovieDetail("166426").subscribe(data => console.log(data));
-		console.log("Top movies: ");
-		this.tmdbapiservice.getTopMovies().subscribe(data => console.log(data));
-		console.log("Up coming movies: ");	
-		this.tmdbapiservice.getUpcomingMovies().subscribe(data => console.log(data));
-	}
+	// searchMovie(): void{
+	// 	console.log("Popular movies: ");
+	// 	this.tmdbapiservice.getPopularMovies().subscribe(data => console.log(data));
+	// 	console.log("Movies detail: ");
+	// 	this.tmdbapiservice.getMovieDetail("166426").subscribe(data => console.log(data));
+	// 	console.log("Top movies: ");
+	// 	this.tmdbapiservice.getTopMovies().subscribe(data => console.log(data));
+	// 	console.log("Up coming movies: ");	
+	// 	this.tmdbapiservice.getUpcomingMovies().subscribe(data => console.log(data));
+	// }
 
 }

@@ -1,8 +1,6 @@
-
 <div class= "main-panel">
-
 	<div class="container">
-		<video autoplay="true" muted loop>
+		<video autoplay="true" muted loop  onloadedmetadata="this.muted = true">
 			<source src="../../../../assets/videos/Movie Mashup Trailer 2017.mp4" type="video/mp4">
 		</video>
 		<p align="center" class="text"> MOVIE CENTER</p>
@@ -12,5 +10,4 @@
 			<button  (click)="goMovies()" class="btn">GO MOVIES</button>
 		</div>	
 	</div>
-	
 </div>

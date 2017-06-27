@@ -17,7 +17,12 @@
 	background-size: 150px;
 	cursor: pointer;
 	box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+	transition: filter 300ms ease-in-out;
 	
+}
+
+.person-tile:hover{
+	filter: brightness(150%);
 }
 
 .shadow-container{
@@ -42,12 +47,24 @@
 	font-size: 12px;
 }
 
-.thumb-up-icon{
+.start{
 	margin: 0 auto;
+	background-repeat: no-repeat;
+	opacity: 1; 
 	background-repeat: no-repeat; 
-	background-image:url('../../../../assets/icons/thumb-up-white-24.png'); 
 	height: 24px; 
 	width: 24px;
+}
+.start-image-red{
+	background-image:url('../../../../assets/icons/star-24.png'); 
+}
+
+.start-image-border{
+	background-image:url('../../../../assets/icons/star-border-24.png'); 
+}
+
+.start-image-white{
+	background-image:url('../../../../assets/icons/star-white-24.png'); 
 }
 
 .info-panel-right{
